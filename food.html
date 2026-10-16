@@ -1,0 +1,863 @@
+<!doctype html>
+<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>金澤百名店地圖</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Noto+Sans+TC:wght@400;600;700&family=Noto+Serif+TC:wght@700&display=swap">
+<style>
+/* 版面：手機優先的單欄手冊；頂部黏著目錄，逐日卡片可收合。色調取自加賀藍與金箔。 */
+:root{
+ --paper:#f4f6f9; --card:#ffffff; --ink:#1b2231; --muted:#5a6476; --line:#d8dde6;
+ --ai:#24467a; --ai-soft:#e3eaf5; --gold:#a8812a; --gold-soft:#f6eed9;
+ --warn-bg:#fff3d1; --warn-fg:#6e4a00; --warn-line:#ecc864; --hot:#b3352b;
+ --f-display:"Noto Serif TC","Songti TC","PMingLiU",serif;
+ --f-body:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
+ --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+ --paper:#10141c; --card:#171c26; --ink:#e5e9f0; --muted:#9aa4b6; --line:#2a3242;
+ --ai:#93b3ea; --ai-soft:#1e2a40; --gold:#d9b65c; --gold-soft:#2e2814;
+ --warn-bg:#33290f; --warn-fg:#f2d27c; --warn-line:#6b5420; --hot:#ef7b70; color-scheme:dark}}
+:root[data-theme="dark"]{
+ --paper:#10141c; --card:#171c26; --ink:#e5e9f0; --muted:#9aa4b6; --line:#2a3242;
+ --ai:#93b3ea; --ai-soft:#1e2a40; --gold:#d9b65c; --gold-soft:#2e2814;
+ --warn-bg:#33290f; --warn-fg:#f2d27c; --warn-line:#6b5420; --hot:#ef7b70; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.65}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--paper)}
+a{color:var(--ai)}
+a:focus-visible,summary:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.wrap{max-width:760px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+header.top{padding-block:28px 18px}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;color:var(--gold);text-transform:uppercase}
+h1{font-family:var(--f-display);font-weight:700;font-size:clamp(26px,6vw,36px);line-height:1.25;margin:.2em 0 .3em;text-wrap:balance}
+.sub{color:var(--muted);margin:0}
+nav.toc{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--paper);border-bottom:1px solid var(--line)}
+nav.toc .wrap{display:flex;gap:6px;overflow-x:auto;padding-block:8px;scrollbar-width:none}
+nav.toc a{flex:none;text-decoration:none;color:var(--ink);font-size:14px;padding:5px 12px;border-radius:999px;border:1px solid var(--line);background:var(--card)}
+nav.toc a.w{border-color:var(--warn-line);background:var(--warn-bg);color:var(--warn-fg)}
+section{padding-block:26px 6px;scroll-margin-top:56px}
+h2{font-family:var(--f-display);font-size:22px;margin:0 0 12px;text-wrap:balance;display:flex;align-items:baseline;gap:10px}
+h2 small{font-family:var(--f-mono);font-size:12px;color:var(--muted);font-weight:400}
+h3{font-size:16px;margin:18px 0 8px}
+h4{font-size:14px;margin:14px 0 6px;color:var(--muted);letter-spacing:.04em}
+.num,.t,.dd{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.tw{overflow-x:auto;margin:8px 0}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{text-align:left;vertical-align:top;padding:7px 8px;border-bottom:1px solid var(--line)}
+th{font-weight:600;color:var(--muted);font-size:12px;letter-spacing:.04em;white-space:nowrap}
+/* 路線條 */
+.route{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:4px;margin:6px 0 4px}
+.route a{display:flex;flex-direction:column;align-items:center;gap:2px;text-decoration:none;color:var(--ink);padding:8px 2px;border-radius:8px;background:var(--card);border:1px solid var(--line);min-width:0}
+.route .rd{font-family:var(--f-mono);font-size:13px;font-weight:600}
+.route .rw{font-size:11px;color:var(--muted)}
+.route .rb{font-size:11px;padding:1px 6px;border-radius:999px;background:var(--ai-soft);color:var(--ai);white-space:nowrap}
+.route .rb.wk{background:var(--gold-soft);color:var(--gold)}
+.route .ski{outline:2px solid var(--gold);outline-offset:-2px}
+.legend{font-size:12px;color:var(--muted);margin:0 0 6px}
+.alert{border:1px solid var(--warn-line);background:var(--warn-bg);color:var(--warn-fg);border-radius:10px;padding:10px 14px;margin:12px 0;font-size:14px}
+.alert b{color:inherit}
+/* 逐日 */
+.tools{display:flex;gap:8px;margin:0 0 10px;flex-wrap:wrap}
+button.tb{font:inherit;font-size:13px;padding:5px 12px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer}
+.day{background:var(--card);border:1px solid var(--line);border-radius:12px;margin:0 0 10px;overflow:hidden}
+.day[open]{border-color:var(--ai)}
+.day.today{box-shadow:0 0 0 2px var(--gold)}
+summary{list-style:none;display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:12px;align-items:center;padding:12px 14px;cursor:pointer}
+summary::-webkit-details-marker{display:none}
+.dnum{display:flex;flex-direction:column;align-items:center;min-width:52px;padding-right:12px;border-right:1px solid var(--line)}
+.dd{font-size:20px;font-weight:600;color:var(--ai);line-height:1.1}
+.wd{font-size:12px;color:var(--muted)}
+.wd.wkend{color:var(--hot);font-weight:600}
+.dtitle{display:flex;flex-direction:column;gap:3px;min-width:0}
+.dlabel{font-family:var(--f-mono);font-size:11px;color:var(--gold);letter-spacing:.08em}
+.dname{font-family:var(--f-display);font-weight:700;font-size:17px;line-height:1.35;text-wrap:balance}
+.dmeta{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font-size:12px;padding:1px 8px;border-radius:999px;background:var(--ai-soft);color:var(--ai);white-space:nowrap}
+.chip.hot{background:var(--gold-soft);color:var(--gold);font-weight:600}
+.chip.warnchip{background:var(--warn-bg);color:var(--warn-fg)}
+.caret{width:10px;height:10px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(45deg);transition:transform .2s;margin-right:4px}
+.day[open] .caret{transform:rotate(-135deg)}
+.dbody{padding:0 14px 16px;border-top:1px solid var(--line)}
+.lead{font-weight:600;margin:12px 0}
+.figs{display:grid;gap:8px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+figure{margin:0;min-width:0}
+figure img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;border-radius:8px;background:var(--line)}
+figcaption{font-size:12px;color:var(--muted);margin-top:4px;display:flex;flex-direction:column}
+.cred{font-size:11px;opacity:.85}
+table.sched td.t{white-space:nowrap;color:var(--ai);font-size:13px}
+table.sched td.how{color:var(--muted);font-size:13px}
+@media (max-width:520px){
+ table.sched thead{display:none}
+ table.sched tr{display:grid;grid-template-columns:1fr;padding:8px 0;border-bottom:1px solid var(--line)}
+ table.sched td{border:0;padding:1px 0}
+ table.sched td.how:not(:empty)::before{content:"↳ "}
+}
+dl.notes{display:grid;gap:6px;margin:12px 0}
+dl.notes div{display:grid;grid-template-columns:5.5em minmax(0,1fr);gap:8px}
+dt{font-size:13px;font-weight:600;color:var(--ai)}
+dd{margin:0}
+ul.warns{list-style:none;padding:0;margin:10px 0;display:grid;gap:6px}
+li.warn{background:var(--warn-bg);color:var(--warn-fg);border-left:3px solid var(--warn-line);padding:6px 10px;border-radius:0 6px 6px 0;font-size:13.5px;overflow-wrap:anywhere}
+li.warn a{color:inherit}
+.wtag{font-weight:700;white-space:nowrap}
+.tel{font-family:var(--f-mono);user-select:all}
+.maps{display:grid;gap:10px;margin-top:12px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.map{display:flex;flex-direction:column;gap:4px;min-width:0}
+.map iframe{width:100%;height:200px;border:0;border-radius:8px;background:var(--line)}
+a.mapbtn{display:block;font-size:13px;text-decoration:none;padding:7px 10px;border-radius:8px;border:1px solid var(--line);background:var(--paper)}
+/* 清單 */
+.cgrid{display:grid;gap:4px 20px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+ul.check{list-style:none;padding:0;margin:0}
+ul.check li{padding:3px 0}
+ul.check label{display:flex;gap:8px;align-items:flex-start;cursor:pointer}
+ul.check input{margin-top:5px;accent-color:var(--ai)}
+ul.check input:checked + span{color:var(--muted);text-decoration:line-through}
+table.stay td:nth-child(-n+3){white-space:nowrap}
+.wakura{columns:2 220px;font-size:14px;padding-left:1.2em}
+footer{padding-block:30px 40px;color:var(--muted);font-size:12px}
+@media (prefers-reduced-motion:reduce){.caret{transition:none}}
+
+.filter{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 4px}
+.filter button{font:inherit;font-size:13px;padding:5px 12px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer}
+.filter button[aria-pressed="true"]{background:var(--ai);border-color:var(--ai);color:var(--paper)}
+.flabel{font-size:12px;color:var(--muted);margin:10px 0 0}
+.cat h3{display:flex;align-items:baseline;gap:8px;border-bottom:1px solid var(--line);padding-bottom:4px}
+.cat h3 small{font-family:var(--f-mono);color:var(--muted);font-weight:400}
+.shop{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:10px 0;display:grid;gap:6px}
+.shop header{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px}
+.shop h4{font-family:var(--f-display);font-size:17px;margin:0;color:var(--ink);letter-spacing:0}
+.tag{font-size:13px;color:var(--muted)}
+.badges{display:flex;gap:6px;flex-wrap:wrap}
+.snote{margin:0;font-size:14px;color:var(--muted)}
+dl.sdl{display:grid;gap:3px;margin:0;font-size:14px}
+dl.sdl div{display:grid;grid-template-columns:3em minmax(0,1fr);gap:8px}
+.hsrc{font-size:12px;color:var(--muted)}
+.closed{color:var(--hot);font-weight:600;white-space:nowrap}
+.open,.ok{color:var(--muted);white-space:nowrap}
+.slinks{display:flex;gap:8px;flex-wrap:wrap}
+.slinks .mapbtn{flex:1 1 140px;text-align:center}
+.src{margin:0;font-size:11px;color:var(--muted)}
+.wtag{color:var(--warn-fg);background:var(--warn-bg);padding:0 4px;border-radius:4px}
+.back{display:inline-block;margin-bottom:6px;font-size:14px}
+details.ref{background:var(--card);border:1px solid var(--line);border-radius:12px;margin:10px 0}
+details.ref summary{display:block;padding:12px 14px;font-weight:600}
+details.ref > div{padding:0 14px 12px}
+.empty{color:var(--muted);font-size:14px}
+</style>
+
+</head><body>
+<header class="top"><div class="wrap">
+ <a class="back" href="index.html">← 回行程手冊</a>
+ <div class="eyebrow">Tabelog 百名店＋Google 高評價 · 照行程區域分類</div>
+ <h1>金澤 附近吃什麼</h1>
+ <p class="sub">共 59 家，都在行程會經過的區域。先選區域，再用下面的按鈕篩。</p>
+</div></header>
+
+<nav class="toc" aria-label="區域"><div class="wrap"><a href="#st">金澤站</a><a href="#omicho">近江町市場</a><a href="#higashi">東茶屋街</a><a href="#korinbo">香林坊</a><a href="#nagamachi">長町</a><a href="#wakura">和倉溫泉</a><a href="#komatsu">小松站</a><a href="#notes" class="w">⚠️ 說明與參考清單</a></div></nav>
+
+<main class="wrap">
+ <section id="howto">
+  <p class="flabel">食物種類</p><div class="filter" data-f="cat" role="group" aria-label="食物種類"><button type="button" data-k="all">全部</button><button type="button" data-k="sweet">甜點・咖啡（8）</button><button type="button" data-k="sushi">壽司・海鮮（13）</button><button type="button" data-k="ramen">拉麵（6）</button><button type="button" data-k="curry">咖哩（6）</button><button type="button" data-k="wa">和食（10）</button><button type="button" data-k="izakaya">居酒屋・燒鳥（5）</button><button type="button" data-k="meat">燒肉・牛排（1）</button><button type="button" data-k="western">西餐（6）</button><button type="button" data-k="asia">亞洲料理（4）</button></div>
+  <p class="flabel">來源</p><div class="filter" data-f="src" role="group" aria-label="來源"><button type="button" data-k="all">全部</button><button type="button" data-k="h">百名店（5）</button><button type="button" data-k="g">Google 高評價（56）</button></div>
+  <div class="alert"><b>先看這裡：</b>① 主清單只放 Google 標「適合小孩」或沒標示的店；被標「不適合小孩」的 85 家收在最下面的參考清單。② 「⚠️ 待查證」＝Google 沒寫能不能帶小孩，訂位或進門前問一下。③ 公休是用該區域對應的行程日期算的。</div>
+ </section>
+ <section class="area" id="st"><h2>金澤站周邊 <small>19 家</small></h2><p class="legend">對應行程：Day 1 晚餐、Day 7，以及每天的晚餐（18:00 前回住宿）。百名店 1 家、Google 高評價 18 家。</p><div class="cat" data-cat="sweet"><h3>甜點・咖啡 <small>1</small></h3><article class="shop" data-cat="sweet" data-src="h">
+ <header><h4>すゞめ 金沢百番街店</h4><span class="tag">和菓子</span></header>
+ <div class="badges"><span class="chip hot">百名店 2026</span><span class="chip">Google ★4.3・174 則</span></div>
+ <p class="snote">和菓子（店名即位置）</p>
+ <dl class="sdl">
+  <div><dt>地址</dt><dd>石川県金沢市木ノ新保町１−１</dd></div>
+  <div><dt>公休</dt><dd>無固定公休<span class="hsrc">（Google）</span> <span class="open">✅ 行程那幾天有開</span></dd></div>
+  <div><dt>小孩</dt><dd><span class="wtag">⚠️ 待查證</span>（Google 沒寫）</dd></div>
+ </dl>
+ <div class="slinks"><a class="mapbtn" href="https://maps.google.com/?cid=16230537512900889107&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">📍 Google 地圖</a><a class="mapbtn" href="https://tabelog.com/ishikawa/A1701/A170101/17006347/" target="_blank" rel="noopener">Tabelog（預約、評分）</a></div>
+ <p class="src">查詢日期：百名店 2026-10-16 · Google 2026-10-16</p>
+</article></div><div class="cat" data-cat="sushi"><h3>壽司・海鮮 <small>5</small></h3><article class="shop" data-cat="sushi" data-src="g">
+ <header><h4>北陸金沢回転寿司 のとめぐり</h4><span class="tag">壽司</span></header>
+ <div class="badges"><span class="chip">Google ★4.3・834 則</span></div>
+ 
+ <dl class="sdl">
+  <div><dt>地址</dt><dd>石川県金沢市広岡１丁目５−３ クロスゲート金沢 2F</dd></div>
+  <div><dt>公休</dt><dd>無固定公休<span class="hsrc">（Google）</span> <span class="open">✅ 行程那幾天有開</span></dd></div>
+  <div><dt>小孩</dt><dd><span class="ok">✅ Google：適合小孩</span></dd></div>
+ </dl>
+ <div class="slinks"><a class="mapbtn" href="https://maps.google.com/?cid=1450376122349212273&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">📍 Google 地圖</a></div>
+ <p class="src">查詢日期：Google 2026-10-16</p>
+</article><article class="shop" data-cat="sushi" data-src="g">
+ <header><h4>まわる寿し もりもり寿し 金沢駅前店</h4><span class="tag">壽司</span></header>
+ <div class="badges"><span class="chip">Google ★4・4,231 則</span></div>
+ 
+ <dl class="sdl">
+  <div><dt>地址</dt><dd>石川県金沢市堀川新町３−１ 6F</dd></div>
+  <div><dt>公休</dt><dd>無固定公休<span class="hsrc">（Google）</span> <span class="open">✅ 行程那幾天有開</span></dd></div>
+  <div><dt>小孩</dt><dd><span class="ok">✅ Google：適合小孩</span></dd></div>
+ </dl>
+ <div class="slinks"><a class="mapbtn" href="https://maps.google.com/?cid=4817511804238884675&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">📍 Google 地圖</a></div>
+ <p class="src">查詢日期：Google 2026-10-16</p>
+</article><article class="shop" data-cat="sushi" data-src="g">
+ <header><h4>廻る富山湾 すし玉(すしたま)</h4><span class="tag">壽司</span></header>
+ <div class="badges"><span class="chip">Google ★4・1,792 則</span></div>
+ 
+ <dl class="sdl">
+  <div><dt>地址</dt><dd>石川県金沢市木ノ新保町１丁目７−１−１ 金沢駅百番街 あんと西2F</dd></div>
+  <div><dt>公休</dt><dd>無固定公休<span class="hsrc">（Google）</span> <span class="open">✅ 行程那幾天有開</span></dd></div>
+  <div><dt>小孩</dt><dd><span class="ok">✅ Google：適合小孩</span></dd></div>
+ </dl>
+ <div class="slinks"><a class="mapbtn" href="https://maps.google.com/?cid=11870236360694743708&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">📍 Google 地圖</a></div>
+ <p class="src">查詢日期：Google 2026-10-16</p>
+</article><article class="shop" data-cat="sushi" data-src="g">
+ <header><h4>あかめ寿し</h4><span class="tag">壽司</span></header>
+ <div class="badges"><span class="chip">Google ★4・574 則</span></div>
+ 
+ <dl class="sdl">
+  <div><dt>地址</dt><dd>石川県金沢市本町１丁目９−１５</dd></div>
+  <div><dt>公休</dt><dd>週四<span class="hsrc">（Google）</span> <span class="closed">❌ 行程中公休：1/14（四）</span></dd></div>
+  <div><dt>小孩</dt><dd><span class="wtag">⚠️ 待查證</span>（Google 沒寫）</dd></div>
+ </dl>
+ <div class="slinks"><a class="mapbtn" href="https://maps.google.com/?cid=10488132861561673714&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">📍 Google 地圖</a></div>
+ <p class="src">查詢日期：Google 2026-10-16</p>
+</article><article class="shop" data-cat="sushi" data-src="g">
+ <header><h4>金沢回転寿司 輝らり</h4><span class="tag">壽司</span></header>
+ <div class="badges"><span class="chip">Google ★3.9・1,371 則</span></div>
+ 
+ <dl class="sdl">
+  <div><dt>地址</dt><dd>石川県金沢市広岡１丁目９−１６ マストスクエア金沢 １階</dd></div>
+  <div><dt>公休</dt><dd>無固定公休<span class="hsrc">（Google）</span> <span class="open">✅ 行程那幾天有開</span></dd></div>
+  <div><dt>小孩</dt><dd><span class="ok">✅ Google：適合小孩</span></dd></div>
+ </dl>
+ <div class="slinks"><a class="mapbtn" href="https://maps.google.com/?cid=9472128725654627786&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">📍 Google 地圖</a></div>
+ <p class="src">查詢日期：Google 2026-10-16</p>
+</article></div><div class="cat" data-cat="ramen"><h3>拉麵 <small>2</small></h3><article class="shop" data-cat="ramen" data-src="g">
+ <header><h4>麺屋達 金沢駅前店</h4><span class="tag">拉麵</span></header>
+ <div class="badges"><span class="chip">Google ★4.6・757 則</span></div>
+ 
+ <dl class="sdl">
+  <div><dt>地址</dt><dd>石川県金沢市此花町９−１８</dd></div>
+  <div><dt>公休</dt><dd>無固定公休<span class="hsrc">（Google）</span> <span class="open">✅ 行程那幾天有開</span></dd></div>
+  <div><dt>小孩</dt><dd><span class="ok">✅ Google：適合小孩</span></dd></div>
+ </dl>
+ <div class="slinks"><a class="mapbtn" href="https://maps.google.com/?cid=14455511871552411319&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">📍 Google 地圖</a></div>
+ <p class="src">查詢日期：Google 2026-10-16</p>
+</article><article class="shop" data-cat="ramen" data-src="g">
+ <header><h4>弓月</h4><span class="tag">拉麵</span></header>
+ <div class="badges"><span class="chip">Google ★4.4・553 則</span></div>
+ 
+ <dl class="sdl">
+  <div><dt>地址</dt><dd>石川県金沢市此花町５−６</dd></div>
+  <div><dt>公休</dt><dd>週日<span class="hsrc">（Google）</span> <span class="closed">❌ 行程中公休：1/17（日）</span></dd></div>
+  <div><dt>小孩</dt><dd><span class="wtag">⚠️ 待查證</span>（Google 沒寫）</dd></div>
+ </dl>
+ <div class="slinks"><a class="mapbtn" href="https://maps.google.com/?cid=14688995385561830263&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">📍 Google 地圖</a></div>
+ <p class="src">查詢日期：Google 2026-10-16</p>
+</article></div><div class="cat" data-cat="curry"><h3>咖哩 <small>2</small></h3><article class="shop" data-cat="curry" data-src="g">
+ <header><h4>北海道スープカレーSuage 金沢フォーラス店</h4><span class="tag">日式咖哩</span></header>
+ <div class="badges"><span class="chip">Google ★4.7・930 則</span></div>
+ 
+ <dl class="sdl">
+  <div><dt>地址</dt><dd>石川県金沢市堀川新町３−１ 金沢フォーラス 6階</dd></div>
+  <div><dt>公休</dt><dd>無固定公休<span class="hsrc">（Google）</span> <span class="open">✅ 行程那幾天有開</span></dd></div>
+  <div><dt>小孩</dt><dd><span class="wtag">⚠️ 待查證</span>（Google 沒寫）</dd></div>
+ </dl>
+ <div class="slinks"><a class="mapbtn" href="https://maps.google.com/?cid=14501553239151652658&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">📍 Google 地圖</a></div>
+ <p class="src">查詢日期：Google 2026-10-16</p>
+</article><article class="shop" data-cat="curry" data-src="g">
+ <header><h4>ゴーゴーカレー 金沢駅総本山</h4><span class="tag">日式咖哩</span></header>
+ <div class="badges"><span class="chip">Google ★4.1・1,771 則</span></div>
+ 
+ <dl class="sdl">
+  <div><dt>地址</dt><dd>石川県金沢市木ノ新保町１−１ 金沢百番街 あんと 内</dd></div>
+  <div><dt>公休</dt><dd>無固定公休<span class="hsrc">（Google）</span> <span class="open">✅ 行程那幾天有開</span></dd></div>
+  <div><dt>小孩</dt><dd><span class="ok">✅ Google：適合小孩</span></dd></div>
+ </dl>
+ <div class="slinks"><a class="mapbtn" href="https://maps.google.com/?cid=10552557980880301077&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">📍 Google 地圖</a></div>
+ <p class="src">查詢日期：Google 2026-10-16</p>
+</article></div><div class="cat" data-cat="wa"><h3>和食 <small>4</small></h3><article class="shop" data-cat="wa" data-src="g">
+ <header><h4>牛カツ京都勝牛 クロスゲート金沢店</h4><span class="tag">日本料理</span></header>
+ <div class="badges"><span class="chip">Google ★4.8・1,551 則</span></div>
+ 
+ <dl class="sdl">
+  <div><dt>地址</dt><dd>石川県金沢市広岡１丁目５−３ クロスゲート金沢 ２Ｆ</dd></div>
+  <div><dt>公休</dt><dd>無固定公休<span class="hsrc">（Google）</span> <span class="open">✅ 行程那幾天有開</span></dd></div>
+  <div><dt>小孩</dt><dd><span class="wtag">⚠️ 待查證</span>（Google 沒寫）</dd></div>
+ </dl>
+ <div class="slinks"><a class="mapbtn" href="https://maps.google.com/?cid=11992448164572439188&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">📍 Google 地圖</a></div>
+ <p class="src">查詢日期：Google 2026-10-16</p>
+</article><article class="shop" data-cat="wa" data-src="g">
+ <header><h4>肉匠Jade金澤</h4><span class="tag">餐廳</span></header>
+ <div class="badges"><span class="chip">Google ★4.3・692 則</span></div>
+ 
+ <dl class="sdl">
+  <div><dt>地址</dt><dd>石川県金沢市此花町３−３ ライブ１ビル B 棟２Ｆ</dd></div>
+  <div><dt>公休</dt><dd>無固定公休<span class="hsrc">（Google）</span> <span class="open">✅ 行程那幾天有開</span></dd></div>
+  <div><dt>小孩</dt><dd><span class="wtag">⚠️ 待查證</span>（Google 沒寫）</dd></div>
+ </dl>
+ <div class="slinks"><a class="mapbtn" href="https://maps.google.com/?cid=396128093903078965&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">📍 Google 地圖</a></div>
+ <p class="src">查詢日期：Google 2026-10-16</p>
+</article><article class="shop" data-cat="wa" data-src="g">
+ <header><h4>金沢肉食堂 百番街店</h4><span class="tag">餐廳</span></header>
+ <div class="badges"><span class="chip">Google ★4.2・521 則</span></div>
+ 
+ <dl class="sdl">
+  <div><dt>地址</dt><dd>石川県金沢市木ノ新保町１−番1号 金沢百番街・あんと内１階</dd></div>
+  <div><dt>公休</dt><dd>無固定公休<span class="hsrc">（Google）</span> <span class="open">✅ 行程那幾天有開</span></dd></div>
+  <div><dt>小孩</dt><dd><span class="wtag">⚠️ 待查證</span>（Google 沒寫）</dd></div>
+ </dl>
+ <div class="slinks"><a class="mapbtn" href="https://maps.google.com/?cid=8958630385953074256&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">📍 Google 地圖</a></div>
+ <p class="src">查詢日期：Google 2026-10-16</p>
+</article><article class="shop" data-cat="wa" data-src="g">
+ <header><h4>加賀料理 大名茶家</h4><span class="tag">日本料理</span></header>
+ <div class="badges"><span class="chip">Google ★4.1・545 則</span></div>
+ 
+ <dl class="sdl">
+  <div><dt>地址</dt><dd>石川県金沢市此花町７−５−１</dd></div>
+  <div><dt>公休</dt><dd>無固定公休<span class="hsrc">（Google）</span> <span class="open">✅ 行程那幾天有開</span></dd></div>
+  <div><dt>小孩</dt><dd><span class="ok">✅ Google：適合小孩</span></dd></div>
+ </dl>
+ <div class="slinks"><a class="mapbtn" href="https://maps.google.com/?cid=17057059791940283774&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">📍 Google 地圖</a></div>
+ <p class="src">查詢日期：Google 2026-10-16</p>
+</article></div><div class="cat" data-cat="izakaya"><h3>居酒屋・燒鳥 <small>1</small></h3><article class="shop" data-cat="izakaya" data-src="g">
+ <header><h4>金澤串揚げ ざしき笑し</h4><span class="tag">居酒屋</span></header>
+ <div class="badges"><span class="chip">Google ★4.4・567 則</span></div>
+ 
+ <dl class="sdl">
+  <div><dt>地址</dt><dd>石川県金沢市中橋町１１−１</dd></div>
+  <div><dt>公休</dt><dd>無固定公休<span class="hsrc">（Google）</span> <span class="open">✅ 行程那幾天有開</span></dd></div>
+  <div><dt>小孩</dt><dd><span class="wtag">⚠️ 待查證</span>（Google 沒寫）</dd></div>
+ </dl>
+ <div class="slinks"><a class="mapbtn" href="https://maps.google.com/?cid=13500526603519691829&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">📍 Google 地圖</a></div>
+ <p class="src">查詢日期：Google 2026-10-16</p>
+</article></div><div class="cat" data-cat="western"><h3>西餐 <small>2</small></h3><article class="shop" data-cat="western" data-src="g">
+ <header><h4>SHOGUN BURGER 金沢クロスゲート店</h4><span class="tag">漢堡</span></header>
+ <div class="badges"><span class="chip">Google ★4.7・2,059 則</span></div>
+ 
+ <dl class="sdl">
+  <div><dt>地址</dt><dd>石川県金沢市広岡１丁目５−３ クロスゲート金沢 ２階</dd></div>
+  <div><dt>公休</dt><dd>無固定公休<span class="hsrc">（Google）</span> <span class="open">✅ 行程那幾天有開</span></dd></div>
+  <div><dt>小孩</dt><dd><span class="ok">✅ Google：適合小孩</span></dd></div>
+ </dl>
+ <div class="slinks"><a class="mapbtn" href="https://maps.google.com/?cid=15830782673835250621&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">📍 Google 地圖</a></div>
+ <p class="src">查詢日期：Google 2026-10-16</p>
+</article><article class="shop" data-cat="western" data-src="g">
+ <header><h4>Da TAKE(ダ・タケ) 駅西店【金沢 イタリアン】</h4><span class="tag">義式</span></header>
+ <div class="badges"><span class="chip">Google ★4.2・718 則</span></div>
+ 
+ <dl class="sdl">
+  <div><dt>地址</dt><dd>石川県金沢市広岡１丁目１２−１７</dd></div>
+  <div><dt>公休</dt><dd>無固定公休<span class="hsrc">（Google）</span> <span class="open">✅ 行程那幾天有開</span></dd></div>
+  <div><dt>小孩</dt><dd><span class="ok">✅ Google：適合小孩</span></dd></div>
+ </dl>
+ <div class="slinks"><a class="mapbtn" href="https://maps.google.com/?cid=2836725437558914811&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">📍 Google 地圖</a></div>
+ <p class="src">查詢日期：Google 2026-10-16</p>
+</article></div><div class="cat" data-cat="asia"><h3>亞洲料理 <small>2</small></h3><article class="shop" data-cat="asia" data-src="g">
+ <header><h4>Halal Wagyu Ramen &amp; Gyukatsu GYUMON Ishikawa Kanazawa</h4><span class="tag">清真料理</span></header>
+ <div class="badges"><span class="chip">Google ★4.8・669 則</span></div>
+ 
+ <dl class="sdl">
+  <div><dt>地址</dt><dd>石川県金沢市本町２丁目１−２ Mビル １階</dd></div>
+  <div><dt>公休</dt><dd>無固定公休<span class="hsrc">（Google）</span> <span class="open">✅ 行程那幾天有開</span></dd></div>
+  <div><dt>小孩</dt><dd><span class="ok">✅ Google：適合小孩</span></dd></div>
+ </dl>
+ <div class="slinks"><a class="mapbtn" href="https://maps.google.com/?cid=445982922558077260&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">📍 Google 地圖</a></div>
+ <p class="src">查詢日期：Google 2026-10-16</p>
+</article><article class="shop" data-cat="asia" data-src="g">
+ <header><h4>FOODVn - X3 金沢</h4><span class="tag">越南料理</span></header>
+ <div class="badges"><span class="chip">Google ★4.7・683 則</span></div>
+ 
+ <dl class="sdl">
+  <div><dt>地址</dt><dd>石川県金沢市広岡１丁目５−１５ ゼオンビル ４階</dd></div>
+  <div><dt>公休</dt><dd>無固定公休<span class="hsrc">（Google）</span> <span class="open">✅ 行程那幾天有開</span></dd></div>
+  <div><dt>小孩</dt><dd><span class="ok">✅ Google：適合小孩</span></dd></div>
+ </dl>
+ <div class="slinks"><a class="mapbtn" href="https://maps.google.com/?cid=10726699791439014277&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">📍 Google 地圖</a></div>
+ <p class="src">查詢日期：Google 2026-10-16</p>
+</article></div></section><section class="area" id="omicho"><h2>近江町市場周邊 <small>15 家</small></h2><p class="legend">對應行程：Day 4 午餐。百名店 0 家、Google 高評價 15 家。</p><div class="cat" data-cat="sweet"><h3>甜點・咖啡 <small>3</small></h3><article class="shop" data-cat="sweet" data-src="g">
+ <header><h4>Coil</h4><span class="tag">餐廳</span></header>
+ <div class="badges"><span class="chip">Google ★4.6・1,621 則</span></div>
+ 
+ <dl class="sdl">
+  <div><dt>地址</dt><dd>かなざわはこまち 2F, １-1 袋町 金沢市 石川県 920-0909 日本</dd></div>
+  <div><dt>公休</dt><dd>無固定公休<span class="hsrc">（Google）</span> <span class="open">✅ 行程那幾天有開</span></dd></div>
+  <div><dt>小孩</dt><dd><span class="wtag">⚠️ 待查證</span>（Google 沒寫）</dd></div>
+ </dl>
+ <div class="slinks"><a class="mapbtn" href="https://maps.google.com/?cid=11106736008719658370&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">📍 Google 地圖</a></div>
+ <p class="src">查詢日期：Google 2026-10-16</p>
+</article><article class="shop" data-cat="sweet" data-src="g">
+ <header><h4>Curio Espresso and Vintage Design</h4><span class="tag">咖啡廳</span></header>
+ <div class="badges"><span class="chip">Google ★4.6・1,177 則</span></div>
+ 
+ <dl class="sdl">
+  <div><dt>地址</dt><dd>Yasuechō, １−１３ Kanazawa-shi, １-13 安江町 金沢市 石川県 920-0854 日本</dd></div>
+  <div><dt>公休</dt><dd>週一、二<span class="hsrc">（Google）</span> <span class="open">✅ 行程那幾天有開</span></dd></div>
+  <div><dt>小孩</dt><dd><span class="ok">✅ Google：適合小孩</span></dd></div>
+ </dl>
+ <div class="slinks"><a class="mapbtn" href="https://maps.google.com/?cid=13228788588341895549&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">📍 Google 地圖</a></div>
+ <p class="src">查詢日期：Google 2026-10-16</p>
+</article><article class="shop" data-cat="sweet" data-src="g">
+ <header><h4>フルーツパーラー むらはた本店</h4><span class="tag">餐飲</span></header>
+ <div class="badges"><span class="chip">Google ★4.1・1,137 則</span></div>
+ 
+ <dl class="sdl">
+  <div><dt>地址</dt><dd>石川県金沢市武蔵町２−１２ フルーツむらはた本店第一ビル 2F</dd></div>
+  <div><dt>公休</dt><dd>無固定公休<span class="hsrc">（Google）</span> <span class="open">✅ 行程那幾天有開</span></dd></div>
+  <div><dt>小孩</dt><dd><span class="wtag">⚠️ 待查證</span>（Google 沒寫）</dd></div>
+ </dl>
+ <div class="slinks"><a class="mapbtn" href="https://maps.google.com/?cid=5131838270699261699&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">📍 Google 地圖</a></div>
+ <p class="src">查詢日期：Google 2026-10-16</p>
+</article></div><div class="cat" data-cat="sushi"><h3>壽司・海鮮 <small>5</small></h3><article class="shop" data-cat="sushi" data-src="g">
+ <header><h4>香りん寿司</h4><span class="tag">壽司</span></header>
+ <div class="badges"><span class="chip">Google ★4.7・1,519 則</span></div>
+ 
+ <dl class="sdl">
+  <div><dt>地址</dt><dd>石川県金沢市博労町７９</dd></div>
+  <div><dt>公休</dt><dd>週日、三<span class="hsrc">（Google）</span> <span class="closed">❌ 行程中公休：1/17（日）</span></dd></div>
+  <div><dt>小孩</dt><dd><span class="wtag">⚠️ 待查證</span>（Google 沒寫）</dd></div>
+ </dl>
+ <div class="slinks"><a class="mapbtn" href="https://maps.google.com/?cid=9224456968411507390&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">📍 Google 地圖</a></div>
+ <p class="src">查詢日期：Google 2026-10-16</p>
+</article><article class="shop" data-cat="sushi" data-src="g">
+ <header><h4>かいてん寿し 大倉</h4><span class="tag">壽司</span></header>
+ <div class="badges"><span class="chip">Google ★4.1・872 則</span></div>
+ 
+ <dl class="sdl">
+  <div><dt>地址</dt><dd>石川県金沢市下堤町３８</dd></div>
+  <div><dt>公休</dt><dd>無固定公休<span class="hsrc">（Google）</span> <span class="open">✅ 行程那幾天有開</span></dd></div>
+  <div><dt>小孩</dt><dd><span class="wtag">⚠️ 待查證</span>（Google 沒寫）</dd></div>
+ </dl>
+ <div class="slinks"><a class="mapbtn" href="https://maps.google.com/?cid=3649247207026674398&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">📍 Google 地圖</a></div>
+ <p class="src">查詢日期：Google 2026-10-16</p>
+</article><article class="shop" data-cat="sushi" data-src="g">
+ <header><h4>まわる寿し もりもり寿し 近江町店</h4><span class="tag">壽司</span></header>
+ <div class="badges"><span class="chip">Google ★4・2,961 則</span></div>
+ 
+ <dl class="sdl">
+  <div><dt>地址</dt><dd>石川県金沢市青草町８８</dd></div>
+  <div><dt>公休</dt><dd>無固定公休<span class="hsrc">（Google）</span> <span class="open">✅ 行程那幾天有開</span></dd></div>
+  <div><dt>小孩</dt><dd><span class="ok">✅ Google：適合小孩</span></dd></div>
+ </dl>
+ <div class="slinks"><a class="mapbtn" href="https://maps.google.com/?cid=1706905560557213618&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">📍 Google 地圖</a></div>
+ <p class="src">查詢日期：Google 2026-10-16</p>
+</article><article class="shop" data-cat="sushi" data-src="g">
+ <header><h4>旬彩和食 口福</h4><span class="tag">海鮮</span></header>
+ <div class="badges"><span class="chip">Google ★4・706 則</span></div>
+ 
+ <dl class="sdl">
+  <div><dt>地址</dt><dd>石川県金沢市青草町８８ 近江町いちば館 ２F</dd></div>
+  <div><dt>公休</dt><dd>週二<span class="hsrc">（Google）</span> <span class="open">✅ 行程那幾天有開</span></dd></div>
+  <div><dt>小孩</dt><dd><span class="wtag">⚠️ 待查證</span>（Google 沒寫）</dd></div>
+ </dl>
+ <div class="slinks"><a class="mapbtn" href="https://maps.google.com/?cid=1488671023739675832&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">📍 Google 地圖</a></div>
+ <p class="src">查詢日期：Google 2026-10-16</p>
+</article><article class="shop" data-cat="sushi" data-src="g">
+ <header><h4>近江町市場寿し 本店</h4><span class="tag">壽司</span></header>
+ <div class="badges"><span class="chip">Google ★3.9・2,213 則</span></div>
+ 
+ <dl class="sdl">
+  <div><dt>地址</dt><dd>石川県金沢市下近江町２８−１</dd></div>
+  <div><dt>公休</dt><dd>無固定公休<span class="hsrc">（Google）</span> <span class="open">✅ 行程那幾天有開</span></dd></div>
+  <div><dt>小孩</dt><dd><span class="wtag">⚠️ 待查證</span>（Google 沒寫）</dd></div>
+ </dl>
+ <div class="slinks"><a class="mapbtn" href="https://maps.google.com/?cid=2933173643893289610&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">📍 Google 地圖</a></div>
+ <p class="src">查詢日期：Google 2026-10-16</p>
+</article></div><div class="cat" data-cat="ramen"><h3>拉麵 <small>1</small></h3><article class="shop" data-cat="ramen" data-src="g">
+ <header><h4>あぶら屋</h4><span class="tag">拉麵</span></header>
+ <div class="badges"><span class="chip">Google ★4.9・1,150 則</span></div>
+ 
+ <dl class="sdl">
+  <div><dt>地址</dt><dd>石川県金沢市彦三町２丁目１−１０ B108</dd></div>
+  <div><dt>公休</dt><dd>週日<span class="hsrc">（Google）</span> <span class="closed">❌ 行程中公休：1/17（日）</span></dd></div>
+  <div><dt>小孩</dt><dd><span class="wtag">⚠️ 待查證</span>（Google 沒寫）</dd></div>
+ </dl>
+ <div class="slinks"><a class="mapbtn" href="https://maps.google.com/?cid=6142182573592583216&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">📍 Google 地圖</a></div>
+ <p class="src">查詢日期：Google 2026-10-16</p>
+</article></div><div class="cat" data-cat="curry"><h3>咖哩 <small>2</small></h3><article class="shop" data-cat="curry" data-src="g">
+ <header><h4>金沢カレー研究工房 近江町市場</h4><span class="tag">日式咖哩</span></header>
+ <div class="badges"><span class="chip">Google ★4.5・1,049 則</span></div>
+ 
+ <dl class="sdl">
+  <div><dt>地址</dt><dd>石川県金沢市十間町２７−１ 口入る</dd></div>
+  <div><dt>公休</dt><dd>無固定公休<span class="hsrc">（Google）</span> <span class="open">✅ 行程那幾天有開</span></dd></div>
+  <div><dt>小孩</dt><dd><span class="wtag">⚠️ 待查證</span>（Google 沒寫）</dd></div>
+ </dl>
+ <div class="slinks"><a class="mapbtn" href="https://maps.google.com/?cid=3505379782400519433&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">📍 Google 地圖</a></div>
+ <p class="src">查詢日期：Google 2026-10-16</p>
+</article><article class="shop" data-cat="curry" data-src="g">
+ <header><h4>カレーのチャンピオン 近江町店</h4><span class="tag">日式咖哩</span></header>
+ <div class="badges"><span class="chip">Google ★3.9・767 則</span></div>
+ 
+ <dl class="sdl">
+  <div><dt>地址</dt><dd>石川県金沢市青草町８８ 近江町いちば館 地下1階</dd></div>
+  <div><dt>公休</dt><dd>無固定公休<span class="hsrc">（Google）</span> <span class="open">✅ 行程那幾天有開</span></dd></div>
+  <div><dt>小孩</dt><dd><span class="wtag">⚠️ 待查證</span>（Google 沒寫）</dd></div>
+ </dl>
+ <div class="slinks"><a class="mapbtn" href="https://maps.google.com/?cid=10112173054838374826&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">📍 Google 地圖</a></div>
+ <p class="src">查詢日期：Google 2026-10-16</p>
+</article></div><div class="cat" data-cat="wa"><h3>和食 <small>3</small></h3><article class="shop" data-cat="wa" data-src="g">
+ <header><h4>潮屋 近江町いちば店</h4><span class="tag">日本料理</span></header>
+ <div class="badges"><span class="chip">Google ★4.7・521 則</span></div>
+ 
+ <dl class="sdl">
+  <div><dt>地址</dt><dd>石川県金沢市青草町８８</dd></div>
+  <div><dt>公休</dt><dd>無固定公休<span class="hsrc">（Google）</span> <span class="open">✅ 行程那幾天有開</span></dd></div>
+  <div><dt>小孩</dt><dd><span class="wtag">⚠️ 待查證</span>（Google 沒寫）</dd></div>
+ </dl>
+ <div class="slinks"><a class="mapbtn" href="https://maps.google.com/?cid=6759496737049421635&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">📍 Google 地圖</a></div>
+ <p class="src">查詢日期：Google 2026-10-16</p>
+</article><article class="shop" data-cat="wa" data-src="g">
+ <header><h4>近江町市場 金沢おでん いっぷくや</h4><span class="tag">日本料理</span></header>
+ <div class="badges"><span class="chip">Google ★3.9・701 則</span></div>
+ 
+ <dl class="sdl">
+  <div><dt>地址</dt><dd>石川県金沢市上近江町５０番地</dd></div>
+  <div><dt>公休</dt><dd>週二、三<span class="hsrc">（Google）</span> <span class="open">✅ 行程那幾天有開</span></dd></div>
+  <div><dt>小孩</dt><dd><span class="wtag">⚠️ 待查證</span>（Google 沒寫）</dd></div>
+ </dl>
+ <div class="slinks"><a class="mapbtn" href="https://maps.google.com/?cid=12053694374470107980&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">📍 Google 地圖</a></div>
+ <p class="src">查詢日期：Google 2026-10-16</p>
+</article><article class="shop" data-cat="wa" data-src="g">
+ <header><h4>海鮮丼いちば</h4><span class="tag">日本料理</span></header>
+ <div class="badges"><span class="chip">Google ★3.9・512 則</span></div>
+ 
+ <dl class="sdl">
+  <div><dt>地址</dt><dd>石川県金沢市上近江町３６−２</dd></div>
+  <div><dt>公休</dt><dd>無固定公休<span class="hsrc">（Google）</span> <span class="open">✅ 行程那幾天有開</span></dd></div>
+  <div><dt>小孩</dt><dd><span class="wtag">⚠️ 待查證</span>（Google 沒寫）</dd></div>
+ </dl>
+ <div class="slinks"><a class="mapbtn" href="https://maps.google.com/?cid=7299833071343857961&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">📍 Google 地圖</a></div>
+ <p class="src">查詢日期：Google 2026-10-16</p>
+</article></div><div class="cat" data-cat="izakaya"><h3>居酒屋・燒鳥 <small>1</small></h3><article class="shop" data-cat="izakaya" data-src="g">
+ <header><h4>市の蔵 近江町市場店</h4><span class="tag">居酒屋</span></header>
+ <div class="badges"><span class="chip">Google ★3.9・718 則</span></div>
+ 
+ <dl class="sdl">
+  <div><dt>地址</dt><dd>石川県金沢市青草町８８ 近江町いちば館 2F</dd></div>
+  <div><dt>公休</dt><dd>無固定公休<span class="hsrc">（Google）</span> <span class="open">✅ 行程那幾天有開</span></dd></div>
+  <div><dt>小孩</dt><dd><span class="wtag">⚠️ 待查證</span>（Google 沒寫）</dd></div>
+ </dl>
+ <div class="slinks"><a class="mapbtn" href="https://maps.google.com/?cid=10391945613564341177&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">📍 Google 地圖</a></div>
+ <p class="src">查詢日期：Google 2026-10-16</p>
+</article></div></section><section class="area" id="higashi"><h2>東茶屋街周邊 <small>6 家</small></h2><p class="legend">對應行程：Day 4 上午。百名店 1 家、Google 高評價 5 家。</p><div class="cat" data-cat="sweet"><h3>甜點・咖啡 <small>1</small></h3><article class="shop" data-cat="sweet" data-src="hg">
+ <header><h4>箔一 東山店</h4><span class="tag">冰淇淋</span></header>
+ <div class="badges"><span class="chip hot">百名店 2026</span><span class="chip">Google ★4.2・1,053 則</span></div>
+ <p class="snote">9:00-18:00 無休、金箔霜淇淋</p>
+ <dl class="sdl">
+  <div><dt>地址</dt><dd>石川県金沢市東山１丁目１５−４</dd></div>
+  <div><dt>公休</dt><dd>無固定公休<span class="hsrc">（Google）</span> <span class="open">✅ 行程那幾天有開</span></dd></div>
+  <div><dt>小孩</dt><dd><span class="wtag">⚠️ 待查證</span>（Google 沒寫）</dd></div>
+ </dl>
+ <div class="slinks"><a class="mapbtn" href="https://maps.google.com/?cid=508644899970139775&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">📍 Google 地圖</a><a class="mapbtn" href="https://tabelog.com/ishikawa/A1701/A170101/17008262/" target="_blank" rel="noopener">Tabelog（預約、評分）</a></div>
+ <p class="src">查詢日期：百名店 2026-10-16 · Google 2026-10-16</p>
+</article></div><div class="cat" data-cat="ramen"><h3>拉麵 <small>1</small></h3><article class="shop" data-cat="ramen" data-src="g">
+ <header><h4>ラーメン若大将</h4><span class="tag">拉麵</span></header>
+ <div class="badges"><span class="chip">Google ★4.5・506 則</span></div>
+ 
+ <dl class="sdl">
+  <div><dt>地址</dt><dd>石川県金沢市並木町１−４</dd></div>
+  <div><dt>公休</dt><dd>週一<span class="hsrc">（Google）</span> <span class="open">✅ 行程那幾天有開</span></dd></div>
+  <div><dt>小孩</dt><dd><span class="wtag">⚠️ 待查證</span>（Google 沒寫）</dd></div>
+ </dl>
+ <div class="slinks"><a class="mapbtn" href="https://maps.google.com/?cid=15255189817195307233&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">📍 Google 地圖</a></div>
+ <p class="src">查詢日期：Google 2026-10-16</p>
+</article></div><div class="cat" data-cat="wa"><h3>和食 <small>1</small></h3><article class="shop" data-cat="wa" data-src="g">
+ <header><h4>レストラン 自由軒</h4><span class="tag">日本料理</span></header>
+ <div class="badges"><span class="chip">Google ★4.2・832 則</span></div>
+ 
+ <dl class="sdl">
+  <div><dt>地址</dt><dd>石川県金沢市東山１丁目６−６</dd></div>
+  <div><dt>公休</dt><dd>週二<span class="hsrc">（Google）</span> <span class="open">✅ 行程那幾天有開</span></dd></div>
+  <div><dt>小孩</dt><dd><span class="ok">✅ Google：適合小孩</span></dd></div>
+ </dl>
+ <div class="slinks"><a class="mapbtn" href="https://maps.google.com/?cid=5500063844634983347&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">📍 Google 地圖</a></div>
+ <p class="src">查詢日期：Google 2026-10-16</p>
+</article></div><div class="cat" data-cat="izakaya"><h3>居酒屋・燒鳥 <small>1</small></h3><article class="shop" data-cat="izakaya" data-src="g">
+ <header><h4>オリエンタルブルーイング 東山店</h4><span class="tag">精釀啤酒餐廳</span></header>
+ <div class="badges"><span class="chip">Google ★4.5・759 則</span></div>
+ 
+ <dl class="sdl">
+  <div><dt>地址</dt><dd>石川県金沢市東山３丁目２−２２</dd></div>
+  <div><dt>公休</dt><dd>無固定公休<span class="hsrc">（Google）</span> <span class="open">✅ 行程那幾天有開</span></dd></div>
+  <div><dt>小孩</dt><dd><span class="wtag">⚠️ 待查證</span>（Google 沒寫）</dd></div>
+ </dl>
+ <div class="slinks"><a class="mapbtn" href="https://maps.google.com/?cid=16814701373193315434&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">📍 Google 地圖</a></div>
+ <p class="src">查詢日期：Google 2026-10-16</p>
+</article></div><div class="cat" data-cat="meat"><h3>燒肉・牛排 <small>1</small></h3><article class="shop" data-cat="meat" data-src="g">
+ <header><h4>六角堂</h4><span class="tag">牛排</span></header>
+ <div class="badges"><span class="chip">Google ★4.4・1,135 則</span></div>
+ 
+ <dl class="sdl">
+  <div><dt>地址</dt><dd>石川県金沢市観音町３丁目４−４２</dd></div>
+  <div><dt>公休</dt><dd>無固定公休<span class="hsrc">（Google）</span> <span class="open">✅ 行程那幾天有開</span></dd></div>
+  <div><dt>小孩</dt><dd><span class="ok">✅ Google：適合小孩</span></dd></div>
+ </dl>
+ <div class="slinks"><a class="mapbtn" href="https://maps.google.com/?cid=6732616913258754661&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">📍 Google 地圖</a></div>
+ <p class="src">查詢日期：Google 2026-10-16</p>
+</article></div><div class="cat" data-cat="western"><h3>西餐 <small>1</small></h3><article class="shop" data-cat="western" data-src="g">
+ <header><h4>SHOGUN BURGERひがし茶屋街店</h4><span class="tag">漢堡</span></header>
+ <div class="badges"><span class="chip">Google ★4.9・3,148 則</span></div>
+ 
+ <dl class="sdl">
+  <div><dt>地址</dt><dd>石川県金沢市東山１丁目３−５</dd></div>
+  <div><dt>公休</dt><dd>無固定公休<span class="hsrc">（Google）</span> <span class="open">✅ 行程那幾天有開</span></dd></div>
+  <div><dt>小孩</dt><dd><span class="ok">✅ Google：適合小孩</span></dd></div>
+ </dl>
+ <div class="slinks"><a class="mapbtn" href="https://maps.google.com/?cid=17546195734255866483&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">📍 Google 地圖</a></div>
+ <p class="src">查詢日期：Google 2026-10-16</p>
+</article></div></section><section class="area" id="korinbo"><h2>香林坊／片町／広坂 <small>11 家</small></h2><p class="legend">對應行程：Day 2 午餐、Day 5 午餐。百名店 2 家、Google 高評價 9 家。</p><div class="cat" data-cat="sweet"><h3>甜點・咖啡 <small>1</small></h3><article class="shop" data-cat="sweet" data-src="hg">
+ <header><h4>ル ミュゼ ドゥ アッシュ 金沢店</h4><span class="tag">甜點</span></header>
+ <div class="badges"><span class="chip hot">百名店 2026</span><span class="chip">Google ★4.3・986 則</span></div>
+ <p class="snote">甜點、兼六園旁</p>
+ <dl class="sdl">
+  <div><dt>地址</dt><dd>石川県金沢市出羽町２−１ 石川県立美術館 内</dd></div>
+  <div><dt>公休</dt><dd>無固定公休<span class="hsrc">（Google）</span> <span class="open">✅ 行程那幾天有開</span></dd></div>
+  <div><dt>小孩</dt><dd><span class="wtag">⚠️ 待查證</span>（Google 沒寫）</dd></div>
+ </dl>
+ <div class="slinks"><a class="mapbtn" href="https://maps.google.com/?cid=13960467964945389059&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">📍 Google 地圖</a><a class="mapbtn" href="https://tabelog.com/ishikawa/A1701/A170101/17001257/" target="_blank" rel="noopener">Tabelog（預約、評分）</a></div>
+ <p class="src">查詢日期：百名店 2026-10-16 · Google 2026-10-16</p>
+</article></div><div class="cat" data-cat="sushi"><h3>壽司・海鮮 <small>1</small></h3><article class="shop" data-cat="sushi" data-src="g">
+ <header><h4>まわる寿し もりもり寿し 片町店</h4><span class="tag">壽司</span></header>
+ <div class="badges"><span class="chip">Google ★3.9・814 則</span></div>
+ 
+ <dl class="sdl">
+  <div><dt>地址</dt><dd>石川県金沢市片町１丁目７−２３</dd></div>
+  <div><dt>公休</dt><dd>週三<span class="hsrc">（Google）</span> <span class="open">✅ 行程那幾天有開</span></dd></div>
+  <div><dt>小孩</dt><dd><span class="wtag">⚠️ 待查證</span>（Google 沒寫）</dd></div>
+ </dl>
+ <div class="slinks"><a class="mapbtn" href="https://maps.google.com/?cid=12650934531266257894&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">📍 Google 地圖</a></div>
+ <p class="src">查詢日期：Google 2026-10-16</p>
+</article></div><div class="cat" data-cat="ramen"><h3>拉麵 <small>1</small></h3><article class="shop" data-cat="ramen" data-src="g">
+ <header><h4>一風堂 金沢香林坊店</h4><span class="tag">拉麵</span></header>
+ <div class="badges"><span class="chip">Google ★4.3・1,278 則</span></div>
+ 
+ <dl class="sdl">
+  <div><dt>地址</dt><dd>石川県金沢市片町１丁目２−３</dd></div>
+  <div><dt>公休</dt><dd>無固定公休<span class="hsrc">（Google）</span> <span class="open">✅ 行程那幾天有開</span></dd></div>
+  <div><dt>小孩</dt><dd><span class="ok">✅ Google：適合小孩</span></dd></div>
+ </dl>
+ <div class="slinks"><a class="mapbtn" href="https://maps.google.com/?cid=6604003512857169180&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">📍 Google 地圖</a></div>
+ <p class="src">查詢日期：Google 2026-10-16</p>
+</article></div><div class="cat" data-cat="curry"><h3>咖哩 <small>2</small></h3><article class="shop" data-cat="curry" data-src="g">
+ <header><h4>ターバンカレー 総本店</h4><span class="tag">日式咖哩</span></header>
+ <div class="badges"><span class="chip">Google ★4.2・1,563 則</span></div>
+ 
+ <dl class="sdl">
+  <div><dt>地址</dt><dd>石川県金沢市広坂１丁目１−４８ ウナシンビル １F</dd></div>
+  <div><dt>公休</dt><dd>無固定公休<span class="hsrc">（Google）</span> <span class="open">✅ 行程那幾天有開</span></dd></div>
+  <div><dt>小孩</dt><dd><span class="wtag">⚠️ 待查證</span>（Google 沒寫）</dd></div>
+ </dl>
+ <div class="slinks"><a class="mapbtn" href="https://maps.google.com/?cid=1353198258438407108&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">📍 Google 地圖</a></div>
+ <p class="src">查詢日期：Google 2026-10-16</p>
+</article><article class="shop" data-cat="curry" data-src="g">
+ <header><h4>金澤ななほしカレー</h4><span class="tag">日式咖哩</span></header>
+ <div class="badges"><span class="chip">Google ★4.2・549 則</span></div>
+ 
+ <dl class="sdl">
+  <div><dt>地址</dt><dd>石川県金沢市広坂１丁目２−１８ 中村ビル</dd></div>
+  <div><dt>公休</dt><dd>無固定公休<span class="hsrc">（Google）</span> <span class="open">✅ 行程那幾天有開</span></dd></div>
+  <div><dt>小孩</dt><dd><span class="ok">✅ Google：適合小孩</span></dd></div>
+ </dl>
+ <div class="slinks"><a class="mapbtn" href="https://maps.google.com/?cid=4414105496465391404&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">📍 Google 地圖</a></div>
+ <p class="src">查詢日期：Google 2026-10-16</p>
+</article></div><div class="cat" data-cat="wa"><h3>和食 <small>1</small></h3><article class="shop" data-cat="wa" data-src="g">
+ <header><h4>ごはん屋はな</h4><span class="tag">日本料理</span></header>
+ <div class="badges"><span class="chip">Google ★4.8・610 則</span></div>
+ 
+ <dl class="sdl">
+  <div><dt>地址</dt><dd>石川県金沢市尾山町３−２</dd></div>
+  <div><dt>公休</dt><dd>週日、六<span class="hsrc">（Google）</span> <span class="open">✅ 行程那幾天有開</span></dd></div>
+  <div><dt>小孩</dt><dd><span class="wtag">⚠️ 待查證</span>（Google 沒寫）</dd></div>
+ </dl>
+ <div class="slinks"><a class="mapbtn" href="https://maps.google.com/?cid=7237318522279003687&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">📍 Google 地圖</a></div>
+ <p class="src">查詢日期：Google 2026-10-16</p>
+</article></div><div class="cat" data-cat="izakaya"><h3>居酒屋・燒鳥 <small>2</small></h3><article class="shop" data-cat="izakaya" data-src="g">
+ <header><h4>Shisha Cafe&amp;Bar SIN 金沢片町店</h4><span class="tag">水煙酒吧</span></header>
+ <div class="badges"><span class="chip">Google ★4.9・542 則</span></div>
+ 
+ <dl class="sdl">
+  <div><dt>地址</dt><dd>石川県金沢市片町２丁目３１−３９ 2F</dd></div>
+  <div><dt>公休</dt><dd>無固定公休<span class="hsrc">（Google）</span> <span class="open">✅ 行程那幾天有開</span></dd></div>
+  <div><dt>小孩</dt><dd><span class="wtag">⚠️ 待查證</span>（Google 沒寫）</dd></div>
+ </dl>
+ <div class="slinks"><a class="mapbtn" href="https://maps.google.com/?cid=6649917000310898187&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">📍 Google 地圖</a></div>
+ <p class="src">查詢日期：Google 2026-10-16</p>
+</article><article class="shop" data-cat="izakaya" data-src="g">
+ <header><h4>はちまき</h4><span class="tag">燒鳥</span></header>
+ <div class="badges"><span class="chip">Google ★4.3・629 則</span></div>
+ 
+ <dl class="sdl">
+  <div><dt>地址</dt><dd>石川県金沢市片町１丁目１０−１８ 石崎ビル 2階</dd></div>
+  <div><dt>公休</dt><dd>無固定公休<span class="hsrc">（Google）</span> <span class="open">✅ 行程那幾天有開</span></dd></div>
+  <div><dt>小孩</dt><dd><span class="ok">✅ Google：適合小孩</span></dd></div>
+ </dl>
+ <div class="slinks"><a class="mapbtn" href="https://maps.google.com/?cid=12176404799582461325&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">📍 Google 地圖</a></div>
+ <p class="src">查詢日期：Google 2026-10-16</p>
+</article></div><div class="cat" data-cat="western"><h3>西餐 <small>3</small></h3><article class="shop" data-cat="western" data-src="h">
+ <header><h4>ア レストラン</h4><span class="tag">創作料理</span></header>
+ <div class="badges"><span class="chip hot">百名店 2025</span><span class="chip">Google ★4.8・28 則</span></div>
+ <p class="snote">2F 無電梯</p>
+ <dl class="sdl">
+  <div><dt>地址</dt><dd>石川県金沢市片町２丁目２３−１２ 2階</dd></div>
+  <div><dt>公休</dt><dd>週日<span class="hsrc">（Google）</span> <span class="open">✅ 行程那幾天有開</span></dd></div>
+  <div><dt>小孩</dt><dd><span class="ok">✅ Google：適合小孩</span></dd></div>
+ </dl>
+ <div class="slinks"><a class="mapbtn" href="https://maps.google.com/?cid=7367448296344861430&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">📍 Google 地圖</a><a class="mapbtn" href="https://tabelog.com/ishikawa/A1701/A170101/17012244/" target="_blank" rel="noopener">Tabelog（預約、評分）</a></div>
+ <p class="src">查詢日期：百名店 2026-10-16 · Google 2026-10-16</p>
+</article><article class="shop" data-cat="western" data-src="g">
+ <header><h4>The Godburger</h4><span class="tag">漢堡</span></header>
+ <div class="badges"><span class="chip">Google ★4.6・1,133 則</span></div>
+ 
+ <dl class="sdl">
+  <div><dt>地址</dt><dd>石川県金沢市香林坊２丁目１２−１０ せせらぎパサージュ 1-A</dd></div>
+  <div><dt>公休</dt><dd>週三<span class="hsrc">（Google）</span> <span class="open">✅ 行程那幾天有開</span></dd></div>
+  <div><dt>小孩</dt><dd><span class="wtag">⚠️ 待查證</span>（Google 沒寫）</dd></div>
+ </dl>
+ <div class="slinks"><a class="mapbtn" href="https://maps.google.com/?cid=12989831594371671678&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">📍 Google 地圖</a></div>
+ <p class="src">查詢日期：Google 2026-10-16</p>
+</article><article class="shop" data-cat="western" data-src="g">
+ <header><h4>CARLO CENTRO</h4><span class="tag">義式</span></header>
+ <div class="badges"><span class="chip">Google ★4.6・592 則</span></div>
+ 
+ <dl class="sdl">
+  <div><dt>地址</dt><dd>石川県金沢市片町２丁目２−２ 片町きらら 2階</dd></div>
+  <div><dt>公休</dt><dd>無固定公休<span class="hsrc">（Google）</span> <span class="open">✅ 行程那幾天有開</span></dd></div>
+  <div><dt>小孩</dt><dd><span class="ok">✅ Google：適合小孩</span></dd></div>
+ </dl>
+ <div class="slinks"><a class="mapbtn" href="https://maps.google.com/?cid=17439050461186503910&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">📍 Google 地圖</a></div>
+ <p class="src">查詢日期：Google 2026-10-16</p>
+</article></div></section><section class="area" id="nagamachi"><h2>長町周邊 <small>2 家</small></h2><p class="legend">對應行程：Day 5 上午。百名店 0 家、Google 高評價 2 家。</p><div class="cat" data-cat="wa"><h3>和食 <small>1</small></h3><article class="shop" data-cat="wa" data-src="g">
+ <header><h4>グリル オーツカ</h4><span class="tag">日本料理</span></header>
+ <div class="badges"><span class="chip">Google ★4・2,137 則</span></div>
+ 
+ <dl class="sdl">
+  <div><dt>地址</dt><dd>石川県金沢市片町２丁目９−１５</dd></div>
+  <div><dt>公休</dt><dd>週三<span class="hsrc">（Google）</span> <span class="open">✅ 行程那幾天有開</span></dd></div>
+  <div><dt>小孩</dt><dd><span class="ok">✅ Google：適合小孩</span></dd></div>
+ </dl>
+ <div class="slinks"><a class="mapbtn" href="https://maps.google.com/?cid=18222820293856182919&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">📍 Google 地圖</a></div>
+ <p class="src">查詢日期：Google 2026-10-16</p>
+</article></div><div class="cat" data-cat="asia"><h3>亞洲料理 <small>1</small></h3><article class="shop" data-cat="asia" data-src="g">
+ <header><h4>アシルワード</h4><span class="tag">印度料理</span></header>
+ <div class="badges"><span class="chip">Google ★4.7・1,133 則</span></div>
+ 
+ <dl class="sdl">
+  <div><dt>地址</dt><dd>石川県金沢市長町１丁目４−５９</dd></div>
+  <div><dt>公休</dt><dd>週一<span class="hsrc">（Google）</span> <span class="closed">❌ 行程中公休：1/18（一）</span></dd></div>
+  <div><dt>小孩</dt><dd><span class="wtag">⚠️ 待查證</span>（Google 沒寫）</dd></div>
+ </dl>
+ <div class="slinks"><a class="mapbtn" href="https://maps.google.com/?cid=5849077060932827810&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">📍 Google 地圖</a></div>
+ <p class="src">查詢日期：Google 2026-10-16</p>
+</article></div></section><section class="area" id="wakura"><h2>和倉溫泉 <small>1 家</small></h2><p class="legend">對應行程：Day 6 下午～Day 7 早上。百名店 0 家、Google 高評價 1 家。</p><div class="cat" data-cat="sweet"><h3>甜點・咖啡 <small>1</small></h3><article class="shop" data-cat="sweet" data-src="g">
+ <header><h4>能登ミルク</h4><span class="tag">冰淇淋</span></header>
+ <div class="badges"><span class="chip">Google ★4.3・1,192 則</span></div>
+ 
+ <dl class="sdl">
+  <div><dt>地址</dt><dd>石川県七尾市和倉町ワ ワ部１３−６</dd></div>
+  <div><dt>公休</dt><dd>週三、四<span class="hsrc">（Google）</span> <span class="closed">❌ 行程中公休：1/20（三）</span></dd></div>
+  <div><dt>小孩</dt><dd><span class="ok">✅ Google：適合小孩</span></dd></div>
+ </dl>
+ <div class="slinks"><a class="mapbtn" href="https://maps.google.com/?cid=10556163974298266054&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">📍 Google 地圖</a></div>
+ <p class="src">查詢日期：Google 2026-10-16</p>
+</article></div></section><section class="area" id="komatsu"><h2>小松站／AEON 新小松 <small>5 家</small></h2><p class="legend">對應行程：Day 8（下午班機方案）。百名店 1 家、Google 高評價 4 家。</p><div class="cat" data-cat="sweet"><h3>甜點・咖啡 <small>1</small></h3><article class="shop" data-cat="sweet" data-src="h">
+ <header><h4>松葉屋</h4><span class="tag">和菓子</span></header>
+ <div class="badges"><span class="chip hot">百名店 2026</span><span class="chip">Google ★4.4・309 則</span></div>
+ <p class="snote">和菓子</p>
+ <dl class="sdl">
+  <div><dt>地址</dt><dd>石川県小松市大文字町６９</dd></div>
+  <div><dt>公休</dt><dd>無固定公休<span class="hsrc">（Google）</span> <span class="open">✅ 行程那幾天有開</span></dd></div>
+  <div><dt>小孩</dt><dd><span class="wtag">⚠️ 待查證</span>（Google 沒寫）</dd></div>
+ </dl>
+ <div class="slinks"><a class="mapbtn" href="https://maps.google.com/?cid=2198629799769015785&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">📍 Google 地圖</a><a class="mapbtn" href="https://tabelog.com/ishikawa/A1702/A170202/17005047/" target="_blank" rel="noopener">Tabelog（預約、評分）</a></div>
+ <p class="src">查詢日期：百名店 2026-10-16 · Google 2026-10-16</p>
+</article></div><div class="cat" data-cat="sushi"><h3>壽司・海鮮 <small>2</small></h3><article class="shop" data-cat="sushi" data-src="g">
+ <header><h4>すし食いねぇ！小松沖店</h4><span class="tag">壽司</span></header>
+ <div class="badges"><span class="chip">Google ★4.2・1,799 則</span></div>
+ 
+ <dl class="sdl">
+  <div><dt>地址</dt><dd>石川県小松市沖町５２８</dd></div>
+  <div><dt>公休</dt><dd>無固定公休<span class="hsrc">（Google）</span> <span class="open">✅ 行程那幾天有開</span></dd></div>
+  <div><dt>小孩</dt><dd><span class="ok">✅ Google：適合小孩</span></dd></div>
+ </dl>
+ <div class="slinks"><a class="mapbtn" href="https://maps.google.com/?cid=6604978915389299996&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">📍 Google 地圖</a></div>
+ <p class="src">查詢日期：Google 2026-10-16</p>
+</article><article class="shop" data-cat="sushi" data-src="g">
+ <header><h4>もりもり寿し イオン新小松店</h4><span class="tag">壽司</span></header>
+ <div class="badges"><span class="chip">Google ★4.2・760 則</span></div>
+ 
+ <dl class="sdl">
+  <div><dt>地址</dt><dd>石川県小松市清六町315番地</dd></div>
+  <div><dt>公休</dt><dd>無固定公休<span class="hsrc">（Google）</span> <span class="open">✅ 行程那幾天有開</span></dd></div>
+  <div><dt>小孩</dt><dd><span class="ok">✅ Google：適合小孩</span></dd></div>
+ </dl>
+ <div class="slinks"><a class="mapbtn" href="https://maps.google.com/?cid=13270328945137850687&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">📍 Google 地圖</a></div>
+ <p class="src">查詢日期：Google 2026-10-16</p>
+</article></div><div class="cat" data-cat="ramen"><h3>拉麵 <small>1</small></h3><article class="shop" data-cat="ramen" data-src="g">
+ <header><h4>８番らーめん 小松店</h4><span class="tag">拉麵</span></header>
+ <div class="badges"><span class="chip">Google ★4・586 則</span></div>
+ 
+ <dl class="sdl">
+  <div><dt>地址</dt><dd>石川県小松市有明町２３</dd></div>
+  <div><dt>公休</dt><dd>無固定公休<span class="hsrc">（Google）</span> <span class="open">✅ 行程那幾天有開</span></dd></div>
+  <div><dt>小孩</dt><dd><span class="ok">✅ Google：適合小孩</span></dd></div>
+ </dl>
+ <div class="slinks"><a class="mapbtn" href="https://maps.google.com/?cid=16130804766414849401&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">📍 Google 地圖</a></div>
+ <p class="src">查詢日期：Google 2026-10-16</p>
+</article></div><div class="cat" data-cat="asia"><h3>亞洲料理 <small>1</small></h3><article class="shop" data-cat="asia" data-src="g">
+ <header><h4>餃子菜館 勝ちゃん</h4><span class="tag">中華料理</span></header>
+ <div class="badges"><span class="chip">Google ★3.9・1,203 則</span></div>
+ 
+ <dl class="sdl">
+  <div><dt>地址</dt><dd>石川県小松市土居原町３９５</dd></div>
+  <div><dt>公休</dt><dd>週三<span class="hsrc">（Google）</span> <span class="open">✅ 行程那幾天有開</span></dd></div>
+  <div><dt>小孩</dt><dd><span class="ok">✅ Google：適合小孩</span></dd></div>
+ </dl>
+ <div class="slinks"><a class="mapbtn" href="https://maps.google.com/?cid=14065805328256378110&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">📍 Google 地圖</a></div>
+ <p class="src">查詢日期：Google 2026-10-16</p>
+</article></div></section>
+ <p id="none" class="empty" hidden>這個組合沒有店，換個篩選試試。</p>
+
+ <section id="notes">
+  <h2>⚠️ 說明與參考清單</h2>
+  <h3>選店規則</h3>
+  <ul>
+   <li><b>Tabelog 百名店</b>：來源 <a href="https://award.tabelog.com/hyakumeiten" target="_blank" rel="noopener">award.tabelog.com</a>，查詢日期 2026-10-16。</li>
+   <li><b>Google 高評價</b>：Google 評分<b>超過 3.8</b>、評價數<b>超過 500 則</b>、營業中，來源 Google Places API，查詢日期 2026-10-16。</li>
+   <li>區域：以金澤站、近江町市場、東茶屋街、香林坊、長町、小松站、AEON 新小松、和倉溫泉為中心，半徑約 300–700 公尺。</li>
+   <li>小孩：用 Google 的「適合兒童」欄位。標「不適合」的移到下面參考清單；沒標的寫 ⚠️。</li>
+   <li>沒有收「Tabelog 評分 3.5 以上」（Tabelog 主站擋自動查詢）和「神泡達人店」（Suntory 沒有公開的店家名單）。</li>
+  </ul>
+  <details class="ref"><summary>📋 參考清單：Google 標「不適合小孩」（85 家）</summary><div>
+   <p class="legend">大人想去或外帶時參考。很多是完全預約制的吧台店。</p>
+   <div class="tw"><table><thead><tr><th>店</th><th>區域</th><th>種類</th><th>來源</th><th>Google</th><th></th></tr></thead><tbody><tr><td>寿し・すき焼き あかめちゃん</td><td>金澤站周邊</td><td>壽司</td><td>Google</td><td class="num">★4.9（914）</td><td><a href="https://maps.google.com/?cid=15069168330673175623&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>ORIGO</td><td>金澤站周邊</td><td>創作料理</td><td>百名店</td><td class="num">★4.8（96）</td><td><a href="https://maps.google.com/?cid=14509150126633635261&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>TILE</td><td>金澤站周邊</td><td>日本料理</td><td>Google</td><td class="num">★4.6（957）</td><td><a href="https://maps.google.com/?cid=6889270238727964613&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>居酒屋革命 酔っ手羽 金沢駅前店</td><td>金澤站周邊</td><td>居酒屋</td><td>Google</td><td class="num">★4.6（644）</td><td><a href="https://maps.google.com/?cid=5008592040174462409&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>小松 弥助</td><td>金澤站周邊</td><td>壽司</td><td>百名店</td><td class="num">★4.6（579）</td><td><a href="https://maps.google.com/?cid=14923363601191850179&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>麺屋大河</td><td>金澤站周邊</td><td>拉麵</td><td>Google</td><td class="num">★4.4（3,607）</td><td><a href="https://maps.google.com/?cid=1046631926684167591&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>和ノ音 金沢駅前店</td><td>金澤站周邊</td><td>居酒屋</td><td>Google</td><td class="num">★4.4（1,311）</td><td><a href="https://maps.google.com/?cid=17137073536972373750&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>うなぎ四代目 菊川 クロスゲート金沢店</td><td>金澤站周邊</td><td>日本料理</td><td>Google</td><td class="num">★4.4（671）</td><td><a href="https://maps.google.com/?cid=7926214782330617693&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>とっくりや</td><td>金澤站周邊</td><td>居酒屋</td><td>百名店</td><td class="num">★4.4（290）</td><td><a href="https://maps.google.com/?cid=3054010101275602895&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>すし屋 小桜</td><td>金澤站周邊</td><td>壽司</td><td>百名店</td><td class="num">★4.4（221）</td><td><a href="https://maps.google.com/?cid=15825825133048825322&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>BIRD</td><td>金澤站周邊</td><td>燒鳥</td><td>百名店</td><td class="num">★4.4（93）</td><td><a href="https://maps.google.com/?cid=8365340949385109470&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>ミステリーカフェ 謎屋珈琲店 金沢本店</td><td>金澤站周邊</td><td>咖啡廳</td><td>Google</td><td class="num">★4.3（524）</td><td><a href="https://maps.google.com/?cid=13410409342309378080&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>味楽 ゆめり</td><td>金澤站周邊</td><td>居酒屋</td><td>百名店</td><td class="num">★4.3（499）</td><td><a href="https://maps.google.com/?cid=8640883622843634154&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>酒粋 醍醐</td><td>金澤站周邊</td><td>居酒屋</td><td>百名店</td><td class="num">★4.3（423）</td><td><a href="https://maps.google.com/?cid=12055746709172718766&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>炭魚酒菜 わなか</td><td>金澤站周邊</td><td>居酒屋</td><td>百名店</td><td class="num">★4.3（242）</td><td><a href="https://maps.google.com/?cid=1572432227325173490&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>333</td><td>金澤站周邊</td><td>雞料理</td><td>百名店</td><td class="num">★4.3（156）</td><td><a href="https://maps.google.com/?cid=8223718642743914086&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>炉端とおでん 呼炉凪来 金沢駅前店</td><td>金澤站周邊</td><td>居酒屋</td><td>Google</td><td class="num">★4.2（851）</td><td><a href="https://maps.google.com/?cid=14634948209748160229&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>中華そば処 万味</td><td>金澤站周邊</td><td>拉麵</td><td>Google</td><td class="num">★4.2（693）</td><td><a href="https://maps.google.com/?cid=11989218498278188221&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>魚がし食堂 金沢駅 Rinto店</td><td>金澤站周邊</td><td>餐廳</td><td>Google</td><td class="num">★4.2（670）</td><td><a href="https://maps.google.com/?cid=9413450709632694227&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>日本料理 加賀屋 金沢店</td><td>金澤站周邊</td><td>日本料理</td><td>Google</td><td class="num">★4.2（581）</td><td><a href="https://maps.google.com/?cid=2840347374517456347&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>あぶり肉 がらん</td><td>金澤站周邊</td><td>居酒屋</td><td>百名店</td><td class="num">★4.2（270）</td><td><a href="https://maps.google.com/?cid=17030290876780219550&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>魚菜屋 あんと店</td><td>金澤站周邊</td><td>日本料理</td><td>Google</td><td class="num">★4.1（1,357）</td><td><a href="https://maps.google.com/?cid=16321558921429912957&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>金澤中華そば 麺屋 白鷺</td><td>金澤站周邊</td><td>拉麵</td><td>Google</td><td class="num">★4.1（860）</td><td><a href="https://maps.google.com/?cid=14084022322851423799&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>長八 金沢駅前店</td><td>金澤站周邊</td><td>壽司</td><td>Google</td><td class="num">★4.1（776）</td><td><a href="https://maps.google.com/?cid=6870348883222649434&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>鹿児島県霧島市 塚田農場 金沢駅西口店</td><td>金澤站周邊</td><td>居酒屋</td><td>Google</td><td class="num">★4.1（550）</td><td><a href="https://maps.google.com/?cid=6410038700682849622&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>こいで</td><td>金澤站周邊</td><td>居酒屋</td><td>百名店</td><td class="num">★4.1（87）</td><td><a href="https://maps.google.com/?cid=12786870137090475699&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>金沢まいもん寿司 金沢駅店</td><td>金澤站周邊</td><td>壽司</td><td>Google</td><td class="num">★4（1,278）</td><td><a href="https://maps.google.com/?cid=7571973811555652512&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>地酒と和個室居酒屋 蔵の間 金沢駅前店</td><td>金澤站周邊</td><td>居酒屋</td><td>Google</td><td class="num">★4（645）</td><td><a href="https://maps.google.com/?cid=3849083488448141530&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>九十九‐つくも‐ 金沢店</td><td>金澤站周邊</td><td>居酒屋</td><td>Google</td><td class="num">★3.9（1,409）</td><td><a href="https://maps.google.com/?cid=15950996848226936895&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>日本酒バル 金澤酒趣</td><td>近江町市場周邊</td><td>居酒屋</td><td>Google</td><td class="num">★4.7（561）</td><td><a href="https://maps.google.com/?cid=18424948194817896428&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>寿し高崎屋</td><td>近江町市場周邊</td><td>壽司</td><td>Google</td><td class="num">★4.5（789）</td><td><a href="https://maps.google.com/?cid=2339216281751399863&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>金澤屋珈琲店</td><td>近江町市場周邊</td><td>咖啡</td><td>Google</td><td class="num">★4.5（689）</td><td><a href="https://maps.google.com/?cid=436511767095816566&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>翁すし</td><td>近江町市場周邊</td><td>壽司</td><td>Google</td><td class="num">★4.5（655）</td><td><a href="https://maps.google.com/?cid=327589650940640048&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>レスピラシオン</td><td>近江町市場周邊</td><td>西班牙</td><td>百名店</td><td class="num">★4.5（290）</td><td><a href="https://maps.google.com/?cid=7267442604118137546&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>東出珈琲店</td><td>近江町市場周邊</td><td>咖啡</td><td>Google</td><td class="num">★4.4（792）</td><td><a href="https://maps.google.com/?cid=294656938149295250&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>鳥たけ</td><td>近江町市場周邊</td><td>燒鳥</td><td>百名店</td><td class="num">★4.4（143）</td><td><a href="https://maps.google.com/?cid=11651700305733420&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>いきいき亭 近江町店</td><td>近江町市場周邊</td><td>壽司</td><td>Google</td><td class="num">★4.3（1,029）</td><td><a href="https://maps.google.com/?cid=1206737371973963829&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>あまつぼ じもの亭</td><td>近江町市場周邊</td><td>海鮮</td><td>Google</td><td class="num">★4.3（592）</td><td><a href="https://maps.google.com/?cid=7926152997133096357&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>能加万菜 市場屋 近江町総本店</td><td>近江町市場周邊</td><td>日本料理</td><td>Google</td><td class="num">★4.2（651）</td><td><a href="https://maps.google.com/?cid=12446891657213557478&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>山さん寿司 本店</td><td>近江町市場周邊</td><td>壽司</td><td>Google</td><td class="num">★4.1（1,253）</td><td><a href="https://maps.google.com/?cid=3400500180089697032&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>近江町食堂</td><td>近江町市場周邊</td><td>海鮮</td><td>Google</td><td class="num">★3.9（1,320）</td><td><a href="https://maps.google.com/?cid=10297804153163278781&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>barrier</td><td>東茶屋街周邊</td><td>餐廳</td><td>Google</td><td class="num">★4.7（1,026）</td><td><a href="https://maps.google.com/?cid=3228701056728152399&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>一笑</td><td>東茶屋街周邊</td><td>咖啡廳</td><td>百名店</td><td class="num">★4.7（191）</td><td><a href="https://maps.google.com/?cid=7528952264405168373&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>片折</td><td>東茶屋街周邊</td><td>日本料理</td><td>百名店</td><td class="num">★4.7（123）</td><td><a href="https://maps.google.com/?cid=16825913149854412859&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>鮨 木場谷</td><td>東茶屋街周邊</td><td>壽司</td><td>百名店</td><td class="num">★4.5（210）</td><td><a href="https://maps.google.com/?cid=9639248808840640266&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>蕎味 櫂</td><td>東茶屋街周邊</td><td>日本料理</td><td>百名店</td><td class="num">★4.5（107）</td><td><a href="https://maps.google.com/?cid=17234763381110132001&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>森八 本店</td><td>東茶屋街周邊</td><td>甜點</td><td>Google</td><td class="num">★4.3（875）</td><td><a href="https://maps.google.com/?cid=4461059609833954882&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>久連波</td><td>東茶屋街周邊</td><td>咖啡廳</td><td>百名店</td><td class="num">★4.2（286）</td><td><a href="https://maps.google.com/?cid=10338872380874231717&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>CAFE たもん</td><td>東茶屋街周邊</td><td>咖啡廳</td><td>Google</td><td class="num">★4.1（1,276）</td><td><a href="https://maps.google.com/?cid=12563414212859256360&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>梅梅 金沢店</td><td>東茶屋街周邊</td><td>中華料理</td><td>Google</td><td class="num">★4（609）</td><td><a href="https://maps.google.com/?cid=11893380656943241004&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>townsfolk coffee</td><td>香林坊</td><td>咖啡廳</td><td>Google</td><td class="num">★4.7（546）</td><td><a href="https://maps.google.com/?cid=14028970626193322653&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>Installation Table ENSO L&#x27;asymetrie du calme</td><td>香林坊</td><td>法式</td><td>百名店</td><td class="num">★4.6（155）</td><td><a href="https://maps.google.com/?cid=17888966838670928945&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>餃子のかっちゃん 金沢片町店</td><td>香林坊</td><td>居酒屋</td><td>Google</td><td class="num">★4.5（1,535）</td><td><a href="https://maps.google.com/?cid=6763631462240194180&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>一平鮨</td><td>香林坊</td><td>壽司</td><td>Google</td><td class="num">★4.5（597）</td><td><a href="https://maps.google.com/?cid=16434628388011701668&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>飛</td><td>香林坊</td><td>壽司</td><td>百名店</td><td class="num">★4.5（149）</td><td><a href="https://maps.google.com/?cid=10410503821734898152&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>うちわ</td><td>香林坊</td><td>居酒屋</td><td>Google</td><td class="num">★4.4（1,098）</td><td><a href="https://maps.google.com/?cid=11082468562803861137&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>酒と人情料理 いたる 本店</td><td>香林坊</td><td>居酒屋</td><td>Google</td><td class="num">★4.4（813）</td><td><a href="https://maps.google.com/?cid=10846005428885968223&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>鮨 いくた</td><td>香林坊</td><td>壽司</td><td>百名店</td><td class="num">★4.4（134）</td><td><a href="https://maps.google.com/?cid=17963499393132828498&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>天ぷら 小泉</td><td>香林坊</td><td>天婦羅</td><td>百名店</td><td class="num">★4.4（120）</td><td><a href="https://maps.google.com/?cid=3914961577425305417&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>全席個室 あなば 片町店</td><td>香林坊</td><td>居酒屋</td><td>Google</td><td class="num">★4.3（1,106）</td><td><a href="https://maps.google.com/?cid=11044952164240064050&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>麺屋 鶯</td><td>香林坊</td><td>拉麵</td><td>Google</td><td class="num">★4.3（922）</td><td><a href="https://maps.google.com/?cid=16954602694029103831&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>旬魚季菜 とと桜</td><td>香林坊</td><td>居酒屋</td><td>Google</td><td class="num">★4.3（730）</td><td><a href="https://maps.google.com/?cid=10385592030440482535&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>金沢居酒屋 かかし片町店</td><td>香林坊</td><td>居酒屋</td><td>Google</td><td class="num">★4.3（533）</td><td><a href="https://maps.google.com/?cid=15267535232704388906&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>つぼみ</td><td>香林坊</td><td>和菓子</td><td>百名店</td><td class="num">★4.3（476）</td><td><a href="https://maps.google.com/?cid=6897859783042458809&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>金沢商店 金沢片町店</td><td>香林坊</td><td>居酒屋</td><td>Google</td><td class="num">★4.2（858）</td><td><a href="https://maps.google.com/?cid=1885320976545077627&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>元祖 金沢炉端 あっぱれ片町本店</td><td>香林坊</td><td>居酒屋</td><td>Google</td><td class="num">★4.2（685）</td><td><a href="https://maps.google.com/?cid=10301602715205845776&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>スペイン料理 アロス</td><td>香林坊</td><td>西班牙</td><td>百名店</td><td class="num">★4.2（491）</td><td><a href="https://maps.google.com/?cid=11388935280842807503&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>のど黒めし本舗 いたる</td><td>香林坊</td><td>日本料理</td><td>Google</td><td class="num">★4.1（1,547）</td><td><a href="https://maps.google.com/?cid=12850961953756625637&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>京祇園ねぎ焼 粉</td><td>香林坊</td><td>ねぎ焼</td><td>百名店</td><td class="num">★4.1（275）</td><td><a href="https://maps.google.com/?cid=9854365092000409025&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>宇宙軒食堂</td><td>香林坊</td><td>日本料理</td><td>Google</td><td class="num">★4（1,461）</td><td><a href="https://maps.google.com/?cid=7553940480925485805&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>スターバックス コーヒー 香林坊店</td><td>香林坊</td><td>咖啡</td><td>Google</td><td class="num">★4（644）</td><td><a href="https://maps.google.com/?cid=9157705574724787669&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>金沢濃厚煮干豚骨 伊乃心</td><td>香林坊</td><td>拉麵</td><td>Google</td><td class="num">★3.9（554）</td><td><a href="https://maps.google.com/?cid=10313749230139844016&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>更科藤井</td><td>香林坊</td><td>蕎麥麵</td><td>百名店</td><td class="num">★3.5（297）</td><td><a href="https://maps.google.com/?cid=5682760481189395592&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>大将軍 金沢店</td><td>長町周邊</td><td>居酒屋</td><td>Google</td><td class="num">★4.9（1,128）</td><td><a href="https://maps.google.com/?cid=4063508821232748795&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>乙女寿司</td><td>長町周邊</td><td>壽司</td><td>百名店</td><td class="num">★4.7（381）</td><td><a href="https://maps.google.com/?cid=5481174605341720709&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>やき鳥 卍郎</td><td>長町周邊</td><td>燒鳥</td><td>百名店</td><td class="num">★4.6（31）</td><td><a href="https://maps.google.com/?cid=17672283625858779698&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>かぶ菜</td><td>長町周邊</td><td>居酒屋</td><td>百名店</td><td class="num">★4.5（414）</td><td><a href="https://maps.google.com/?cid=7513142793654791566&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>タワラ</td><td>長町周邊</td><td>法式</td><td>百名店</td><td class="num">★4.5（157）</td><td><a href="https://maps.google.com/?cid=15978985151287730554&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>jibunchi</td><td>長町周邊</td><td>義式</td><td>百名店</td><td class="num">★4.4（68）</td><td><a href="https://maps.google.com/?cid=5479679818877437218&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>片町居酒屋 魚ぎゅう</td><td>長町周邊</td><td>居酒屋</td><td>Google</td><td class="num">★4.3（882）</td><td><a href="https://maps.google.com/?cid=15692663596833692343&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>大衆割烹 魚吟</td><td>長町周邊</td><td>居酒屋</td><td>Google</td><td class="num">★4.3（682）</td><td><a href="https://maps.google.com/?cid=16178961296900267616&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>ひらみぱん</td><td>長町周邊</td><td>麵包</td><td>百名店</td><td class="num">★4.1（1,285）</td><td><a href="https://maps.google.com/?cid=712084526765232420&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>五郎八</td><td>長町周邊</td><td>居酒屋</td><td>Google</td><td class="num">★4.1（588）</td><td><a href="https://maps.google.com/?cid=5054822783104873621&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>海月が雲になる日</td><td>長町周邊</td><td>泰國料理</td><td>百名店</td><td class="num">★4.1（75）</td><td><a href="https://maps.google.com/?cid=13942847785508703448&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr><tr><td>コメール マル イ モンターニャ</td><td>長町周邊</td><td>西班牙</td><td>百名店</td><td class="num">★4（144）</td><td><a href="https://maps.google.com/?cid=15655344677674083732&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener">地圖</a></td></tr></tbody></table></div>
+  </div></details>
+  <details class="ref"><summary>沒列入的百名店（22 家）</summary><div>
+   <p><b>Google 顯示永久歇業：</b>くりゑンテ カワバタ、レストラン エンヌ</p>
+   <p><b>不在行程區域（Google 位置）：</b>料理 小松</p>
+   <div class="tw"><table><thead><tr><th>不在行程區域（網路搜尋地址）</th><th>種類</th><th>地點</th></tr></thead><tbody><tr><td>チャイナダイニング クーイン</td><td>中華料理</td><td>西金沢駅から車7分</td></tr><tr><td>SHOKUDO YArn</td><td>創作料理</td><td>小松市吉竹町1-37-1</td></tr><tr><td>Auberge eaufeu</td><td>創作料理</td><td>小松市観音下町ロ48</td></tr><tr><td>マキノンチ</td><td>法式</td><td>金沢市山の上町25-18</td></tr><tr><td>レストランぶどうの森 レ・トネル</td><td>法式</td><td>金沢市岩出町ハ50-1</td></tr><tr><td>1/3 HAMBURGER FACTORY</td><td>漢堡</td><td>金沢市畝田東4-1125</td></tr><tr><td>イタリアンジェラート チェルキオ</td><td>冰淇淋</td><td>七尾市神明町ロ-22-10（OSM）</td></tr><tr><td>ヴィラ・デラ・パーチェ</td><td>義式</td><td>七尾市中島町塩津</td></tr><tr><td>お好み焼 平野屋</td><td>ねぎ焼</td><td>七尾市本府中町20</td></tr><tr><td>自然派ラーメン 神楽</td><td>拉麵</td><td>金沢市有松／堀川町（不一致）</td></tr><tr><td>麺や 福座</td><td>拉麵</td><td>金沢市有松（上有松バス停）</td></tr><tr><td>麺屋大河</td><td>拉麵</td><td>金沢市高柳町（OSM）</td></tr><tr><td>手打蕎麦 こより</td><td>蕎麥麵</td><td>金沢市長田2-20-13</td></tr><tr><td>六角堂</td><td>牛排・鐵板燒</td><td>北鉄金沢駅車程4分（番地未確認）</td></tr><tr><td>幸寿し 本店</td><td>壽司</td><td>七尾市相生町30-1</td></tr><tr><td>鮨 志の助</td><td>壽司</td><td>金沢市入江3-73</td></tr><tr><td>落雁諸江屋 西茶屋菓寮 味和以</td><td>和菓子</td><td>西茶屋街</td></tr><tr><td>甘納豆かわむら</td><td>和菓子</td><td>金沢市野町2丁目（OSM）</td></tr><tr><td>蛤坂 まえかわ</td><td>燒鳥</td><td>金沢市野町1-1-9</td></tr></tbody></table></div>
+  </div></details>
+ </section>
+</main>
+<footer><div class="wrap">百名店資料 2026-10-16、Google 資料 2026-10-16。營業時間、公休、預約規則以店家最新公告為準。本頁不代訂。</div></footer>
+<script>
+(function(){
+ var state={cat:'all',src:'all'};
+ try{var s=JSON.parse(localStorage.getItem('kz-food-f')||'{}');if(s.cat)state.cat=s.cat;if(s.src)state.src=s.src}catch(e){}
+ var groups=[].slice.call(document.querySelectorAll('.filter'));
+ function apply(){
+  groups.forEach(function(g){[].slice.call(g.querySelectorAll('button')).forEach(function(b){
+   b.setAttribute('aria-pressed',String(state[g.dataset.f]===b.dataset.k))})});
+  [].slice.call(document.querySelectorAll('article.shop')).forEach(function(a){
+   var okc=state.cat==='all'||a.dataset.cat===state.cat;
+   var oks=state.src==='all'||a.dataset.src.indexOf(state.src)>=0;
+   a.hidden=!(okc&&oks);
+  });
+  [].slice.call(document.querySelectorAll('.cat')).forEach(function(c){c.hidden=!c.querySelector('article.shop:not([hidden])')});
+  [].slice.call(document.querySelectorAll('main section.area')).forEach(function(s){s.hidden=!s.querySelector('article.shop:not([hidden])')});
+  document.getElementById('none').hidden=!!document.querySelector('main section.area:not([hidden])');
+  try{localStorage.setItem('kz-food-f',JSON.stringify(state))}catch(e){}
+ }
+ groups.forEach(function(g){g.addEventListener('click',function(ev){
+  var b=ev.target.closest('button');if(!b)return;state[g.dataset.f]=b.dataset.k;apply();})});
+ apply();
+})();
+</script>
+</body></html>

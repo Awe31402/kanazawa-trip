@@ -1,0 +1,795 @@
+[
+ {
+  "name": "海月が雲になる日",
+  "genres": [
+   "asia_ethnic"
+  ],
+  "holiday": "",
+  "tabelog": "https://tabelog.com/ishikawa/A1701/A170101/17006301/",
+  "year": "2026",
+  "address": "金沢市長町2-6-5",
+  "area": "長町",
+  "note": "タイ料理、古民家",
+  "source": "https://www.mapple.net/spot/17012177/"
+ },
+ {
+  "name": "ひらみぱん",
+  "genres": [
+   "bread"
+  ],
+  "holiday": "月曜日",
+  "tabelog": "https://tabelog.com/ishikawa/A1701/A170101/17006812/",
+  "year": "2026",
+  "address": "金沢市長町1丁目（OSM, 920-0865）",
+  "area": "長町",
+  "note": "麵包店",
+  "source": "https://nominatim.openstreetmap.org/"
+ },
+ {
+  "name": "一笑",
+  "genres": [
+   "cafe"
+  ],
+  "holiday": "月曜日、火曜日",
+  "tabelog": "https://tabelog.com/ishikawa/A1701/A170101/17000060/",
+  "year": "2025",
+  "address": "金沢市東山1-26-13",
+  "area": "東茶屋",
+  "note": "丸八製茶場直營焙茶喫茶",
+  "source": "https://serai.jp/?p=1086031"
+ },
+ {
+  "name": "久連波",
+  "genres": [
+   "cafe"
+  ],
+  "holiday": "水曜日",
+  "tabelog": "https://tabelog.com/ishikawa/A1701/A170101/17000663/",
+  "year": "2025",
+  "address": "ひがし茶屋街內（番地未確認）",
+  "area": "東茶屋",
+  "note": "ゑり虎經營、2F 咖啡",
+  "source": "https://www.gltjp.com/ja/directory/item/13539/"
+ },
+ {
+  "name": "チャイナダイニング クーイン",
+  "genres": [
+   "chinese"
+  ],
+  "holiday": "水曜日",
+  "tabelog": "https://tabelog.com/ishikawa/A1701/A170101/17011149/",
+  "year": "2026",
+  "address": "西金沢駅から車7分",
+  "area": "範圍外",
+  "note": "",
+  "source": "https://tabelog.com/matome/29491/"
+ },
+ {
+  "name": "ア レストラン",
+  "genres": [
+   "creative_innovative"
+  ],
+  "holiday": "日曜日、祝後日",
+  "tabelog": "https://tabelog.com/ishikawa/A1701/A170101/17012244/",
+  "year": "2025",
+  "address": "片町／香林坊バス停（番地未確認）",
+  "area": "香林坊",
+  "note": "2F 無電梯",
+  "source": "https://restaurant.ikyu.com/117092/highlights"
+ },
+ {
+  "name": "SHOKUDO YArn",
+  "genres": [
+   "creative_innovative"
+  ],
+  "holiday": "月曜日、日曜日",
+  "tabelog": "https://tabelog.com/ishikawa/A1702/A170202/17009741/",
+  "year": "2025",
+  "address": "小松市吉竹町1-37-1",
+  "area": "範圍外",
+  "note": "午餐只有週五六",
+  "source": "https://www.navitime.co.jp/category/0306/17203/"
+ },
+ {
+  "name": "くりゑンテ カワバタ",
+  "genres": [
+   "creative_innovative"
+  ],
+  "holiday": "月曜日",
+  "tabelog": "https://tabelog.com/ishikawa/A1701/A170101/17000809/",
+  "year": "2025",
+  "address": "金沢市観音町3-2-2",
+  "area": "東茶屋",
+  "note": "要預約",
+  "source": "https://www.mapple.net/spot/17010772/"
+ },
+ {
+  "name": "ORIGO",
+  "genres": [
+   "creative_innovative"
+  ],
+  "holiday": "",
+  "tabelog": "https://tabelog.com/ishikawa/A1701/A170101/17012364/",
+  "year": "2025",
+  "address": "金沢駅徒歩10分內（番地未確認）",
+  "area": "金沢駅",
+  "note": "完全預約制 8 席",
+  "source": "https://visitkanazawa.jp/en/restaurants/detail_52292.html"
+ },
+ {
+  "name": "Auberge eaufeu",
+  "genres": [
+   "creative_innovative"
+  ],
+  "holiday": "月曜日、火曜日、水曜日",
+  "tabelog": "https://tabelog.com/ishikawa/A1702/A170202/17013500/",
+  "year": "2025",
+  "address": "小松市観音下町ロ48",
+  "area": "範圍外",
+  "note": "小松駅計程車20分",
+  "source": "https://restaurant.ikyu.com/124843/"
+ },
+ {
+  "name": "マキノンチ",
+  "genres": [
+   "french"
+  ],
+  "holiday": "木曜日",
+  "tabelog": "https://tabelog.com/ishikawa/A1701/A170101/17012300/",
+  "year": "2025",
+  "address": "金沢市山の上町25-18",
+  "area": "範圍外",
+  "note": "東金沢駅1.9km",
+  "source": "https://www.tablecheck.com/es/frenchmakinonci"
+ },
+ {
+  "name": "レストランぶどうの森 レ・トネル",
+  "genres": [
+   "french"
+  ],
+  "holiday": "木曜日",
+  "tabelog": "https://tabelog.com/ishikawa/A1701/A170101/17012469/",
+  "year": "2025",
+  "address": "金沢市岩出町ハ50-1",
+  "area": "範圍外",
+  "note": "ぶどうの木本店內",
+  "source": "https://hamoni.jp/area/ishikawa/kanazawa/morimoto/list/french"
+ },
+ {
+  "name": "レストラン エンヌ",
+  "genres": [
+   "french"
+  ],
+  "holiday": "",
+  "tabelog": "https://tabelog.com/ishikawa/A1701/A170101/17009850/",
+  "year": "2025",
+  "address": "查不到",
+  "area": "地址待查",
+  "note": "",
+  "source": ""
+ },
+ {
+  "name": "タワラ",
+  "genres": [
+   "french"
+  ],
+  "holiday": "日曜日",
+  "tabelog": "https://tabelog.com/ishikawa/A1701/A170101/17008112/",
+  "year": "2025",
+  "address": "金沢市片町2-10-19 ロイヤルプラザ片町1F",
+  "area": "香林坊",
+  "note": "要預約",
+  "source": "https://www.mapple.net/spot/17012017/"
+ },
+ {
+  "name": "Installation Table ENSO L'asymetrie du calme",
+  "genres": [
+   "french"
+  ],
+  "holiday": "月曜日",
+  "tabelog": "https://tabelog.com/ishikawa/A1701/A170101/17009914/",
+  "year": "2025",
+  "address": "金沢市池田町4番丁33",
+  "area": "香林坊",
+  "note": "片町バス停步行",
+  "source": "https://savorjapan.com/index.php/0006079285/menus"
+ },
+ {
+  "name": "1/3 HAMBURGER FACTORY",
+  "genres": [
+   "hamburger"
+  ],
+  "holiday": "",
+  "tabelog": "https://tabelog.com/ishikawa/A1701/A170101/17013126/",
+  "year": "2026",
+  "address": "金沢市畝田東4-1125",
+  "area": "範圍外",
+  "note": "金沢駅巴士20分",
+  "source": "https://foodle.pro/restaurants/kanazawa/1-3-hamburger-factory"
+ },
+ {
+  "name": "箔一 東山店",
+  "genres": [
+   "ice_gelato"
+  ],
+  "holiday": "",
+  "tabelog": "https://tabelog.com/ishikawa/A1701/A170101/17008262/",
+  "year": "2026",
+  "address": "金沢市東山1-15-4",
+  "area": "東茶屋",
+  "note": "9:00-18:00 無休、金箔霜淇淋",
+  "source": "https://www.mapple.net/article/208527/"
+ },
+ {
+  "name": "イタリアンジェラート チェルキオ",
+  "genres": [
+   "ice_gelato"
+  ],
+  "holiday": "火曜日",
+  "tabelog": "https://tabelog.com/ishikawa/A1703/A170302/17006103/",
+  "year": "2026",
+  "address": "七尾市神明町ロ-22-10（OSM）",
+  "area": "範圍外",
+  "note": "七尾站附近（不在和倉）",
+  "source": "https://nominatim.openstreetmap.org/"
+ },
+ {
+  "name": "jibunchi",
+  "genres": [
+   "italian"
+  ],
+  "holiday": "日曜日",
+  "tabelog": "https://tabelog.com/ishikawa/A1701/A170101/17012833/",
+  "year": "2025",
+  "address": "金沢市中央通町11-49（另一來源說野町，不一致）",
+  "area": "長町",
+  "note": "完全預約制 20 席",
+  "source": "https://www.enprimeurclub.com/restaurants/jibunchi-17012833"
+ },
+ {
+  "name": "ヴィラ・デラ・パーチェ",
+  "genres": [
+   "italian"
+  ],
+  "holiday": "",
+  "tabelog": "https://tabelog.com/ishikawa/A1703/A170302/17012559/",
+  "year": "2025",
+  "address": "七尾市中島町塩津",
+  "area": "範圍外",
+  "note": "離和倉遠",
+  "source": "https://savorjapan.com/0004046539"
+ },
+ {
+  "name": "炭魚酒菜 わなか",
+  "genres": [
+   "izakaya"
+  ],
+  "holiday": "日曜日",
+  "tabelog": "https://tabelog.com/ishikawa/A1701/A170101/17009717/",
+  "year": "2026",
+  "address": "金沢市安江町18-5",
+  "area": "金沢駅",
+  "note": "居酒屋",
+  "source": "https://www.mapple.net/spot/17012158/"
+ },
+ {
+  "name": "酒粋 醍醐",
+  "genres": [
+   "izakaya"
+  ],
+  "holiday": "日曜日",
+  "tabelog": "https://tabelog.com/ishikawa/A1701/A170101/17009374/",
+  "year": "2026",
+  "address": "金沢市本町1丁目（OSM）",
+  "area": "金沢駅",
+  "note": "居酒屋",
+  "source": "https://nominatim.openstreetmap.org/"
+ },
+ {
+  "name": "あぶり肉 がらん",
+  "genres": [
+   "izakaya"
+  ],
+  "holiday": "",
+  "tabelog": "https://tabelog.com/ishikawa/A1701/A170101/17008267/",
+  "year": "2026",
+  "address": "金沢市芳斉2丁目（OSM）",
+  "area": "長町",
+  "note": "居酒屋",
+  "source": "https://nominatim.openstreetmap.org/"
+ },
+ {
+  "name": "こいで",
+  "genres": [
+   "izakaya"
+  ],
+  "holiday": "日曜日、祝日",
+  "tabelog": "https://tabelog.com/ishikawa/A1701/A170101/17001005/",
+  "year": "2026",
+  "address": "金沢市本町2丁目（OSM「柴船小出」）",
+  "area": "金沢駅",
+  "note": "居酒屋、只有座敷",
+  "source": "https://nominatim.openstreetmap.org/"
+ },
+ {
+  "name": "味楽 ゆめり",
+  "genres": [
+   "izakaya"
+  ],
+  "holiday": "水曜日、日曜日",
+  "tabelog": "https://tabelog.com/ishikawa/A1701/A170101/17005534/",
+  "year": "2026",
+  "address": "金沢市本町1-3-33",
+  "area": "金沢駅",
+  "note": "18:00-23:00、晚餐",
+  "source": "https://aumo.jp/articles/74198"
+ },
+ {
+  "name": "かぶ菜",
+  "genres": [
+   "izakaya"
+  ],
+  "holiday": "日曜日",
+  "tabelog": "https://tabelog.com/ishikawa/A1701/A170101/17000085/",
+  "year": "2026",
+  "address": "金沢市片町2-23-5 パルシェ片町1F",
+  "area": "香林坊",
+  "note": "居酒屋、17:00 起",
+  "source": "https://tabelog.com/ishikawa/A1701/A170101/17000085/"
+ },
+ {
+  "name": "とっくりや",
+  "genres": [
+   "izakaya"
+  ],
+  "holiday": "日曜日",
+  "tabelog": "https://tabelog.com/ishikawa/A1701/A170101/17000666/",
+  "year": "2026",
+  "address": "金沢市本町2-3-6",
+  "area": "金沢駅",
+  "note": "18:00-22:00、金沢駅東口步行10分",
+  "source": "https://www.gltjp.com/zh-hant/article/item/11730/"
+ },
+ {
+  "name": "料理 小松",
+  "genres": [
+   "japanese"
+  ],
+  "holiday": "日曜日",
+  "tabelog": "https://tabelog.com/ishikawa/A1701/A170101/17010847/",
+  "year": "2025",
+  "address": "查不到",
+  "area": "地址待查",
+  "note": "",
+  "source": ""
+ },
+ {
+  "name": "片折",
+  "genres": [
+   "japanese"
+  ],
+  "holiday": "",
+  "tabelog": "https://tabelog.com/ishikawa/A1701/A170101/17011166/",
+  "year": "2025",
+  "address": "金沢市並木町3-36",
+  "area": "東茶屋",
+  "note": "完全預約制、橋場町步行7分",
+  "source": "https://u.tabelog.com/en/ishikawa/A1701/A170101/17011166/"
+ },
+ {
+  "name": "蕎味 櫂",
+  "genres": [
+   "japanese"
+  ],
+  "holiday": "日曜日",
+  "tabelog": "https://tabelog.com/ishikawa/A1701/A170101/17009816/",
+  "year": "2025",
+  "address": "金沢市東山1-23-10",
+  "area": "東茶屋",
+  "note": "套餐要前一天預約",
+  "source": "https://icotto.jp/restaurants/4534"
+ },
+ {
+  "name": "お好み焼 平野屋",
+  "genres": [
+   "okonomiyaki"
+  ],
+  "holiday": "月曜日",
+  "tabelog": "https://tabelog.com/ishikawa/A1703/A170302/17003809/",
+  "year": "2025",
+  "address": "七尾市本府中町20",
+  "area": "範圍外",
+  "note": "七尾駅步行9分（不在和倉）",
+  "source": "https://hamoni.jp/en/area/ishikawa/nanao/list/washoku-japanese-cuisine"
+ },
+ {
+  "name": "京祇園ねぎ焼 粉",
+  "genres": [
+   "okonomiyaki"
+  ],
+  "holiday": "水曜日",
+  "tabelog": "https://tabelog.com/ishikawa/A1701/A170101/17005442/",
+  "year": "2025",
+  "address": "金沢市香林坊2丁目（OSM）",
+  "area": "香林坊",
+  "note": "ねぎ焼",
+  "source": "https://nominatim.openstreetmap.org/"
+ },
+ {
+  "name": "自然派ラーメン 神楽",
+  "genres": [
+   "ramen"
+  ],
+  "holiday": "月曜日、日曜日",
+  "tabelog": "https://tabelog.com/ishikawa/A1701/A170101/17001321/",
+  "year": "2025",
+  "address": "金沢市有松／堀川町（不一致）",
+  "area": "範圍外",
+  "note": "",
+  "source": "https://www.nap-camp.com/mag/63736"
+ },
+ {
+  "name": "麺や 福座",
+  "genres": [
+   "ramen"
+  ],
+  "holiday": "月曜日",
+  "tabelog": "https://tabelog.com/ishikawa/A1701/A170101/17002724/",
+  "year": "2025",
+  "address": "金沢市有松（上有松バス停）",
+  "area": "範圍外",
+  "note": "",
+  "source": "https://www.nap-camp.com/mag/63736"
+ },
+ {
+  "name": "麺屋大河",
+  "genres": [
+   "ramen"
+  ],
+  "holiday": "",
+  "tabelog": "https://tabelog.com/ishikawa/A1701/A170101/17007507/",
+  "year": "2025",
+  "address": "金沢市高柳町（OSM）",
+  "area": "範圍外",
+  "note": "",
+  "source": "https://nominatim.openstreetmap.org/"
+ },
+ {
+  "name": "更科藤井",
+  "genres": [
+   "soba"
+  ],
+  "holiday": "月曜日",
+  "tabelog": "https://tabelog.com/ishikawa/A1701/A170101/17006763/",
+  "year": "2025",
+  "address": "金沢市柿木畠附近（番地未確認）",
+  "area": "香林坊",
+  "note": "21世紀美術館附近",
+  "source": "https://aumo.jp/articles/27572"
+ },
+ {
+  "name": "手打蕎麦 こより",
+  "genres": [
+   "soba"
+  ],
+  "holiday": "月曜日、日曜日、祝日",
+  "tabelog": "https://tabelog.com/ishikawa/A1701/A170101/17012178/",
+  "year": "2025",
+  "address": "金沢市長田2-20-13",
+  "area": "範圍外",
+  "note": "長町步行約15分以上；週一日休",
+  "source": "https://retty.me/restaurant/100001539556/"
+ },
+ {
+  "name": "スペイン料理 アロス",
+  "genres": [
+   "spanish"
+  ],
+  "holiday": "",
+  "tabelog": "https://tabelog.com/ishikawa/A1701/A170101/17001118/",
+  "year": "2026",
+  "address": "金沢市片町2丁目 木倉町（OSM）",
+  "area": "香林坊",
+  "note": "",
+  "source": "https://nominatim.openstreetmap.org/"
+ },
+ {
+  "name": "レスピラシオン",
+  "genres": [
+   "spanish"
+  ],
+  "holiday": "",
+  "tabelog": "https://tabelog.com/ishikawa/A1701/A170101/17010732/",
+  "year": "2026",
+  "address": "金沢市本町2丁目（OSM）",
+  "area": "金沢駅",
+  "note": "",
+  "source": "https://nominatim.openstreetmap.org/"
+ },
+ {
+  "name": "コメール マル イ モンターニャ",
+  "genres": [
+   "spanish"
+  ],
+  "holiday": "",
+  "tabelog": "https://tabelog.com/ishikawa/A1701/A170101/17011295/",
+  "year": "2026",
+  "address": "金沢市木倉町（番地未確認）",
+  "area": "香林坊",
+  "note": "レスピラシオン的西班牙小酒館",
+  "source": "https://aumo.jp/articles/37428"
+ },
+ {
+  "name": "六角堂",
+  "genres": [
+   "steak"
+  ],
+  "holiday": "",
+  "tabelog": "https://tabelog.com/ishikawa/A1701/A170101/17000063/",
+  "year": "2025",
+  "address": "北鉄金沢駅車程4分（番地未確認）",
+  "area": "範圍外",
+  "note": "鉄板焼",
+  "source": "https://retty.me/restaurant/100000047201/"
+ },
+ {
+  "name": "鮨 いくた",
+  "genres": [
+   "sushi"
+  ],
+  "holiday": "",
+  "tabelog": "https://tabelog.com/ishikawa/A1701/A170101/17012391/",
+  "year": "2025",
+  "address": "金沢市片町1-4-4",
+  "area": "香林坊",
+  "note": "週二休",
+  "source": "https://www.navitime.co.jp/category/0305001/17/"
+ },
+ {
+  "name": "乙女寿司",
+  "genres": [
+   "sushi"
+  ],
+  "holiday": "水曜日、日曜日、祝日",
+  "tabelog": "https://tabelog.com/ishikawa/A1701/A170101/17000107/",
+  "year": "2025",
+  "address": "金沢市木倉町4-10",
+  "area": "香林坊",
+  "note": "",
+  "source": "https://www.nap-camp.com/mag/97648"
+ },
+ {
+  "name": "鮨 木場谷",
+  "genres": [
+   "sushi"
+  ],
+  "holiday": "日曜日",
+  "tabelog": "https://tabelog.com/ishikawa/A1701/A170101/17010062/",
+  "year": "2025",
+  "address": "金沢市彦三町（番地未確認）",
+  "area": "近江町",
+  "note": "17:00-21:00",
+  "source": "https://hitosara.com/0006101632/person.html"
+ },
+ {
+  "name": "すし屋 小桜",
+  "genres": [
+   "sushi"
+  ],
+  "holiday": "水曜日",
+  "tabelog": "https://tabelog.com/ishikawa/A1701/A170101/17010028/",
+  "year": "2025",
+  "address": "金沢市昭和町15-21 ステーションステイベル1F",
+  "area": "金沢駅",
+  "note": "金沢駅東口步行3分",
+  "source": "https://hitosara.com/0006118215/"
+ },
+ {
+  "name": "幸寿し 本店",
+  "genres": [
+   "sushi"
+  ],
+  "holiday": "月曜日",
+  "tabelog": "https://tabelog.com/ishikawa/A1703/A170302/17000352/",
+  "year": "2025",
+  "address": "七尾市相生町30-1",
+  "area": "範圍外",
+  "note": "七尾駅步行5分（不在和倉）",
+  "source": "https://www.mapple.net/article/44655/"
+ },
+ {
+  "name": "飛",
+  "genres": [
+   "sushi"
+  ],
+  "holiday": "水曜日、木曜日",
+  "tabelog": "https://tabelog.com/ishikawa/A1701/A170101/17010234/",
+  "year": "2025",
+  "address": "金沢市尾山町12-5",
+  "area": "近江町",
+  "note": "武蔵が辻步行6分",
+  "source": "https://tabelog.com/ishikawa/A1701/A170101/17010234/"
+ },
+ {
+  "name": "小松 弥助",
+  "genres": [
+   "sushi"
+  ],
+  "holiday": "",
+  "tabelog": "https://tabelog.com/ishikawa/A1701/A170101/17010524/",
+  "year": "2025",
+  "address": "金沢市本町2-17-21",
+  "area": "金沢駅",
+  "note": "完全預約制、金沢駅步行3分",
+  "source": "https://www.nap-camp.com/mag/25172"
+ },
+ {
+  "name": "鮨 志の助",
+  "genres": [
+   "sushi"
+  ],
+  "holiday": "日曜日、祝日",
+  "tabelog": "https://tabelog.com/ishikawa/A1701/A170101/17000173/",
+  "year": "2025",
+  "address": "金沢市入江3-73",
+  "area": "範圍外",
+  "note": "住宅區",
+  "source": "https://www.travelbook.co.jp/t-253/topic-859/"
+ },
+ {
+  "name": "ル ミュゼ ドゥ アッシュ 金沢店",
+  "genres": [
+   "sweets"
+  ],
+  "holiday": "",
+  "tabelog": "https://tabelog.com/ishikawa/A1701/A170101/17001257/",
+  "year": "2026",
+  "address": "金沢市出羽町 石川県立美術館內",
+  "area": "香林坊",
+  "note": "甜點、兼六園旁",
+  "source": "https://rurubu.jp/andmore/article/20550"
+ },
+ {
+  "name": "天ぷら 小泉",
+  "genres": [
+   "tempura"
+  ],
+  "holiday": "",
+  "tabelog": "https://tabelog.com/ishikawa/A1701/A170101/17009514/",
+  "year": "2025",
+  "address": "金沢市池田町4番丁34",
+  "area": "香林坊",
+  "note": "完全預約制、12-14/18-20",
+  "source": "https://www.navitime.co.jp/category/0305015/17/"
+ },
+ {
+  "name": "333",
+  "genres": [
+   "toriryori"
+  ],
+  "holiday": "",
+  "tabelog": "https://tabelog.com/ishikawa/A1701/A170101/17009093/",
+  "year": "2025",
+  "address": "金沢市堀川町9-1",
+  "area": "金沢駅",
+  "note": "焼鳥、金沢駅步行5-6分",
+  "source": "https://hamoni.jp/en/area/ishikawa/kanazawa/hokutetsukanazawa/shops/yakitori"
+ },
+ {
+  "name": "松葉屋",
+  "genres": [
+   "wagashi"
+  ],
+  "holiday": "",
+  "tabelog": "https://tabelog.com/ishikawa/A1702/A170202/17005047/",
+  "year": "2026",
+  "address": "小松市大文字町69（OSM）",
+  "area": "小松",
+  "note": "和菓子",
+  "source": "https://nominatim.openstreetmap.org/"
+ },
+ {
+  "name": "すゞめ 金沢百番街店",
+  "genres": [
+   "wagashi"
+  ],
+  "holiday": "",
+  "tabelog": "https://tabelog.com/ishikawa/A1701/A170101/17006347/",
+  "year": "2026",
+  "address": "金沢駅 金沢百番街內",
+  "area": "金沢駅",
+  "note": "和菓子（店名即位置）",
+  "source": ""
+ },
+ {
+  "name": "落雁諸江屋 西茶屋菓寮 味和以",
+  "genres": [
+   "wagashi"
+  ],
+  "holiday": "火曜日",
+  "tabelog": "https://tabelog.com/ishikawa/A1701/A170101/17007462/",
+  "year": "2026",
+  "address": "西茶屋街",
+  "area": "範圍外",
+  "note": "店名即位置",
+  "source": ""
+ },
+ {
+  "name": "甘納豆かわむら",
+  "genres": [
+   "wagashi"
+  ],
+  "holiday": "",
+  "tabelog": "https://tabelog.com/ishikawa/A1701/A170101/17000514/",
+  "year": "2026",
+  "address": "金沢市野町2丁目（OSM）",
+  "area": "範圍外",
+  "note": "西茶屋附近",
+  "source": "https://nominatim.openstreetmap.org/"
+ },
+ {
+  "name": "つぼみ",
+  "genres": [
+   "wagashi"
+  ],
+  "holiday": "水曜日",
+  "tabelog": "https://tabelog.com/ishikawa/A1701/A170101/17000008/",
+  "year": "2026",
+  "address": "金沢市広坂1丁目 柿木畠（OSM）",
+  "area": "香林坊",
+  "note": "甘味",
+  "source": "https://nominatim.openstreetmap.org/"
+ },
+ {
+  "name": "BIRD",
+  "genres": [
+   "yakitori"
+  ],
+  "holiday": "月曜日、日曜日",
+  "tabelog": "https://tabelog.com/ishikawa/A1701/A170101/17005811/",
+  "year": "2025",
+  "address": "查不到",
+  "area": "地址待查",
+  "note": "",
+  "source": ""
+ },
+ {
+  "name": "蛤坂 まえかわ",
+  "genres": [
+   "yakitori"
+  ],
+  "holiday": "",
+  "tabelog": "https://tabelog.com/ishikawa/A1701/A170101/17012585/",
+  "year": "2025",
+  "address": "金沢市野町1-1-9",
+  "area": "範圍外",
+  "note": "預約困難",
+  "source": "https://hamoni.jp/shop/kV82DcjCVUYmn4kgqdDJ"
+ },
+ {
+  "name": "鳥たけ",
+  "genres": [
+   "yakitori"
+  ],
+  "holiday": "火曜日",
+  "tabelog": "https://tabelog.com/ishikawa/A1701/A170101/17009295/",
+  "year": "2025",
+  "address": "近江町市場附近（番地未確認）",
+  "area": "近江町",
+  "note": "焼鳥",
+  "source": "https://retty.me/restaurant/100001184337/"
+ },
+ {
+  "name": "やき鳥 卍郎",
+  "genres": [
+   "yakitori"
+  ],
+  "holiday": "",
+  "tabelog": "https://tabelog.com/ishikawa/A1701/A170101/17012859/",
+  "year": "2025",
+  "address": "查不到",
+  "area": "地址待查",
+  "note": "",
+  "source": ""
+ }
+]
