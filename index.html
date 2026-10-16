@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>金澤能登冬季親子遊</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Noto+Sans+TC:wght@400;600;700&family=Noto+Serif+TC:wght@700&display=swap">
+</head><body>
+<style>
+/* 版面：手機優先的單欄手冊；頂部黏著目錄，逐日卡片可收合。色調取自加賀藍與金箔。 */
+:root{
+ --paper:#f4f6f9; --card:#ffffff; --ink:#1b2231; --muted:#5a6476; --line:#d8dde6;
+ --ai:#24467a; --ai-soft:#e3eaf5; --gold:#a8812a; --gold-soft:#f6eed9;
+ --warn-bg:#fff3d1; --warn-fg:#6e4a00; --warn-line:#ecc864; --hot:#b3352b;
+ --f-display:"Noto Serif TC","Songti TC","PMingLiU",serif;
+ --f-body:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
+ --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+ --paper:#10141c; --card:#171c26; --ink:#e5e9f0; --muted:#9aa4b6; --line:#2a3242;
+ --ai:#93b3ea; --ai-soft:#1e2a40; --gold:#d9b65c; --gold-soft:#2e2814;
+ --warn-bg:#33290f; --warn-fg:#f2d27c; --warn-line:#6b5420; --hot:#ef7b70; color-scheme:dark}}
+:root[data-theme="dark"]{
+ --paper:#10141c; --card:#171c26; --ink:#e5e9f0; --muted:#9aa4b6; --line:#2a3242;
+ --ai:#93b3ea; --ai-soft:#1e2a40; --gold:#d9b65c; --gold-soft:#2e2814;
+ --warn-bg:#33290f; --warn-fg:#f2d27c; --warn-line:#6b5420; --hot:#ef7b70; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.65}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--paper)}
+a{color:var(--ai)}
+a:focus-visible,summary:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.wrap{max-width:760px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+header.top{padding-block:28px 18px}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;color:var(--gold);text-transform:uppercase}
+h1{font-family:var(--f-display);font-weight:700;font-size:clamp(26px,6vw,36px);line-height:1.25;margin:.2em 0 .3em;text-wrap:balance}
+.sub{color:var(--muted);margin:0}
+nav.toc{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--paper);border-bottom:1px solid var(--line)}
+nav.toc .wrap{display:flex;gap:6px;overflow-x:auto;padding-block:8px;scrollbar-width:none}
+nav.toc a{flex:none;text-decoration:none;color:var(--ink);font-size:14px;padding:5px 12px;border-radius:999px;border:1px solid var(--line);background:var(--card)}
+nav.toc a.w{border-color:var(--warn-line);background:var(--warn-bg);color:var(--warn-fg)}
+section{padding-block:26px 6px;scroll-margin-top:56px}
+h2{font-family:var(--f-display);font-size:22px;margin:0 0 12px;text-wrap:balance;display:flex;align-items:baseline;gap:10px}
+h2 small{font-family:var(--f-mono);font-size:12px;color:var(--muted);font-weight:400}
+h3{font-size:16px;margin:18px 0 8px}
+h4{font-size:14px;margin:14px 0 6px;color:var(--muted);letter-spacing:.04em}
+.num,.t,.dd{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.tw{overflow-x:auto;margin:8px 0}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{text-align:left;vertical-align:top;padding:7px 8px;border-bottom:1px solid var(--line)}
+th{font-weight:600;color:var(--muted);font-size:12px;letter-spacing:.04em;white-space:nowrap}
+/* 路線條 */
+.route{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:4px;margin:6px 0 4px}
+.route a{display:flex;flex-direction:column;align-items:center;gap:2px;text-decoration:none;color:var(--ink);padding:8px 2px;border-radius:8px;background:var(--card);border:1px solid var(--line);min-width:0}
+.route .rd{font-family:var(--f-mono);font-size:13px;font-weight:600}
+.route .rw{font-size:11px;color:var(--muted)}
+.route .rb{font-size:11px;padding:1px 6px;border-radius:999px;background:var(--ai-soft);color:var(--ai);white-space:nowrap}
+.route .rb.wk{background:var(--gold-soft);color:var(--gold)}
+.route .ski{outline:2px solid var(--gold);outline-offset:-2px}
+.legend{font-size:12px;color:var(--muted);margin:0 0 6px}
+.alert{border:1px solid var(--warn-line);background:var(--warn-bg);color:var(--warn-fg);border-radius:10px;padding:10px 14px;margin:12px 0;font-size:14px}
+.alert b{color:inherit}
+/* 逐日 */
+.tools{display:flex;gap:8px;margin:0 0 10px;flex-wrap:wrap}
+button.tb{font:inherit;font-size:13px;padding:5px 12px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer}
+.day{background:var(--card);border:1px solid var(--line);border-radius:12px;margin:0 0 10px;overflow:hidden}
+.day[open]{border-color:var(--ai)}
+.day.today{box-shadow:0 0 0 2px var(--gold)}
+summary{list-style:none;display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:12px;align-items:center;padding:12px 14px;cursor:pointer}
+summary::-webkit-details-marker{display:none}
+.dnum{display:flex;flex-direction:column;align-items:center;min-width:52px;padding-right:12px;border-right:1px solid var(--line)}
+.dd{font-size:20px;font-weight:600;color:var(--ai);line-height:1.1}
+.wd{font-size:12px;color:var(--muted)}
+.wd.wkend{color:var(--hot);font-weight:600}
+.dtitle{display:flex;flex-direction:column;gap:3px;min-width:0}
+.dlabel{font-family:var(--f-mono);font-size:11px;color:var(--gold);letter-spacing:.08em}
+.dname{font-family:var(--f-display);font-weight:700;font-size:17px;line-height:1.35;text-wrap:balance}
+.dmeta{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font-size:12px;padding:1px 8px;border-radius:999px;background:var(--ai-soft);color:var(--ai);white-space:nowrap}
+.chip.hot{background:var(--gold-soft);color:var(--gold);font-weight:600}
+.chip.warnchip{background:var(--warn-bg);color:var(--warn-fg)}
+.caret{width:10px;height:10px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(45deg);transition:transform .2s;margin-right:4px}
+.day[open] .caret{transform:rotate(-135deg)}
+.dbody{padding:0 14px 16px;border-top:1px solid var(--line)}
+.lead{font-weight:600;margin:12px 0}
+.figs{display:grid;gap:8px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+figure{margin:0;min-width:0}
+figure img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;border-radius:8px;background:var(--line)}
+figcaption{font-size:12px;color:var(--muted);margin-top:4px;display:flex;flex-direction:column}
+.cred{font-size:11px;opacity:.85}
+table.sched td.t{white-space:nowrap;color:var(--ai);font-size:13px}
+table.sched td.how{color:var(--muted);font-size:13px}
+@media (max-width:520px){
+ table.sched thead{display:none}
+ table.sched tr{display:grid;grid-template-columns:1fr;padding:8px 0;border-bottom:1px solid var(--line)}
+ table.sched td{border:0;padding:1px 0}
+ table.sched td.how:not(:empty)::before{content:"↳ "}
+}
+dl.notes{display:grid;gap:6px;margin:12px 0}
+dl.notes div{display:grid;grid-template-columns:5.5em minmax(0,1fr);gap:8px}
+dt{font-size:13px;font-weight:600;color:var(--ai)}
+dd{margin:0}
+ul.warns{list-style:none;padding:0;margin:10px 0;display:grid;gap:6px}
+li.warn{background:var(--warn-bg);color:var(--warn-fg);border-left:3px solid var(--warn-line);padding:6px 10px;border-radius:0 6px 6px 0;font-size:13.5px;overflow-wrap:anywhere}
+li.warn a{color:inherit}
+.wtag{font-weight:700;white-space:nowrap}
+.tel{font-family:var(--f-mono);user-select:all}
+.maps{display:grid;gap:10px;margin-top:12px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.map{display:flex;flex-direction:column;gap:4px;min-width:0}
+.map iframe{width:100%;height:200px;border:0;border-radius:8px;background:var(--line)}
+a.mapbtn{display:block;font-size:13px;text-decoration:none;padding:7px 10px;border-radius:8px;border:1px solid var(--line);background:var(--paper)}
+/* 清單 */
+.cgrid{display:grid;gap:4px 20px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+ul.check{list-style:none;padding:0;margin:0}
+ul.check li{padding:3px 0}
+ul.check label{display:flex;gap:8px;align-items:flex-start;cursor:pointer}
+ul.check input{margin-top:5px;accent-color:var(--ai)}
+ul.check input:checked + span{color:var(--muted);text-decoration:line-through}
+table.stay td:nth-child(-n+3){white-space:nowrap}
+.wakura{columns:2 220px;font-size:14px;padding-left:1.2em}
+footer{padding-block:30px 40px;color:var(--muted);font-size:12px}
+@media (prefers-reduced-motion:reduce){.caret{transition:none}}
+</style>
+
+<header class="top"><div class="wrap">
+ <div class="eyebrow">2027.01.14 — 01.21 · 8 天 7 夜</div>
+ <h1>金澤＋能登 冬季親子行程手冊</h1>
+ <p class="sub">大人 2＋國小孩童 1 · 桃園 ⇄ 小松直飛 · 全程大眾運輸 · 資料查詢日期 2026-10-16</p>
+</div></header>
+
+<nav class="toc" aria-label="目錄"><div class="wrap">
+ <a href="#overview">總覽</a><a href="#days">逐日行程</a><a href="#check1">關鍵查證</a><a href="#transport">交通</a>
+ <a href="#budget">預算</a><a href="#prep">行前清單</a><a href="#pending" class="w">⚠️ 待查證 19</a>
+</div></nav>
+
+<main class="wrap">
+
+<section id="overview">
+ <h2>總覽</h2>
+ <div class="route"><a href="#d1" class=""><span class="rd">1/14</span><span class="rw">週四</span><span class="rb">金澤</span></a><a href="#d2" class=""><span class="rd">1/15</span><span class="rw">週五</span><span class="rb">金澤</span></a><a href="#d3" class="ski"><span class="rd">1/16</span><span class="rw">週六</span><span class="rb">金澤</span></a><a href="#d4" class=""><span class="rd">1/17</span><span class="rw">週日</span><span class="rb">金澤</span></a><a href="#d5" class=""><span class="rd">1/18</span><span class="rw">週一</span><span class="rb">金澤</span></a><a href="#d6" class=""><span class="rd">1/19</span><span class="rw">週二</span><span class="rb wk">和倉</span></a><a href="#d7" class=""><span class="rd">1/20</span><span class="rw">週三</span><span class="rb">金澤</span></a><a href="#d8" class=""><span class="rd">1/21</span><span class="rw">週四</span><span class="rb">回台</span></a></div>
+ <p class="legend">點日期跳到當天。金框＝滑雪日。天黑約 17:00，戶外景點排在 15:00 前，每天約 18:00 前回住宿。</p>
+ <div class="alert"><b>出發前最重要的 2 件事：</b>① 11–12 月查一里野滑雪巴士 2026–27 年度日期（還沒公布）；② 金澤飯店訂「1/14–18＋1/20」同一間，並問 1/19 能不能寄放大行李。</div>
+ <h3>住宿一覽</h3>
+ <div class="tw"><table class="stay"><thead><tr><th>晚</th><th>日期</th><th>地點</th><th>備註</th></tr></thead><tbody>
+  <tr><td class="num">1–5</td><td class="num">1/14–1/18</td><td>金澤站周邊</td><td>住金澤站步行範圍，方便搭機場巴士、滑雪巴士、特急</td></tr>
+  <tr><td class="num">6</td><td class="num">1/19</td><td>和倉溫泉</td><td>候選：TAOYA 和倉、日本の宿 のと楽、白鷺の湯 能登 海舟（都已恢復營業）</td></tr>
+  <tr><td class="num">7</td><td class="num">1/20</td><td>金澤站周邊</td><td>和前 5 晚同一間；大行李寄放 ⚠️</td></tr>
+ </tbody></table></div>
+ <p class="legend">路線：小松機場 → 金澤（5 晚）→ 和倉溫泉（1 晚）→ 金澤（1 晚）→ 小松機場。回程當天只要搭機場巴士約 40–45 分。</p>
+</section>
+
+<section id="days">
+ <h2>逐日行程 <small>點一下展開</small></h2>
+ <div class="tools"><button class="tb" id="openAll" type="button">全部展開</button><button class="tb" id="closeAll" type="button">全部收合</button></div>
+ <details class="day" id="d1" data-date="2027-01-14">
+<summary>
+ <span class="dnum"><span class="dd">1/14</span><span class="wd">週四</span></span>
+ <span class="dtitle"><span class="dlabel">Day 1</span><span class="dname">抵達金澤</span>
+  <span class="dmeta"><span class="chip">🛏 金澤</span><span class="chip warnchip">⚠️ 3</span></span></span>
+ <span class="caret" aria-hidden="true"></span>
+</summary>
+<div class="dbody">
+ <p class="lead">平安抵達、熟悉金澤站。不排景點。</p>
+ <div class="figs n2"><figure><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/7/76/Tsuzumi-mon%2C_Kanazawa_Station_-_Kanazawa%2C_Japan_-_DSC09640.jpg/960px-Tsuzumi-mon%2C_Kanazawa_Station_-_Kanazawa%2C_Japan_-_DSC09640.jpg" alt="金澤站鼓門" width="800" height="533" loading="lazy"><figcaption>金澤站鼓門<span class="cred">Daderot · CC0 · <a href="https://commons.wikimedia.org/wiki/File:Tsuzumi-mon,_Kanazawa_Station_-_Kanazawa,_Japan_-_DSC09640.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></span></figcaption></figure><figure><img src="https://upload.wikimedia.org/wikipedia/commons/e/ec/Komatsu_airport_terminal_building.jpg" alt="小松機場航廈" width="640" height="480" loading="lazy"><figcaption>小松機場航廈<span class="cred">Shift at Japanese Wikipedia · CC BY-SA 3.0 · <a href="https://commons.wikimedia.org/wiki/File:Komatsu_airport_terminal_building.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></span></figcaption></figure></div>
+ <div class="tw"><table class="sched"><thead><tr><th>時間</th><th>行程</th><th>交通</th></tr></thead><tbody><tr><td class="t">午後（依航班 ⚠️）</td><td>小松機場入境</td><td class="how"></td></tr><tr><td class="t">＋約 40–45 分</td><td>機場巴士到金澤站</td><td class="how">小松機場巴士 ¥1,300（大人），可信用卡感應；座位有限</td></tr><tr><td class="t">傍晚前</td><td>住宿 check-in；看鼓門（金澤站東口）</td><td class="how">步行</td></tr><tr><td class="t">有空的話</td><td>到<b>金澤站西口北鐵售票中心</b>先買 1/16 滑雪巴士的兒童票／套票（車上買不到）</td><td class="how">步行</td></tr></tbody></table></div>
+ 
+ <dl class="notes"><div><dt>室內備案</dt><dd>金澤站內商場（百番街）逛逛、吃晚餐。</dd></div><div><dt>晚餐區域</dt><dd>金澤站周邊（站內商場、あんと）。</dd></div><div><dt>親子提醒</dt><dd>第一天別排太滿，早點睡，隔天走路量大。</dd></div></dl>
+ <ul class="warns"><li class="warn"><span class="wtag">⚠️ 待查證</span> 去程航班時刻 → <a href="https://www.evaair.com/" target="_blank" rel="noopener">www.evaair.com</a></li><li class="warn"><span class="wtag">⚠️ 待查證</span> （虎航）去程航班時刻 → <a href="https://www.tigerairtw.com/" target="_blank" rel="noopener">www.tigerairtw.com</a></li><li class="warn"><span class="wtag">⚠️ 待查證</span> 機場巴士兒童票價 → <a href="https://www.hokutetsu.co.jp/" target="_blank" rel="noopener">www.hokutetsu.co.jp</a></li></ul>
+ <div class="maps"><div class="map"><iframe src="https://maps.google.com/maps?q=%E9%87%91%E6%B2%A2%E9%A7%85%20%E9%BC%93%E9%96%80&output=embed" loading="lazy" title="金澤站鼓門 地圖" referrerpolicy="no-referrer-when-downgrade"></iframe><a class="mapbtn" href="https://www.google.com/maps/search/?api=1&query=%E9%87%91%E6%B2%A2%E9%A7%85%20%E9%BC%93%E9%96%80" target="_blank" rel="noopener">📍 金澤站鼓門：在 Google 地圖開啟</a></div></div>
+</div>
+</details><details class="day" id="d2" data-date="2027-01-15">
+<summary>
+ <span class="dnum"><span class="dd">1/15</span><span class="wd">週五</span></span>
+ <span class="dtitle"><span class="dlabel">Day 2</span><span class="dname">兼六園＋金澤城＋21 世紀美術館</span>
+  <span class="dmeta"><span class="chip">🛏 金澤</span><span class="chip warnchip">⚠️ 3</span></span></span>
+ <span class="caret" aria-hidden="true"></span>
+</summary>
+<div class="dbody">
+ <p class="lead">金澤最經典的一天。上午戶外，下午室內。</p>
+ <div class="figs n2"><figure><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d5/Kenroku-en-winter-lantern.jpg/960px-Kenroku-en-winter-lantern.jpg" alt="兼六園冬季的徽軫燈籠" width="800" height="533" loading="lazy"><figcaption>兼六園冬季的徽軫燈籠<span class="cred">tab2_dawa · CC BY 2.0 · <a href="https://commons.wikimedia.org/wiki/File:Kenroku-en-winter-lantern.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></span></figcaption></figure><figure><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/8/87/Kanazawa_Castle_-_Jan_26%2C_2016_%281%29.jpg/960px-Kanazawa_Castle_-_Jan_26%2C_2016_%281%29.jpg" alt="金澤城公園" width="800" height="600" loading="lazy"><figcaption>金澤城公園<span class="cred">gtknj · CC BY 2.0 · <a href="https://commons.wikimedia.org/wiki/File:Kanazawa_Castle_-_Jan_26,_2016_(1).jpg" target="_blank" rel="noopener">Wikimedia Commons</a></span></figcaption></figure></div>
+ <div class="tw"><table class="sched"><thead><tr><th>時間</th><th>行程</th><th>交通</th></tr></thead><tbody><tr><td class="t">09:00</td><td>金澤站出發</td><td class="how">路線巴士約 15–20 分 ⚠️（到「兼六園下」或「広坂」）</td></tr><tr><td class="t">09:30–11:30</td><td><b>兼六園</b>：雪吊、徽軫燈籠</td><td class="how"></td></tr><tr><td class="t">11:30–12:30</td><td><b>金澤城公園</b>（和兼六園相鄰）</td><td class="how">步行</td></tr><tr><td class="t">12:30–13:30</td><td>午餐</td><td class="how">步行到香林坊／広坂</td></tr><tr><td class="t">14:00–16:00</td><td><b>金澤 21 世紀美術館</b>（室內）</td><td class="how">步行約 10 分</td></tr><tr><td class="t">16:30</td><td>回金澤站</td><td class="how">巴士</td></tr></tbody></table></div>
+ 
+ <dl class="notes"><div><dt>室內備案</dt><dd>雨雪大就把美術館移到上午，兼六園只走主要路線 1 小時。</dd></div><div><dt>午餐區域</dt><dd>香林坊／広坂一帶（百貨地下街方便）。</dd></div><div><dt>親子提醒</dt><dd>兼六園雪地容易滑，穿防水防滑鞋。</dd></div><div><dt>門票</dt><dd>兼六園大人 ¥320。</dd></div></dl>
+ <ul class="warns"><li class="warn"><span class="wtag">⚠️ 待查證</span> 兼六園兒童票、冬季開園時間 → <a href="https://www.pref.ishikawa.jp/siro-niwa/kenrokuen/" target="_blank" rel="noopener">www.pref.ishikawa.jp/siro-niwa/kenrokuen</a></li><li class="warn"><span class="wtag">⚠️ 待查證</span> 21 世紀美術館休館日、門票 → <a href="https://www.kanazawa21.jp/" target="_blank" rel="noopener">www.kanazawa21.jp</a></li><li class="warn"><span class="wtag">⚠️ 待查證</span> 市區巴士路線與時間 → <a href="https://www.hokutetsu.co.jp/" target="_blank" rel="noopener">www.hokutetsu.co.jp</a></li></ul>
+ <div class="maps"><div class="map"><iframe src="https://maps.google.com/maps?q=%E5%85%BC%E5%85%AD%E5%9C%92&output=embed" loading="lazy" title="兼六園 地圖" referrerpolicy="no-referrer-when-downgrade"></iframe><a class="mapbtn" href="https://www.google.com/maps/search/?api=1&query=%E5%85%BC%E5%85%AD%E5%9C%92" target="_blank" rel="noopener">📍 兼六園：在 Google 地圖開啟</a></div><div class="map"><iframe src="https://maps.google.com/maps?q=%E9%87%91%E6%B2%A2%E5%9F%8E%E5%85%AC%E5%9C%92&output=embed" loading="lazy" title="金澤城公園 地圖" referrerpolicy="no-referrer-when-downgrade"></iframe><a class="mapbtn" href="https://www.google.com/maps/search/?api=1&query=%E9%87%91%E6%B2%A2%E5%9F%8E%E5%85%AC%E5%9C%92" target="_blank" rel="noopener">📍 金澤城公園：在 Google 地圖開啟</a></div><div class="map"><iframe src="https://maps.google.com/maps?q=%E9%87%91%E6%B2%A221%E4%B8%96%E7%B4%80%E7%BE%8E%E8%A1%93%E9%A4%A8&output=embed" loading="lazy" title="21 世紀美術館 地圖" referrerpolicy="no-referrer-when-downgrade"></iframe><a class="mapbtn" href="https://www.google.com/maps/search/?api=1&query=%E9%87%91%E6%B2%A221%E4%B8%96%E7%B4%80%E7%BE%8E%E8%A1%93%E9%A4%A8" target="_blank" rel="noopener">📍 21 世紀美術館：在 Google 地圖開啟</a></div></div>
+</div>
+</details><details class="day" id="d3" data-date="2027-01-16">
+<summary>
+ <span class="dnum"><span class="dd">1/16</span><span class="wd wkend">週六</span></span>
+ <span class="dtitle"><span class="dlabel">Day 3</span><span class="dname">一里野溫泉滑雪場</span>
+  <span class="dmeta"><span class="chip">🛏 金澤</span><span class="chip hot">滑雪日</span><span class="chip warnchip">⚠️ 3</span></span></span>
+ <span class="caret" aria-hidden="true"></span>
+</summary>
+<div class="dbody">
+ <p class="lead">全家玩雪。這天移動時間最長（滑雪日例外）。停駛就和 1/17 對調。</p>
+ <div class="figs n1"><figure><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ee/Hakusan_Ichirino_Hot_Spring_Ski_Area.jpg/960px-Hakusan_Ichirino_Hot_Spring_Ski_Area.jpg" alt="白山一里野溫泉滑雪場" width="800" height="600" loading="lazy"><figcaption>白山一里野溫泉滑雪場<span class="cred">Ski Mania · CC0 · <a href="https://commons.wikimedia.org/wiki/File:Hakusan_Ichirino_Hot_Spring_Ski_Area.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></span></figcaption></figure></div>
+ <div class="tw"><table class="sched"><thead><tr><th>時間</th><th>行程</th><th>交通</th></tr></thead><tbody><tr><td class="t">早上（⚠️ 班次待查）</td><td>金澤站發車</td><td class="how">北鐵「一里野溫泉滑雪場直行巴士」</td></tr><tr><td class="t">白天</td><td>滑雪／玩雪；初學者可租雪具</td><td class="how"></td></tr><tr><td class="t">下午（⚠️ 回程班次待查）</td><td>回金澤站</td><td class="how">同一路巴士</td></tr><tr><td class="t">18:00 前</td><td>回金澤住宿</td><td class="how"></td></tr></tbody></table></div>
+ <h4>票價（2025–26 年度參考，2026–27 年度還沒公布）</h4>
+<div class="tw"><table><thead><tr><th>票種</th><th>大人</th><th>兒童</th></tr></thead><tbody>
+<tr><td>巴士單程（金澤站出發）</td><td class="num">¥1,330</td><td class="num">¥670</td></tr>
+<tr><td>套票（纜車＋來回巴士）</td><td class="num">¥6,500</td><td class="num">¥4,500</td></tr>
+<tr><td>初學者票＋來回巴士（附雪具租借半價券）</td><td class="num" colspan="2">¥5,000</td></tr>
+</tbody></table></div>
+ <dl class="notes"><div><dt>購票</dt><dd>兒童票和初學者套票<b>車上買不到</b>。要到金澤站西口北鐵售票中心，或武藏 M'za 北鐵巴士服務中心買。建議 Day 1 或 Day 2 傍晚先買。</dd></div><div><dt>停駛備案</dt><dd>大雪可能停駛。前一天傍晚打北鐵 <span class="tel">076-234-0123</span> 確認。1/16 停駛 → 和 1/17（日）對調。兩天都不行 → 改室內行程（美術館、金箔體驗）。</dd></div><div><dt>其他交通</dt><dd>WHITE RING 有小松機場／JR 小松站 ⇄ 一里野的滑雪接駁（2025–26 年度資料）。</dd></div><div><dt>親子提醒</dt><dd>帶備用手套、襪子、毛巾；中午在雪場休息區吃，下午早點收。</dd></div><div><dt>午餐區域</dt><dd>滑雪場內餐廳。</dd></div></dl>
+ <ul class="warns"><li class="warn"><span class="wtag">⚠️ 待查證</span> 2026–27 年度運行日期、時刻（往年 11–12 月公布，時刻表是圖片） → <a href="https://www.hokutetsu.co.jp/tourism-bus/" target="_blank" rel="noopener">www.hokutetsu.co.jp/tourism-bus</a></li><li class="warn"><span class="wtag">⚠️ 待查證</span> 是否需預約、雪具租借價格 → <a href="https://www.sam-hakusan.com/white/ichirino/bus/index.html" target="_blank" rel="noopener">www.sam-hakusan.com/white/ichirino/bus/index.html</a></li><li class="warn"><span class="wtag">⚠️ 待查證</span> 備案接駁巴士 2026–27 年度資訊 → <a href="https://whitering.co.jp/ski_shuttle_2026.html" target="_blank" rel="noopener">whitering.co.jp/ski_shuttle_2026.html</a></li></ul>
+ <div class="maps"><div class="map"><iframe src="https://maps.google.com/maps?q=%E7%99%BD%E5%B1%B1%E4%B8%80%E9%87%8C%E9%87%8E%E6%B8%A9%E6%B3%89%E3%82%B9%E3%82%AD%E3%83%BC%E5%A0%B4&output=embed" loading="lazy" title="一里野溫泉滑雪場 地圖" referrerpolicy="no-referrer-when-downgrade"></iframe><a class="mapbtn" href="https://www.google.com/maps/search/?api=1&query=%E7%99%BD%E5%B1%B1%E4%B8%80%E9%87%8C%E9%87%8E%E6%B8%A9%E6%B3%89%E3%82%B9%E3%82%AD%E3%83%BC%E5%A0%B4" target="_blank" rel="noopener">📍 一里野溫泉滑雪場：在 Google 地圖開啟</a></div></div>
+</div>
+</details><details class="day" id="d4" data-date="2027-01-17">
+<summary>
+ <span class="dnum"><span class="dd">1/17</span><span class="wd wkend">週日</span></span>
+ <span class="dtitle"><span class="dlabel">Day 4</span><span class="dname">東茶屋街＋近江町市場＋金箔體驗</span>
+  <span class="dmeta"><span class="chip">🛏 金澤</span><span class="chip warnchip">⚠️ 2</span></span></span>
+ <span class="caret" aria-hidden="true"></span>
+</summary>
+<div class="dbody">
+ <p class="lead">老街＋手作。（如果滑雪改到今天，本日行程移到 1/16。）</p>
+ <div class="figs n3"><figure><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0e/Higashi_Chaya_District_of_Kanazawa_-_panoramio.jpg/960px-Higashi_Chaya_District_of_Kanazawa_-_panoramio.jpg" alt="東茶屋街" width="800" height="474" loading="lazy"><figcaption>東茶屋街<span class="cred">AudaCity3371 · CC BY-SA 3.0 · <a href="https://commons.wikimedia.org/wiki/File:Higashi_Chaya_District_of_Kanazawa_-_panoramio.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></span></figcaption></figure><figure><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/c/ce/Omicho_covered_market_western_entrance%2C_Kanazawa%2C_2016.jpg/960px-Omicho_covered_market_western_entrance%2C_Kanazawa%2C_2016.jpg" alt="近江町市場西口" width="800" height="532" loading="lazy"><figcaption>近江町市場西口<span class="cred">DimiTalen · CC0 · <a href="https://commons.wikimedia.org/wiki/File:Omicho_covered_market_western_entrance,_Kanazawa,_2016.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></span></figcaption></figure><figure><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/8/84/Yasuekinpakukogeikan003.jpg/960px-Yasuekinpakukogeikan003.jpg" alt="安江金箔工芸館（金箔工藝參考照，不是箔一）" width="800" height="533" loading="lazy"><figcaption>安江金箔工芸館（金箔工藝參考照，不是箔一）<span class="cred">金沢市 · CC BY 2.1 jp · <a href="https://commons.wikimedia.org/wiki/File:Yasuekinpakukogeikan003.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></span></figcaption></figure></div>
+ <div class="tw"><table class="sched"><thead><tr><th>時間</th><th>行程</th><th>交通</th></tr></thead><tbody><tr><td class="t">09:30</td><td>金澤站出發</td><td class="how">巴士約 10 分 ⚠️ 或計程車</td></tr><tr><td class="t">10:00–11:30</td><td><b>東茶屋街</b>散步</td><td class="how"></td></tr><tr><td class="t">11:30–12:30</td><td><b>近江町市場</b>午餐</td><td class="how">巴士／計程車短程</td></tr><tr><td class="t">13:30–15:00</td><td><b>金箔貼體驗</b>（室內）：箔一本店（箔巧館），明信片約 10 分、小物盒約 40 分</td><td class="how">巴士 ⚠️</td></tr><tr><td class="t">15:30</td><td>回金澤站</td><td class="how"></td></tr></tbody></table></div>
+ 
+ <dl class="notes"><div><dt>室內備案</dt><dd>東茶屋街縮短成 30 分鐘，把時間給金箔體驗。</dd></div><div><dt>午餐區域</dt><dd>近江町市場（海鮮丼；小孩不吃生魚可選熟食攤）。</dd></div><div><dt>親子提醒</dt><dd>金箔體驗<b>要先預約</b>。市場人多，小孩牽好。</dd></div></dl>
+ <ul class="warns"><li class="warn"><span class="wtag">⚠️ 待查證</span> 近江町市場週日營業狀況（部分店家週日休） → <a href="https://ohmicho-ichiba.com/" target="_blank" rel="noopener">ohmicho-ichiba.com</a></li><li class="warn"><span class="wtag">⚠️ 待查證</span> 金箔體驗價格、位置交通（其他店家約 ¥1,000–2,000 起） → <a href="https://www.hakuichi.co.jp/" target="_blank" rel="noopener">www.hakuichi.co.jp</a></li></ul>
+ <div class="maps"><div class="map"><iframe src="https://maps.google.com/maps?q=%E3%81%B2%E3%81%8C%E3%81%97%E8%8C%B6%E5%B1%8B%E8%A1%97&output=embed" loading="lazy" title="東茶屋街 地圖" referrerpolicy="no-referrer-when-downgrade"></iframe><a class="mapbtn" href="https://www.google.com/maps/search/?api=1&query=%E3%81%B2%E3%81%8C%E3%81%97%E8%8C%B6%E5%B1%8B%E8%A1%97" target="_blank" rel="noopener">📍 東茶屋街：在 Google 地圖開啟</a></div><div class="map"><iframe src="https://maps.google.com/maps?q=%E8%BF%91%E6%B1%9F%E7%94%BA%E5%B8%82%E5%A0%B4&output=embed" loading="lazy" title="近江町市場 地圖" referrerpolicy="no-referrer-when-downgrade"></iframe><a class="mapbtn" href="https://www.google.com/maps/search/?api=1&query=%E8%BF%91%E6%B1%9F%E7%94%BA%E5%B8%82%E5%A0%B4" target="_blank" rel="noopener">📍 近江町市場：在 Google 地圖開啟</a></div><div class="map"><iframe src="https://maps.google.com/maps?q=%E7%AE%94%E4%B8%80%20%E6%9C%AC%E5%BA%97%20%E7%AE%94%E5%B7%A7%E9%A4%A8&output=embed" loading="lazy" title="箔一 箔巧館 地圖" referrerpolicy="no-referrer-when-downgrade"></iframe><a class="mapbtn" href="https://www.google.com/maps/search/?api=1&query=%E7%AE%94%E4%B8%80%20%E6%9C%AC%E5%BA%97%20%E7%AE%94%E5%B7%A7%E9%A4%A8" target="_blank" rel="noopener">📍 箔一 箔巧館：在 Google 地圖開啟</a></div></div>
+</div>
+</details><details class="day" id="d5" data-date="2027-01-18">
+<summary>
+ <span class="dnum"><span class="dd">1/18</span><span class="wd">週一</span></span>
+ <span class="dtitle"><span class="dlabel">Day 5</span><span class="dname">長町武家屋敷＋緩衝日</span>
+  <span class="dmeta"><span class="chip">🛏 金澤</span><span class="chip warnchip">⚠️ 1</span></span></span>
+ <span class="caret" aria-hidden="true"></span>
+</summary>
+<div class="dbody">
+ <p class="lead">輕鬆一天，消化前幾天的疲勞。週一不少館舍休館，故意排空。</p>
+ <div class="figs n1"><figure><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/8/80/Street_-_Nagamachi_-_Kanazawa%2C_Japan_-_DSC00307.jpg/960px-Street_-_Nagamachi_-_Kanazawa%2C_Japan_-_DSC00307.jpg" alt="長町武家屋敷" width="800" height="533" loading="lazy"><figcaption>長町武家屋敷<span class="cred">Daderot · CC0 · <a href="https://commons.wikimedia.org/wiki/File:Street_-_Nagamachi_-_Kanazawa,_Japan_-_DSC00307.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></span></figcaption></figure></div>
+ <div class="tw"><table class="sched"><thead><tr><th>時間</th><th>行程</th><th>交通</th></tr></thead><tbody><tr><td class="t">10:00</td><td>金澤站出發</td><td class="how">巴士約 10 分 ⚠️（到香林坊）</td></tr><tr><td class="t">10:30–12:00</td><td><b>長町武家屋敷</b>散步</td><td class="how">步行</td></tr><tr><td class="t">12:00–13:00</td><td>午餐</td><td class="how">香林坊</td></tr><tr><td class="t">下午</td><td>自由：補買、回住宿休息；打包<b>一晚用的小包</b>（大行李隔天寄放飯店）</td><td class="how"></td></tr></tbody></table></div>
+ 
+ <dl class="notes"><div><dt>室內備案</dt><dd>香林坊百貨／金澤站商場。</dd></div><div><dt>午餐區域</dt><dd>香林坊。</dd></div><div><dt>補位日</dt><dd>Day 2–4 沒走完的行程可以移到今天。</dd></div></dl>
+ <ul class="warns"><li class="warn"><span class="wtag">⚠️ 待查證</span> 和菓子體驗店家、價格、週一是否營業 → <a href="https://www.hot-ishikawa.jp/" target="_blank" rel="noopener">www.hot-ishikawa.jp</a></li></ul>
+ <div class="maps"><div class="map"><iframe src="https://maps.google.com/maps?q=%E9%95%B7%E7%94%BA%E6%AD%A6%E5%AE%B6%E5%B1%8B%E6%95%B7%E8%B7%A1&output=embed" loading="lazy" title="長町武家屋敷 地圖" referrerpolicy="no-referrer-when-downgrade"></iframe><a class="mapbtn" href="https://www.google.com/maps/search/?api=1&query=%E9%95%B7%E7%94%BA%E6%AD%A6%E5%AE%B6%E5%B1%8B%E6%95%B7%E8%B7%A1" target="_blank" rel="noopener">📍 長町武家屋敷：在 Google 地圖開啟</a></div></div>
+</div>
+</details><details class="day" id="d6" data-date="2027-01-19">
+<summary>
+ <span class="dnum"><span class="dd">1/19</span><span class="wd">週二</span></span>
+ <span class="dtitle"><span class="dlabel">Day 6</span><span class="dname">和倉溫泉＋能登島水族館</span>
+  <span class="dmeta"><span class="chip">🛏 和倉溫泉</span><span class="chip hot">換住宿</span><span class="chip warnchip">⚠️ 4</span></span></span>
+ <span class="caret" aria-hidden="true"></span>
+</summary>
+<div class="dbody">
+ <p class="lead">帶小包去和倉住一晚＋水族館（全室內，下雪也不怕）。</p>
+ <div class="figs n2"><figure><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/1/17/JR-WEST_683_series_Noto-Kagaribi.jpg/960px-JR-WEST_683_series_Noto-Kagaribi.jpg" alt="特急能登篝火號（683 系）" width="800" height="576" loading="lazy"><figcaption>特急能登篝火號（683 系）<span class="cred">世界の坂田銀時 · CC0 · <a href="https://commons.wikimedia.org/wiki/File:JR-WEST_683_series_Noto-Kagaribi.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></span></figcaption></figure><figure><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/2/23/Notojima_Suizokukan.jpg/960px-Notojima_Suizokukan.jpg" alt="能登島水族館" width="800" height="599" loading="lazy"><figcaption>能登島水族館<span class="cred">Fuseoyama · CC BY-SA 3.0 · <a href="https://commons.wikimedia.org/wiki/File:Notojima_Suizokukan.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></span></figcaption></figure></div>
+ <div class="tw"><table class="sched"><thead><tr><th>時間</th><th>行程</th><th>交通</th></tr></thead><tbody><tr><td class="t">上午</td><td>金澤飯店退房，大行李寄放飯店 ⚠️</td><td class="how"></td></tr><tr><td class="t">上午（⚠️ 班次待查）</td><td>金澤 → 和倉溫泉</td><td class="how">特急「能登篝火號」約 1 小時；自由席在 3 號車廂</td></tr><tr><td class="t">抵達後</td><td>小包寄放旅館</td><td class="how">計程車短程</td></tr><tr><td class="t">中午前後</td><td>和倉溫泉站前 → 能登島水族館</td><td class="how">能登島交通巴士（往のとじま臨海公園），約 30 分到終點</td></tr><tr><td class="t">約 12:30–15:00</td><td><b>能登島水族館</b>：海豚表演已恢復</td><td class="how"></td></tr><tr><td class="t">15:00 後</td><td>回和倉溫泉，check-in、泡湯</td><td class="how">巴士</td></tr></tbody></table></div>
+ 
+ <dl class="notes"><div><dt>冬季營業</dt><dd>12/1–3/19 是 9:00–16:30（16:00 停止入館）。</dd></div><div><dt>門票</dt><dd>國中以下（3 歲以上）¥510；大人 ¥1,850 或 ¥1,890（兩個來源不一致）。</dd></div><div><dt>注意</dt><dd>2026 年 3 月時<b>沒有展示鯨鯊</b>。</dd></div><div><dt>午餐區域</dt><dd>水族館內。</dd></div><div><dt>親子提醒</dt><dd>巴士班次少，<b>先抄好回程時間</b>。水族館電話 <span class="tel">0767-84-1271</span>。</dd></div></dl>
+ <ul class="warns"><li class="warn"><span class="wtag">⚠️ 待查證</span> 金澤飯店能否寄放大行李一晚（訂房時問）</li><li class="warn"><span class="wtag">⚠️ 待查證</span> 特急班次、車票運賃（自由席特急券大人 ¥960／兒童 ¥480） → <a href="https://timetable.jr-odekake.net/line-timetable/2850" target="_blank" rel="noopener">timetable.jr-odekake.net/line-timetable/2850</a></li><li class="warn"><span class="wtag">⚠️ 待查證</span> 能登島交通巴士時刻、票價 → <a href="https://mb.jorudan.co.jp/os/bus/1707/stop/75286.html" target="_blank" rel="noopener">mb.jorudan.co.jp/os/bus/1707/stop/75286.html</a></li><li class="warn"><span class="wtag">⚠️ 待查證</span> 水族館大人票價 → <a href="https://www.notoaqua.jp/" target="_blank" rel="noopener">www.notoaqua.jp</a></li></ul>
+ <div class="maps"><div class="map"><iframe src="https://maps.google.com/maps?q=%E3%81%AE%E3%81%A8%E3%81%98%E3%81%BE%E6%B0%B4%E6%97%8F%E9%A4%A8&output=embed" loading="lazy" title="能登島水族館 地圖" referrerpolicy="no-referrer-when-downgrade"></iframe><a class="mapbtn" href="https://www.google.com/maps/search/?api=1&query=%E3%81%AE%E3%81%A8%E3%81%98%E3%81%BE%E6%B0%B4%E6%97%8F%E9%A4%A8" target="_blank" rel="noopener">📍 能登島水族館：在 Google 地圖開啟</a></div><div class="map"><iframe src="https://maps.google.com/maps?q=%E5%92%8C%E5%80%89%E6%B8%A9%E6%B3%89%E9%A7%85&output=embed" loading="lazy" title="和倉溫泉站 地圖" referrerpolicy="no-referrer-when-downgrade"></iframe><a class="mapbtn" href="https://www.google.com/maps/search/?api=1&query=%E5%92%8C%E5%80%89%E6%B8%A9%E6%B3%89%E9%A7%85" target="_blank" rel="noopener">📍 和倉溫泉站：在 Google 地圖開啟</a></div></div>
+</div>
+</details><details class="day" id="d7" data-date="2027-01-20">
+<summary>
+ <span class="dnum"><span class="dd">1/20</span><span class="wd">週三</span></span>
+ <span class="dtitle"><span class="dlabel">Day 7</span><span class="dname">和倉溫泉早晨 → 回金澤</span>
+  <span class="dmeta"><span class="chip">🛏 金澤</span><span class="chip hot">換住宿</span><span class="chip warnchip">⚠️ 1</span></span></span>
+ <span class="caret" aria-hidden="true"></span>
+</summary>
+<div class="dbody">
+ <p class="lead">不排水族館。早上泡湯散步，中午前回金澤，下午輕鬆。</p>
+ <div class="figs n1"><figure><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f6/Wakura_View.JPG/960px-Wakura_View.JPG" alt="和倉溫泉" width="800" height="532" loading="lazy"><figcaption>和倉溫泉<span class="cred">User: (WT-shared) Jpatokal at wts wikivoyage · CC BY-SA 4.0 · <a href="https://commons.wikimedia.org/wiki/File:Wakura_View.JPG" target="_blank" rel="noopener">Wikimedia Commons</a></span></figcaption></figure></div>
+ <div class="tw"><table class="sched"><thead><tr><th>時間</th><th>行程</th><th>交通</th></tr></thead><tbody><tr><td class="t">早上</td><td>旅館早餐、泡湯、和倉溫泉街散步看七尾灣</td><td class="how">步行</td></tr><tr><td class="t">上午（⚠️ 班次待查）</td><td>和倉溫泉 → 金澤</td><td class="how">特急「能登篝火號」約 1 小時</td></tr><tr><td class="t">午餐</td><td>金澤站周邊</td><td class="how">步行</td></tr><tr><td class="t">下午</td><td>回金澤飯店 check-in、拿回大行李；買伴手禮、整理回程行李</td><td class="how">步行</td></tr></tbody></table></div>
+ 
+ <dl class="notes"><div><dt>室內備案</dt><dd>整天幾乎都在室內或車上，不怕下雪。</dd></div><div><dt>午餐區域</dt><dd>金澤站周邊（站內商場、あんと）。</dd></div><div><dt>可選</dt><dd>體力夠就補走前幾天沒走完的景點。</dd></div><div><dt>親子提醒</dt><dd>週三<b>近江町市場部分店家公休</b>，今天別排市場。</dd></div></dl>
+ <ul class="warns"><li class="warn"><span class="wtag">⚠️ 待查證</span> 和倉溫泉街店家災後營業狀況 → <a href="https://www.hot-ishikawa.jp/" target="_blank" rel="noopener">www.hot-ishikawa.jp</a></li></ul>
+ <div class="maps"><div class="map"><iframe src="https://maps.google.com/maps?q=%E5%92%8C%E5%80%89%E6%B8%A9%E6%B3%89&output=embed" loading="lazy" title="和倉溫泉 地圖" referrerpolicy="no-referrer-when-downgrade"></iframe><a class="mapbtn" href="https://www.google.com/maps/search/?api=1&query=%E5%92%8C%E5%80%89%E6%B8%A9%E6%B3%89" target="_blank" rel="noopener">📍 和倉溫泉：在 Google 地圖開啟</a></div><div class="map"><iframe src="https://maps.google.com/maps?q=%E9%87%91%E6%B2%A2%E9%A7%85&output=embed" loading="lazy" title="金澤站 地圖" referrerpolicy="no-referrer-when-downgrade"></iframe><a class="mapbtn" href="https://www.google.com/maps/search/?api=1&query=%E9%87%91%E6%B2%A2%E9%A7%85" target="_blank" rel="noopener">📍 金澤站：在 Google 地圖開啟</a></div></div>
+</div>
+</details><details class="day" id="d8" data-date="2027-01-21">
+<summary>
+ <span class="dnum"><span class="dd">1/21</span><span class="wd">週四</span></span>
+ <span class="dtitle"><span class="dlabel">Day 8</span><span class="dname">回程</span>
+  <span class="dmeta"><span class="chip">🛏 —</span><span class="chip warnchip">⚠️ 3</span></span></span>
+ <span class="caret" aria-hidden="true"></span>
+</summary>
+<div class="dbody">
+ <p class="lead">從金澤出發，機場巴士約 40–45 分。上午、下午航班都可以。</p>
+ <div class="figs n2"><figure><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f2/Aeon_Mall_Shinkomatsu.jpg/960px-Aeon_Mall_Shinkomatsu.jpg" alt="AEON MALL 新小松" width="800" height="533" loading="lazy"><figcaption>AEON MALL 新小松<span class="cred">SONIC BLOOMING · CC BY-SA 4.0 · <a href="https://commons.wikimedia.org/wiki/File:Aeon_Mall_Shinkomatsu.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></span></figcaption></figure><figure><img src="https://upload.wikimedia.org/wikipedia/commons/e/ec/Komatsu_airport_terminal_building.jpg" alt="小松機場航廈" width="640" height="480" loading="lazy"><figcaption>小松機場航廈<span class="cred">Shift at Japanese Wikipedia · CC BY-SA 3.0 · <a href="https://commons.wikimedia.org/wiki/File:Komatsu_airport_terminal_building.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></span></figcaption></figure></div>
+ <div class="tw"><table class="sched"><thead><tr><th>時間</th><th>行程</th><th>交通</th></tr></thead><tbody><tr><td class="t">方案 A：上午航班</td><td>金澤站 → 機場巴士約 40–45 分 → 小松機場</td><td class="how">參考：長榮 BR157 小松 11:45 起飛</td></tr><tr><td class="t">方案 B：下午航班</td><td>金澤站上午自由 → JR 到小松站 → <b>AEON MALL 新小松</b>午餐、逛街 → 小松機場</td><td class="how">參考：虎航回程 16:55 起飛（5 月資料）</td></tr></tbody></table></div>
+ 
+ <dl class="notes"><div><dt>AEON MALL 新小松</dt><dd>JR 小松站搭免費接駁車約 8 分、步行約 19 分（1.5 km）；離小松機場約 5 km。</dd></div></dl>
+ <ul class="warns"><li class="warn"><span class="wtag">⚠️ 待查證</span> 回程航班時刻 → <a href="https://booking.evaair.com/flyeva/eva/b2c/flight-schedules.aspx?lang=zh-tw" target="_blank" rel="noopener">booking.evaair.com/flyeva/eva/b2c/flight-schedules.aspx?lang=zh-tw</a></li><li class="warn"><span class="wtag">⚠️ 待查證</span> JR 金澤 → 小松班次 → <a href="https://www.jr-odekake.net/" target="_blank" rel="noopener">www.jr-odekake.net</a></li><li class="warn"><span class="wtag">⚠️ 待查證</span> AEON 免費接駁車班次、AEON 到機場的交通 → <a href="https://shinkomatsu-aeonmall.com/" target="_blank" rel="noopener">shinkomatsu-aeonmall.com</a></li></ul>
+ <div class="maps"><div class="map"><iframe src="https://maps.google.com/maps?q=%E3%82%A4%E3%82%AA%E3%83%B3%E3%83%A2%E3%83%BC%E3%83%AB%E6%96%B0%E5%B0%8F%E6%9D%BE&output=embed" loading="lazy" title="AEON MALL 新小松 地圖" referrerpolicy="no-referrer-when-downgrade"></iframe><a class="mapbtn" href="https://www.google.com/maps/search/?api=1&query=%E3%82%A4%E3%82%AA%E3%83%B3%E3%83%A2%E3%83%BC%E3%83%AB%E6%96%B0%E5%B0%8F%E6%9D%BE" target="_blank" rel="noopener">📍 AEON MALL 新小松：在 Google 地圖開啟</a></div><div class="map"><iframe src="https://maps.google.com/maps?q=%E5%B0%8F%E6%9D%BE%E7%A9%BA%E6%B8%AF&output=embed" loading="lazy" title="小松機場 地圖" referrerpolicy="no-referrer-when-downgrade"></iframe><a class="mapbtn" href="https://www.google.com/maps/search/?api=1&query=%E5%B0%8F%E6%9D%BE%E7%A9%BA%E6%B8%AF" target="_blank" rel="noopener">📍 小松機場：在 Google 地圖開啟</a></div></div>
+</div>
+</details>
+</section>
+
+<section id="check1">
+ <h2>5 項關鍵查證 <small>2026-10-16</small></h2>
+ <div class="tw"><table><thead><tr><th>項目</th><th>結果</th><th>狀態</th></tr></thead><tbody>
+  <tr><td>一里野滑雪巴士 2027/1</td><td>2025–26 年度只在週末假日開（1 月有 17、18 日）。2026–27 年度還沒公布，往年 11–12 月公布。照往年規律 1/16、1/17 很可能有車。</td><td>⚠️ 待查證</td></tr>
+  <tr><td>能登島水族館</td><td>2025 年 3 月全面恢復營業，海豚表演也恢復。冬季 9:00–16:30。和倉溫泉站前搭巴士約 30 分。</td><td>✅ 營業中</td></tr>
+  <tr><td>和倉溫泉旅館</td><td>2026/7/16 為止 19 家中 11 家恢復營業（見下方名單）。</td><td>✅</td></tr>
+  <tr><td>JR 七尾線／能登篝火號</td><td>2026/3/14 改點後的時刻表上有這班車，金澤 ⇄ 和倉溫泉約 1 小時。部分班次只在特定日期開。</td><td>✅ 運行中</td></tr>
+  <tr><td>桃園 ⇄ 小松直飛</td><td>長榮每日飛（參考 BR157 小松 11:45 → 桃園 13:55）。台灣虎航也飛（5 月參考：去程 TPE 12:10，回程 16:55）。</td><td>⚠️ 待查證</td></tr>
+ </tbody></table></div>
+ <h3>和倉溫泉：已恢復營業（11 家）</h3>
+ <ul class="wakura"><li>花ごよみ</li><li>味な宿 宝仙閣</li><li>湯の華</li><li>日本の宿 のと楽</li><li>TAOYA 和倉</li><li>はまづる</li><li>能州いろは</li><li>ゆけむりの宿 美湾荘（部分客房）</li><li>ホテル海望（部分客房）</li><li>奥田屋（4 間客房）</li><li>白鷺の湯 能登 海舟</li></ul>
+ <h3>尚未恢復</h3>
+ <div class="tw"><table><thead><tr><th>旅館</th><th>預定恢復</th></tr></thead><tbody>
+  <tr><td>すず花</td><td>2027/3</td></tr><tr><td>宿守屋寿苑</td><td>2027/5 左右</td></tr><tr><td>大観荘</td><td>2027 年度內</td></tr>
+  <tr><td>多田屋</td><td>2028/4</td></tr><tr><td>あえの風</td><td>2028 年度下半年</td></tr><tr><td>加賀屋（新館）</td><td>2028 年度末</td></tr>
+  <tr><td>虹と海</td><td>未定</td></tr><tr><td>渡月庵</td><td>未定</td></tr>
+ </tbody></table></div>
+</section>
+
+<section id="transport">
+ <h2>交通攻略</h2>
+ <div class="tw"><table><thead><tr><th>交通</th><th>重點</th><th>何時訂／買</th></tr></thead><tbody>
+  <tr><td>桃園 ⇄ 小松 機票</td><td>長榮或台灣虎航；回程從金澤出發，上午、下午班都可以</td><td>開賣就訂 ⚠️</td></tr>
+  <tr><td>小松機場巴士</td><td>約 40–45 分，¥1,300，可信用卡感應，座位有限</td><td>當天在機場買</td></tr>
+  <tr><td>一里野滑雪直行巴士</td><td>兒童票、初學者套票只能在售票中心買</td><td>1/14 或 1/15 傍晚到金澤站西口北鐵售票中心；是否需預約 ⚠️</td></tr>
+  <tr><td>特急能登篝火號</td><td>自由席在 3 號車廂；部分班次只在特定日期開</td><td>確認班次後再決定要不要買指定席 ⚠️</td></tr>
+  <tr><td>能登島交通巴士</td><td>班次少，先抄好去回時間</td><td>出發前查 Jorudan ⚠️</td></tr>
+  <tr><td>金澤市區</td><td>路線巴士＋短程計程車</td><td>一日券種類、價格 ⚠️</td></tr>
+ </tbody></table></div>
+ <h3>預約時間表</h3>
+ <div class="tw"><table><thead><tr><th>什麼時候</th><th>要做什麼</th></tr></thead><tbody>
+  <tr><td>現在～11 月</td><td>訂機票；訂金澤住宿（1/14–18 共 5 晚＋1/20 共 1 晚，同一間，問能不能寄放行李）；訂和倉溫泉旅館 1 晚（1/19）</td></tr>
+  <tr><td>11–12 月</td><td>查一里野巴士 2026–27 年度日期與時刻（北鐵官網）</td></tr>
+  <tr><td>出發前 2–4 週</td><td>預約金箔體驗；查特急、能登島巴士班次；再確認水族館營業</td></tr>
+  <tr><td>1/15 傍晚</td><td>確認 1/16 滑雪巴士有沒有停駛（北鐵 <span class="tel">076-234-0123</span>）</td></tr>
+ </tbody></table></div>
+</section>
+
+<section id="budget">
+ <h2>預算表 <small>查詢日期 2026-10-16</small></h2>
+ <p class="legend">只列查得到的數字。查不到的寫 ⚠️，不估假數字。</p>
+ <div class="tw"><table><thead><tr><th>項目</th><th>大人／人</th><th>兒童</th><th>全家 3 人</th></tr></thead><tbody>
+  <tr><td>機票 桃園 ⇄ 小松</td><td>⚠️</td><td>⚠️</td><td>⚠️</td></tr>
+  <tr><td>機場巴士（來回）</td><td class="num">¥2,600</td><td>⚠️</td><td>⚠️</td></tr>
+  <tr><td>一里野套票（纜車＋來回巴士，2025–26 參考）</td><td class="num">¥6,500</td><td class="num">¥4,500</td><td class="num">¥17,500</td></tr>
+  <tr><td>雪具租借</td><td>⚠️</td><td>⚠️</td><td>⚠️</td></tr>
+  <tr><td>特急能登篝火號 金澤 ⇄ 和倉（來回）</td><td class="num">約 ¥4,200–5,400（估算）</td><td>特急券 ¥480×2＋運賃 ⚠️</td><td>⚠️</td></tr>
+  <tr><td>兼六園</td><td class="num">¥320</td><td>⚠️</td><td>⚠️</td></tr>
+  <tr><td>21 世紀美術館</td><td>⚠️</td><td>⚠️</td><td>⚠️</td></tr>
+  <tr><td>能登島水族館</td><td class="num">¥1,850–1,890</td><td class="num">¥510</td><td class="num">¥4,210–4,290</td></tr>
+  <tr><td>能登島交通巴士（來回）</td><td>⚠️</td><td>⚠️</td><td>⚠️</td></tr>
+  <tr><td>金箔體驗</td><td class="num">約 ¥1,000–2,000 起（他店參考）</td><td>同左</td><td>⚠️</td></tr>
+  <tr><td>金澤住宿 6 晚（5＋1）</td><td>—</td><td>—</td><td>⚠️</td></tr>
+  <tr><td>和倉溫泉旅館 1 晚</td><td>—</td><td>—</td><td>⚠️</td></tr>
+ </tbody></table></div>
+</section>
+
+<section id="prep">
+ <h2>冬季親子行前清單 <small>打勾只存在這支手機</small></h2>
+ <div class="cgrid"><div class="cgroup"><h4>穿著</h4><ul class="check"><li><label><input type="checkbox" id="c1"> <span>防水防滑的鞋（雪地、濕滑石板路）</span></label></li><li><label><input type="checkbox" id="c2"> <span>洋蔥式穿法：發熱衣＋刷毛＋防水外套</span></label></li><li><label><input type="checkbox" id="c3"> <span>帽子、圍巾、手套（小孩多帶一副備用）</span></label></li><li><label><input type="checkbox" id="c4"> <span>滑雪日：雪褲、防水手套、護目鏡（或在雪場租 ⚠️）</span></label></li></ul></div><div class="cgroup"><h4>雨雪裝備</h4><ul class="check"><li><label><input type="checkbox" id="c5"> <span>折疊傘或輕便雨衣（北陸冬天常下雨夾雪）</span></label></li><li><label><input type="checkbox" id="c6"> <span>鞋子防水噴霧</span></label></li><li><label><input type="checkbox" id="c7"> <span>塑膠袋裝濕衣物</span></label></li></ul></div><div class="cgroup"><h4>親子</h4><ul class="check"><li><label><input type="checkbox" id="c8"> <span>小孩常用藥、暈車藥（滑雪日巴士較久）</span></label></li><li><label><input type="checkbox" id="c9"> <span>零食、水壺</span></label></li><li><label><input type="checkbox" id="c10"> <span>平板／繪本（等車用）</span></label></li><li><label><input type="checkbox" id="c11"> <span>護唇膏、乳液（乾冷）</span></label></li><li><label><input type="checkbox" id="c12"> <span>小孩身上放家長聯絡卡（中日文）</span></label></li><li><label><input type="checkbox" id="c13"> <span>1/19 去和倉用的一晚小包</span></label></li></ul></div><div class="cgroup"><h4>證件與錢</h4><ul class="check"><li><label><input type="checkbox" id="c14"> <span>護照</span></label></li><li><label><input type="checkbox" id="c15"> <span>信用卡（機場巴士可感應）</span></label></li><li><label><input type="checkbox" id="c16"> <span>日圓現金（小店、巴士）</span></label></li><li><label><input type="checkbox" id="c17"> <span>交通 IC 卡（⚠️ 北鐵巴士可用範圍待查證）</span></label></li><li><label><input type="checkbox" id="c18"> <span>旅遊保險</span></label></li></ul></div><div class="cgroup"><h4>手機</h4><ul class="check"><li><label><input type="checkbox" id="c19"> <span>網卡或 eSIM</span></label></li><li><label><input type="checkbox" id="c20"> <span>存好這份手冊的連結</span></label></li><li><label><input type="checkbox" id="c21"> <span>北鐵 076-234-0123、水族館 0767-84-1271</span></label></li></ul></div></div>
+</section>
+
+<section id="pending">
+ <h2>⚠️ 待查證彙整 <small>19 項</small></h2>
+ <p class="legend">出發前逐項到官方連結確認。查到後再更新手冊。</p>
+ <div class="tw"><table><thead><tr><th>#</th><th>項目</th><th>影響</th><th>官方連結</th></tr></thead><tbody><tr><td class="num">1</td><td>2027/1 去回程航班時刻、票價</td><td>Day 1、8</td><td><a href="https://www.evaair.com/" target="_blank" rel="noopener">www.evaair.com</a></td></tr><tr><td class="num">2</td><td>機場巴士兒童票價</td><td>Day 1、8</td><td><a href="https://www.hokutetsu.co.jp/" target="_blank" rel="noopener">www.hokutetsu.co.jp</a></td></tr><tr><td class="num">3</td><td>一里野直行巴士 2026–27 年度日期、時刻、票價</td><td>Day 3</td><td><a href="https://www.hokutetsu.co.jp/tourism-bus/" target="_blank" rel="noopener">www.hokutetsu.co.jp</a></td></tr><tr><td class="num">4</td><td>一里野是否需預約、雪具租借價格</td><td>Day 3</td><td><a href="https://www.sam-hakusan.com/white/ichirino/bus/index.html" target="_blank" rel="noopener">www.sam-hakusan.com</a></td></tr><tr><td class="num">5</td><td>兼六園兒童票、冬季開園時間</td><td>Day 2</td><td><a href="https://www.pref.ishikawa.jp/siro-niwa/kenrokuen/" target="_blank" rel="noopener">www.pref.ishikawa.jp</a></td></tr><tr><td class="num">6</td><td>21 世紀美術館休館日、門票</td><td>Day 2</td><td><a href="https://www.kanazawa21.jp/" target="_blank" rel="noopener">www.kanazawa21.jp</a></td></tr><tr><td class="num">7</td><td>金澤市區巴士路線、時間、一日券</td><td>Day 2、4、5</td><td><a href="https://www.hokutetsu.co.jp/" target="_blank" rel="noopener">www.hokutetsu.co.jp</a></td></tr><tr><td class="num">8</td><td>近江町市場週日營業狀況</td><td>Day 4</td><td><a href="https://ohmicho-ichiba.com/" target="_blank" rel="noopener">ohmicho-ichiba.com</a></td></tr><tr><td class="num">9</td><td>金箔體驗（箔一）價格、位置交通</td><td>Day 4</td><td><a href="https://www.hakuichi.co.jp/" target="_blank" rel="noopener">www.hakuichi.co.jp</a></td></tr><tr><td class="num">10</td><td>和菓子體驗店家、價格、營業日</td><td>備案</td><td><a href="https://www.hot-ishikawa.jp/" target="_blank" rel="noopener">www.hot-ishikawa.jp</a></td></tr><tr><td class="num">11</td><td>特急能登篝火號實際班次、運賃</td><td>Day 6、7</td><td><a href="https://timetable.jr-odekake.net/line-timetable/2850" target="_blank" rel="noopener">timetable.jr-odekake.net</a></td></tr><tr><td class="num">12</td><td>能登島交通巴士時刻、票價</td><td>Day 6</td><td><a href="https://mb.jorudan.co.jp/os/bus/1707/stop/75286.html" target="_blank" rel="noopener">mb.jorudan.co.jp</a></td></tr><tr><td class="num">13</td><td>能登島水族館大人票價（¥1,850 或 ¥1,890）</td><td>Day 6</td><td><a href="https://www.notoaqua.jp/" target="_blank" rel="noopener">www.notoaqua.jp</a></td></tr><tr><td class="num">14</td><td>和倉溫泉街餐廳、店家災後營業狀況</td><td>Day 6、7</td><td><a href="https://www.hot-ishikawa.jp/" target="_blank" rel="noopener">www.hot-ishikawa.jp</a></td></tr><tr><td class="num">15</td><td>AEON MALL 新小松免費接駁車班次</td><td>Day 8</td><td><a href="https://shinkomatsu-aeonmall.com/" target="_blank" rel="noopener">shinkomatsu-aeonmall.com</a></td></tr><tr><td class="num">16</td><td>金澤、和倉住宿價格</td><td>預算</td><td>訂房的旅館／飯店</td></tr><tr><td class="num">17</td><td>交通 IC 卡在北鐵巴士的可用範圍</td><td>全程</td><td><a href="https://www.hokutetsu.co.jp/" target="_blank" rel="noopener">www.hokutetsu.co.jp</a></td></tr><tr><td class="num">18</td><td>金澤飯店能否在 1/19 寄放大行李一晚</td><td>Day 6、7</td><td>訂房的旅館／飯店</td></tr><tr><td class="num">19</td><td>JR 金澤 → 小松班次（回程方案 B）</td><td>Day 8</td><td><a href="https://www.jr-odekake.net/" target="_blank" rel="noopener">www.jr-odekake.net</a></td></tr></tbody></table></div>
+</section>
+
+<section id="noto">
+ <h2>附錄：奧能登災後現況</h2>
+ <p>輪島、珠洲、千枚田等奧能登地區，受 2024 年 1 月地震與 9 月豪雨影響很大，本次行程不前往。最新復原狀況請看 <a href="https://www.hot-ishikawa.jp/" target="_blank" rel="noopener">ほっと石川旅ねっと</a>（⚠️ 待查證）。</p>
+</section>
+
+<section id="credits">
+ <h2>照片來源 <small>全部來自 Wikimedia Commons</small></h2>
+ <div class="tw"><table><thead><tr><th>照片</th><th>作者</th><th>授權</th><th></th></tr></thead><tbody><tr><td>金澤站鼓門</td><td>Daderot</td><td>CC0</td><td><a href="https://commons.wikimedia.org/wiki/File:Tsuzumi-mon,_Kanazawa_Station_-_Kanazawa,_Japan_-_DSC09640.jpg" target="_blank" rel="noopener">頁面</a></td></tr><tr><td>兼六園冬季的徽軫燈籠</td><td>tab2_dawa</td><td>CC BY 2.0</td><td><a href="https://commons.wikimedia.org/wiki/File:Kenroku-en-winter-lantern.jpg" target="_blank" rel="noopener">頁面</a></td></tr><tr><td>金澤城公園</td><td>gtknj</td><td>CC BY 2.0</td><td><a href="https://commons.wikimedia.org/wiki/File:Kanazawa_Castle_-_Jan_26,_2016_(1).jpg" target="_blank" rel="noopener">頁面</a></td></tr><tr><td>長町武家屋敷</td><td>Daderot</td><td>CC0</td><td><a href="https://commons.wikimedia.org/wiki/File:Street_-_Nagamachi_-_Kanazawa,_Japan_-_DSC00307.jpg" target="_blank" rel="noopener">頁面</a></td></tr><tr><td>白山一里野溫泉滑雪場</td><td>Ski Mania</td><td>CC0</td><td><a href="https://commons.wikimedia.org/wiki/File:Hakusan_Ichirino_Hot_Spring_Ski_Area.jpg" target="_blank" rel="noopener">頁面</a></td></tr><tr><td>東茶屋街</td><td>AudaCity3371</td><td>CC BY-SA 3.0</td><td><a href="https://commons.wikimedia.org/wiki/File:Higashi_Chaya_District_of_Kanazawa_-_panoramio.jpg" target="_blank" rel="noopener">頁面</a></td></tr><tr><td>近江町市場西口</td><td>DimiTalen</td><td>CC0</td><td><a href="https://commons.wikimedia.org/wiki/File:Omicho_covered_market_western_entrance,_Kanazawa,_2016.jpg" target="_blank" rel="noopener">頁面</a></td></tr><tr><td>安江金箔工芸館（金箔工藝參考照，不是箔一）</td><td>金沢市</td><td>CC BY 2.1 jp</td><td><a href="https://commons.wikimedia.org/wiki/File:Yasuekinpakukogeikan003.jpg" target="_blank" rel="noopener">頁面</a></td></tr><tr><td>特急能登篝火號（683 系）</td><td>世界の坂田銀時</td><td>CC0</td><td><a href="https://commons.wikimedia.org/wiki/File:JR-WEST_683_series_Noto-Kagaribi.jpg" target="_blank" rel="noopener">頁面</a></td></tr><tr><td>能登島水族館</td><td>Fuseoyama</td><td>CC BY-SA 3.0</td><td><a href="https://commons.wikimedia.org/wiki/File:Notojima_Suizokukan.jpg" target="_blank" rel="noopener">頁面</a></td></tr><tr><td>和倉溫泉</td><td>User: (WT-shared) Jpatokal at wts wikivoyage</td><td>CC BY-SA 4.0</td><td><a href="https://commons.wikimedia.org/wiki/File:Wakura_View.JPG" target="_blank" rel="noopener">頁面</a></td></tr><tr><td>AEON MALL 新小松</td><td>SONIC BLOOMING</td><td>CC BY-SA 4.0</td><td><a href="https://commons.wikimedia.org/wiki/File:Aeon_Mall_Shinkomatsu.jpg" target="_blank" rel="noopener">頁面</a></td></tr><tr><td>小松機場航廈</td><td>Shift at Japanese Wikipedia</td><td>CC BY-SA 3.0</td><td><a href="https://commons.wikimedia.org/wiki/File:Komatsu_airport_terminal_building.jpg" target="_blank" rel="noopener">頁面</a></td></tr></tbody></table></div>
+</section>
+
+</main>
+<footer><div class="wrap">資料查詢日期 2026-10-16。價格、時刻、營業狀況以官方最新公告為準。本手冊不代訂。</div></footer>
+<script>
+(function(){
+ var days=[].slice.call(document.querySelectorAll('details.day'));
+ // 旅途中：自動展開「今天」
+ var t=new Date(), iso=t.getFullYear()+'-'+String(t.getMonth()+1).padStart(2,'0')+'-'+String(t.getDate()).padStart(2,'0');
+ var hit=days.filter(function(d){return d.dataset.date===iso})[0];
+ if(hit){hit.open=true;hit.classList.add('today');}
+ document.getElementById('openAll').onclick=function(){days.forEach(function(d){d.open=true})};
+ document.getElementById('closeAll').onclick=function(){days.forEach(function(d){d.open=false})};
+ // 從路線條點進來時展開該天
+ [].slice.call(document.querySelectorAll('a[href^="#d"]')).forEach(function(a){
+  a.addEventListener('click',function(){var d=document.querySelector(a.getAttribute('href'));if(d&&d.tagName==='DETAILS')d.open=true;});
+ });
+ // 行前清單：只存在這支手機
+ var KEY='kz-check-v1', st={};
+ try{st=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){}
+ [].slice.call(document.querySelectorAll('ul.check input')).forEach(function(c){
+  c.checked=!!st[c.id];
+  c.addEventListener('change',function(){st[c.id]=c.checked;try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}});
+ });
+})();
+</script>
+</body></html>
