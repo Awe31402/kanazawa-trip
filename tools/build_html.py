@@ -100,17 +100,21 @@ DAYS = [
          ("金箔體驗價格、位置交通（其他店家約 ¥1,000–2,000 起）", "https://www.hakuichi.co.jp/")],
   photos=["chaya", "omicho", "goldleaf"], maps=[("東茶屋街", "ひがし茶屋街"), ("近江町市場", "近江町市場"), ("箔一 箔巧館", "箔一 本店 箔巧館")]),
 
- dict(n=5, date="1/18", wd="一", iso="2027-01-18", title="長町武家屋敷＋緩衝日", base="金澤",
-  lead="輕鬆一天，消化前幾天的疲勞。週一不少館舍休館，故意排空。",
+ dict(n=5, date="1/18", wd="一", iso="2027-01-18", title="長町武家屋敷＋AEON 新小松", base="金澤",
+  lead="上午長町散步，下午去 AEON 新小松吃飯逛街（全室內）。週一不少館舍休館，所以排商場。累了就跳過 AEON，回住宿休息。",
   rows=[("10:00", "金澤站出發", "巴士約 10 分 ⚠️（到香林坊）"),
         ("10:30–12:00", "<b>長町武家屋敷</b>散步", "步行"),
-        ("12:00–13:00", "午餐", "香林坊"),
-        ("下午", "自由：補買、回住宿休息；打包<b>一晚用的小包</b>（大行李隔天寄放飯店）", "—")],
-  notes=[("室內備案", "香林坊百貨／金澤站商場。"),
-         ("午餐區域", "香林坊。"),
-         ("補位日", "Day 2–4 沒走完的行程可以移到今天。")],
-  warns=[("和菓子體驗店家、價格、週一是否營業", "https://www.hot-ishikawa.jp/")],
-  photos=["nagamachi"], maps=[("長町武家屋敷", "長町武家屋敷跡")]),
+        ("12:00–12:30", "回金澤站", "巴士 ⚠️"),
+        ("12:30–13:00", "金澤 → 小松站", "IR いしかわ鐵道或北陸新幹線 ⚠️ 班次、時間、票價待查"),
+        ("13:00–16:00", "<b>AEON MALL 新小松</b>：午餐、逛街（室內）", "小松站搭免費接駁車約 8 分，或步行約 19 分（1.5 km）"),
+        ("16:00–17:00", "回金澤住宿；打包<b>一晚用的小包</b>（大行李隔天寄放飯店）", "接駁車＋電車")],
+  notes=[("室內備案", "AEON 整個都在室內，不怕下雪。"),
+         ("午餐區域", "AEON 新小松館內。"),
+         ("不想跑遠", "跳過 AEON，改在香林坊午餐、金澤站商場逛逛。"),
+         ("補位日", "Day 2–4 沒走完的行程也可以移到今天上午。")],
+  warns=[("金澤 → 小松的電車班次、時間、票價（IR いしかわ鐵道／北陸新幹線）", "https://www.ishikawa-railway.jp/"),
+         ("AEON 免費接駁車班次、週一營業時間", "https://shinkomatsu-aeonmall.com/")],
+  photos=["nagamachi", "aeon"], maps=[("長町武家屋敷", "長町武家屋敷跡"), ("AEON MALL 新小松", "イオンモール新小松")]),
 
  dict(n=6, date="1/19", wd="二", iso="2027-01-19", title="和倉溫泉＋能登島水族館", base="和倉溫泉", tag="換住宿",
   lead="帶小包去和倉住一晚＋水族館（全室內，下雪也不怕）。",
@@ -145,21 +149,20 @@ DAYS = [
   photos=["wakura"], maps=[("和倉溫泉", "和倉温泉"), ("金澤站", "金沢駅")]),
 
  dict(n=8, date="1/21", wd="四", iso="2027-01-21", title="回程", base="—",
-  lead="從金澤出發，機場巴士約 40–45 分。上午、下午航班都可以。",
+  lead="從金澤出發，機場巴士約 40–45 分。上午、下午航班都可以，不排景點。",
   rows=[("方案 A：上午航班", "金澤站 → 機場巴士約 40–45 分 → 小松機場", "參考：長榮 BR157 小松 11:45 起飛"),
-        ("方案 B：下午航班", "金澤站上午自由 → JR 到小松站 → <b>AEON MALL 新小松</b>午餐、逛街 → 小松機場", "參考：虎航回程 16:55 起飛（5 月資料）")],
-  notes=[("AEON MALL 新小松", "JR 小松站搭免費接駁車約 8 分、步行約 19 分（1.5 km）；離小松機場約 5 km。")],
+        ("方案 B：下午航班", "金澤站上午自由（站內商場買伴手禮）→ 機場巴士約 40–45 分 → 小松機場", "參考：虎航回程 16:55 起飛（5 月資料）")],
+  notes=[("機場巴士", "座位有限，人多時提早到金澤站排隊。"),
+         ("伴手禮", "金澤站內商場（百番街、あんと）。")],
   warns=[("回程航班時刻", "https://booking.evaair.com/flyeva/eva/b2c/flight-schedules.aspx?lang=zh-tw"),
-         ("JR 金澤 → 小松班次", "https://www.jr-odekake.net/"),
-         ("AEON 免費接駁車班次、AEON 到機場的交通", "https://shinkomatsu-aeonmall.com/")],
-  photos=["aeon", "komatsu"], maps=[("AEON MALL 新小松", "イオンモール新小松"), ("小松機場", "小松空港")]),
+         ("機場巴士時刻", "https://www.hokutetsu.co.jp/")],
+  photos=["komatsu"], maps=[("金澤站", "金沢駅"), ("小松機場", "小松空港")]),
 ]
 
 # 每天加「附近美食」連到美食頁（家數由 build_food.py 產生）
 _COUNTS = json.load(open(os.path.join(ROOT, "data", "food-counts.json")))
 FOOD_LINKS = {1: [("st", "金澤站")], 2: [("korinbo", "香林坊／広坂")], 4: [("higashi", "東茶屋街"), ("omicho", "近江町")],
-              5: [("nagamachi", "長町"), ("korinbo", "香林坊")], 6: [("wakura", "和倉溫泉")], 7: [("st", "金澤站")],
-              8: [("komatsu", "小松／AEON")]}
+              5: [("nagamachi", "長町"), ("komatsu", "AEON 新小松")], 6: [("wakura", "和倉溫泉")], 7: [("st", "金澤站")], 8: [("st", "金澤站")]}
 for _d in DAYS:
     links = [f'<a href="food.html#{aid}">{label} {_COUNTS[aid]} 家 →</a>' for aid, label in FOOD_LINKS.get(_d["n"], [])
              if _COUNTS.get(aid)]
@@ -181,11 +184,11 @@ PENDING = [
  ("能登島交通巴士時刻、票價", "Day 6", "https://mb.jorudan.co.jp/os/bus/1707/stop/75286.html"),
  ("能登島水族館大人票價（¥1,850 或 ¥1,890）", "Day 6", "https://www.notoaqua.jp/"),
  ("和倉溫泉街餐廳、店家災後營業狀況", "Day 6、7", "https://www.hot-ishikawa.jp/"),
- ("AEON MALL 新小松免費接駁車班次", "Day 8", "https://shinkomatsu-aeonmall.com/"),
+ ("AEON MALL 新小松免費接駁車班次、週一營業時間", "Day 5", "https://shinkomatsu-aeonmall.com/"),
  ("金澤、和倉住宿價格", "預算", None),
  ("交通 IC 卡在北鐵巴士的可用範圍", "全程", "https://www.hokutetsu.co.jp/"),
  ("金澤飯店能否在 1/19 寄放大行李一晚", "Day 6、7", None),
- ("JR 金澤 → 小松班次（回程方案 B）", "Day 8", "https://www.jr-odekake.net/"),
+ ("金澤 → 小松電車班次、票價（IR いしかわ鐵道／北陸新幹線）", "Day 5", "https://www.ishikawa-railway.jp/"),
 ]
 
 
