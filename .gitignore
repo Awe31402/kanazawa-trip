@@ -1,0 +1,6 @@
+.cache/
+data/google-places-raw.json
+data/google-places.json
+__pycache__/
+.shot.png
+.preview.html

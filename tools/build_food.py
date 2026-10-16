@@ -322,7 +322,7 @@ body = f'''<title>金澤百名店地圖</title>
   </div></details>
  </section>
 </main>
-<footer><div class="wrap">百名店資料 {HM_ASOF}、Google 資料 {G_ASOF}。營業時間、公休、預約規則以店家最新公告為準。本頁不代訂。</div></footer>
+<footer><div class="wrap">Google 評分、評價數、地址、營業時間與「適合兒童」資料來源：Google Maps。百名店資料 {HM_ASOF}、Google 資料 {G_ASOF}。營業時間、公休、預約規則以店家最新公告為準。本頁不代訂。</div></footer>
 <script>{JS}</script>
 '''
 
