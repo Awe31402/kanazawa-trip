@@ -32,7 +32,8 @@ AREAS = [  # id, 標題, 對應行程, 用來算公休的日期
  ("higashi", "東茶屋街周邊", "Day 6 上午", [("1/19", "二")]),
  ("korinbo", "香林坊／片町／広坂", "Day 2 午餐", [("1/15", "五")]),
  ("nagamachi", "長町周邊", "Day 2 下午", [("1/15", "五")]),
- ("komatsu", "小松站／AEON 新小松", "Day 7 整天（午餐、晚餐）", [("1/20", "三")]),
+ ("hakusan", "AEON 白山", "Day 7 整天（午餐、晚餐）", [("1/20", "三")]),
+ ("komatsu", "小松站周邊", "目前行程沒有經過（機場巴士直接到金澤站）", KANAZAWA_DATES),
  ("wakura", "和倉溫泉", "Day 4 下午～Day 5 早上", [("1/17", "日"), ("1/18", "一")]),
  ("far", "行程區域外（要另外搭車）", "不在行程路線上，想專程去再排",
   KANAZAWA_DATES[:3] + [("1/17", "日")] + KANAZAWA_DATES[3:]),
@@ -364,7 +365,7 @@ body = f'''<title>金澤百名店地圖</title>
   <ul>
    <li><b>Tabelog 百名店</b>：來源 <a href="https://award.tabelog.com/hyakumeiten" target="_blank" rel="noopener">award.tabelog.com</a>，查詢日期 {HM_ASOF}。</li>
    <li><b>Google 高評價</b>：Google 評分<b>超過 3.8</b>、評價數<b>超過 500 則</b>、營業中，來源 Google Places API，查詢日期 {G_ASOF}。</li>
-   <li>區域：以金澤站、近江町市場、東茶屋街、香林坊、長町、小松站、AEON 新小松、和倉溫泉為中心，半徑約 300–700 公尺。</li>
+   <li>區域：以金澤站、近江町市場、東茶屋街、香林坊、長町、小松站、和倉溫泉為中心（AEON 白山還沒查 Google 資料，館內有 FOOD STREET 等約 50 家餐廳），半徑約 300–700 公尺。</li>
    <li>小孩：以人工檢查的清單為準（參考 Google 的「適合兒童」欄位）。不適合的 {len(kids_no)} 家已拿掉；沒標的寫 ⚠️。</li>
    <li>沒有收「Tabelog 評分 3.5 以上」（Tabelog 主站擋自動查詢）。「神泡達人」是人工補標的。</li>
   </ul>

@@ -16,7 +16,7 @@ PICK = {
  "kagaribi":"File:JR-WEST 683 series Noto-Kagaribi.jpg",
  "aquarium":"File:Notojima Suizokukan.jpg",
  "wakura":"File:Wakura View.JPG",
- "aeon":"File:Aeon Mall Shinkomatsu.jpg",
+ "aeon":"File:ÆON MALL Hakusan 20230427.jpg",
  "komatsu":"File:Komatsu airport terminal building.jpg",
 }
 p = {"action":"query","format":"json","titles":"|".join(PICK.values()),"prop":"imageinfo","iiprop":"url|extmetadata","iiurlwidth":"960"}
