@@ -104,3 +104,21 @@
 - **金澤白鳥路 ホテル山樂**（1/18–20）：金沢市丸の内6-3，076-222-1212。check-in 15:00／check-out 12:00（依方案可能不同）。金澤站計程車約 10 分；巴士到「兼六園下・金沢城」走路 5 分。白鳥路溫泉大浴場（碳酸氫鹽泉，有三溫暖，沒有露天），5:00–10:30、15:00–24:00。⚠️ jalan 另有「THE HOTEL SANRAKU KANAZAWA」是不同的飯店，別搞混。來源：https://www.jalan.net/yad388405/ 、https://www.gltjp.com/ja/directory/item/17484/ 、https://yado.knt.co.jp/st/S170023/
 - **小松機場巴士**：部分班次停香林坊（東橫 INN 前）和武蔵ヶ辻・近江町市場（Holiday Inn 前）；票價有 ¥1,300／¥1,400 兩種說法 ⚠️。來源：https://www.nap-camp.com/mag/122867
 - **AEON 白山巴士（50 號）經過飯店附近**：去程 金沢駅 09:02 → 武蔵ヶ辻 09:08 → 南町 09:10 → 香林坊 09:12；回程 AEON 19:20 → 香林坊 19:53 → 南町 19:54 → 武蔵ヶ辻 19:56（北鐵 PDF 2026-03-15）。
+
+## AEON 白山 買戰鬥陀螺（Beyblade X）（2026-11-07 查詢）
+
+- 樓層圖 PDF 存在 `data/aeon-hakusan-floormap.pdf`（來源 https://file-cdn.aeonmall.jp/uploads/75aa5a1a-99e2-452c-abb7-25980ea4e608.pdf ，樓層圖頁 https://hakusan.aeonmall.jp/floormap ）。
+- **3F AEON STYLE 玩具賣場**：樓層圖標有「男児玩具」「女児玩具」「幼児・知育玩具」「LEGO」「TVゲーム」。AEON STYLE 白山電話 076-216-1600，2F・3F 09:00–21:00（https://hakusan.aeonmall.jp/shop/70bb2e0c-9ac4-4c0d-bb01-5f3417356fa2 ）。
+- 2F **Joshin（ジョーシン）**家電：有沒有玩具區沒查到（Joshin 店鋪頁 403）。
+- 其他 3F：一番くじ公式ショップ、ハイドアンドシーク／キャラクタースタジオ（313）、ヴィレッジヴァンガード（356）、MIRAINO（CAPCOM 遊樂場）。
+- 3F 兒童遊戲區「きょうりゅうのおうち」0–3 歲；2F「おやつのおうち」3–6 歲。
+- ⚠️ 沒有任何一家明寫有賣 Beyblade X，也沒查到 Beyblade 活動；新品常缺貨，要先打電話問。
+
+## 金澤站附近買戰鬥陀螺（Beyblade X）（2026-11-07 查詢）
+
+- **金沢フォーラス**（金澤站東口旁，堀川新町 3-1，076-265-8111；物販 10:00–20:00，官網註明暫時調整時間）：5F 是「ライフスタイル＆キャラクターグッズ」樓層（https://www.forus.co.jp/kanazawa/floorguide/160 ）。
+  - ガシャポンバンダイオフィシャルショップ／一番くじ公式ショップ（キャラクター雑貨/ホビー），0570-087-670（https://www.forus.co.jp/kanazawa/shop/5466 ）
+  - 金沢ゲーマーズ（ホビー），076-204-8063（https://www.forus.co.jp/kanazawa/shop/6082 ）
+  - ポポンデッタ（鐵道模型為主），076-213-5884（https://www.forus.co.jp/kanazawa/shop/6332 ）
+  - 同層還有ポケモンセンターカナザワ、ロフト、サンリオ。
+- ⚠️ 以上都沒有明寫賣 Beyblade X。Yodobashi 金澤店查不到存在與否；Rinto、M'za 沒查。TAKARA TOMY Beyblade 官網打不開。
