@@ -6,9 +6,12 @@
 資料：
   data/food-research.json  百名店（award.tabelog.com）＋地址查證
   data/google-places.json  Google Places API 結果（先跑 tools/google_places.py）
-規則：Google 標「不適合小孩」的店不放主清單，收在頁尾參考清單；永久歇業的店拿掉。
+  data/kanazawa-food-kids-check.xlsx  人工檢查過的清單（以這份為準）
+規則：只放 Excel 裡有的店；「Google兒童標示」＝不適合的店直接拿掉；永久歇業的店拿掉。
+      Excel 的「類型」「來源」會蓋過自動判斷。
 """
 import json, os, re, sys, urllib.parse
+import openpyxl
 from html import escape
 from style import CSS
 
@@ -117,7 +120,7 @@ for s in HM:
     else:
         e["closed"] = {WD_JP[p[0]] for p in s["holiday"].split("、") if p and p[0] in WD_JP and "曜" in p}
         e["closed_src"] = "百名店頁面" if s["holiday"] else None
-    (kids_no if e["kids"] is False else entries).append(e)
+    entries.append(e)
 
 for p in G["picked"] + G["kids_no"]:
     if p["id"] in hm_ids:
@@ -128,7 +131,32 @@ for p in G["picked"] + G["kids_no"]:
              kids=p["kids"], tabelog=None, map=p["uri"],
              closed={WD_IDX[d] for d in p["closed"]} if p["closed"] is not None else set(),
              closed_src="Google" if p["closed"] is not None else None)
-    (kids_no if e["kids"] is False else entries).append(e)
+    entries.append(e)
+
+# ───────── 套用人工檢查的 Excel ─────────
+_ws = openpyxl.load_workbook(os.path.join(ROOT, "data", "kanazawa-food-kids-check.xlsx")).active
+_rows = list(_ws.iter_rows(values_only=True))
+_col = {h: i for i, h in enumerate(_rows[0])}
+XL = {r[_col["店名"]]: r for r in _rows[1:] if r[_col["店名"]]}
+_names = {e["name"] for e in entries}
+for n in XL:
+    if n not in _names:
+        print("⚠️ Excel 有、資料沒有：", n)
+kept = []
+for e in entries:
+    r = XL.get(e["name"])
+    if r is None:
+        continue  # Excel 刪掉的店
+    k = r[_col["Google兒童標示"]]
+    if k == "不適合":
+        kids_no.append(e)
+        continue
+    e["kids"] = True if k == "適合" else None
+    if r[_col["類型"]]:
+        e["genre"] = r[_col["類型"]]
+    e["src_label"] = r[_col["來源"]]
+    kept.append(e)
+entries = kept
 
 
 def sort_key(e):
@@ -136,12 +164,21 @@ def sort_key(e):
     return (-(g.get("rating") or 0), -(g.get("count") or 0))
 
 
+def is_h(e):
+    lab = e.get("src_label")
+    return lab == "百名店" if lab else bool(e["hm"])
+
+
 def card(e, days):
     g = e["g"] or {}
-    src = ("h" if e["hm"] else "") + ("g" if g.get("rating") and g.get("count", 0) > 500 and g["rating"] > 3.8 else "")
+    lab = e.get("src_label")
+    is_hm = lab == "百名店" if lab else bool(e["hm"])
+    src = ("h" if is_hm else "") + ("g" if g.get("rating") and g.get("count", 0) > 500 and g["rating"] > 3.8 else "")
     badges = []
-    if e["hm"]:
-        badges.append(f'<span class="chip hot">百名店 {e["hm"]["year"]}</span>')
+    if is_hm:
+        badges.append(f'<span class="chip hot">百名店{" " + e["hm"]["year"] if e["hm"] else ""}</span>')
+    elif lab and lab != "Google":
+        badges.append(f'<span class="chip hot">{escape(lab)}</span>')
     if g.get("rating"):
         badges.append(f'<span class="chip">Google ★{g["rating"]}・{g["count"]:,} 則</span>')
     hits = [f"{d}（{w}）" for d, w in days if w in e["closed"]]
@@ -152,7 +189,7 @@ def card(e, days):
               f'<span class="hsrc">（{e["closed_src"]}）</span>'
         hol += (f' <span class="closed">❌ 行程中公休：{"、".join(hits)}</span>' if hits
                 else ' <span class="open">✅ 行程那幾天有開</span>')
-    kids = ('<span class="ok">✅ Google：適合小孩</span>' if e["kids"] else
+    kids = ('<span class="ok">✅ 適合小孩</span>' if e["kids"] else
             '<span class="wtag">⚠️ 待查證</span>（Google 沒寫）')
     addr = escape(e["address"]) + ("" if e["addr_ok"] else ' <span class="wtag">⚠️ 番地待確認</span>')
     links = f'<a class="mapbtn" href="{e["map"]}" target="_blank" rel="noopener">📍 Google 地圖</a>'
@@ -184,9 +221,9 @@ def area_section(aid, title, when, days):
         if group:
             blocks.append(f'<div class="cat" data-cat="{key}"><h3>{label} <small>{len(group)}</small></h3>'
                           + "".join(card(e, days) for e in group) + "</div>")
-    nh = sum(1 for e in items if e["hm"])
+    nh = sum(1 for e in items if is_h(e))
     return (f'<section id="{aid}"><h2>{title} <small>{len(items)} 家</small></h2>'
-            f'<p class="legend">對應行程：{when}。百名店 {nh} 家、Google 高評價 {len(items) - nh} 家。</p>'
+            f'<p class="legend">對應行程：{when}。百名店 {nh} 家、其他 {len(items) - nh} 家。</p>'
             f'{"".join(blocks)}</section>')
 
 
@@ -269,7 +306,7 @@ if any(e["cat"] == "other" for e in entries):
 cat_btns = '<button type="button" data-k="all">全部</button>' + "".join(
     f'<button type="button" data-k="{k}">{label}（{sum(1 for e in entries if e["cat"] == k)}）</button>'
     for k, label, _, _ in present)
-n_hm = sum(1 for e in entries if e["hm"])
+n_hm = sum(1 for e in entries if is_h(e))
 n_g = sum(1 for e in entries if (e["g"] or {}).get("count", 0) > 500 and (e["g"] or {}).get("rating", 0) > 3.8)
 src_btns = (f'<button type="button" data-k="all">全部</button><button type="button" data-k="h">百名店（{n_hm}）</button>'
             f'<button type="button" data-k="g">Google 高評價（{n_g}）</button>')
@@ -290,31 +327,27 @@ body = f'''<title>金澤百名店地圖</title>
  <p class="sub">共 {len(entries)} 家，都在行程會經過的區域。先選區域，再用下面的按鈕篩。</p>
 </div></header>
 
-<nav class="toc" aria-label="區域"><div class="wrap">{toc}<a href="#notes" class="w">⚠️ 說明與參考清單</a></div></nav>
+<nav class="toc" aria-label="區域"><div class="wrap">{toc}<a href="#notes" class="w">⚠️ 說明</a></div></nav>
 
 <main class="wrap">
  <section id="howto">
   <p class="flabel">食物種類</p><div class="filter" data-f="cat" role="group" aria-label="食物種類">{cat_btns}</div>
   <p class="flabel">來源</p><div class="filter" data-f="src" role="group" aria-label="來源">{src_btns}</div>
-  <div class="alert"><b>先看這裡：</b>① 主清單只放 Google 標「適合小孩」或沒標示的店；被標「不適合小孩」的 {len(kids_no)} 家收在最下面的參考清單。② 「⚠️ 待查證」＝Google 沒寫能不能帶小孩，訂位或進門前問一下。③ 公休是用該區域對應的行程日期算的。</div>
+  <div class="alert"><b>先看這裡：</b>① 不適合小孩的店已經拿掉了。② 「⚠️ 待查證」＝還不知道能不能帶小孩，訂位或進門前問一下。③ 公休是用該區域對應的行程日期算的。</div>
  </section>
  {sections}
  <p id="none" class="empty" hidden>這個組合沒有店，換個篩選試試。</p>
 
  <section id="notes">
-  <h2>⚠️ 說明與參考清單</h2>
+  <h2>⚠️ 說明</h2>
   <h3>選店規則</h3>
   <ul>
    <li><b>Tabelog 百名店</b>：來源 <a href="https://award.tabelog.com/hyakumeiten" target="_blank" rel="noopener">award.tabelog.com</a>，查詢日期 {HM_ASOF}。</li>
    <li><b>Google 高評價</b>：Google 評分<b>超過 3.8</b>、評價數<b>超過 500 則</b>、營業中，來源 Google Places API，查詢日期 {G_ASOF}。</li>
    <li>區域：以金澤站、近江町市場、東茶屋街、香林坊、長町、小松站、AEON 新小松、和倉溫泉為中心，半徑約 300–700 公尺。</li>
-   <li>小孩：用 Google 的「適合兒童」欄位。標「不適合」的移到下面參考清單；沒標的寫 ⚠️。</li>
-   <li>沒有收「Tabelog 評分 3.5 以上」（Tabelog 主站擋自動查詢）和「神泡達人店」（Suntory 沒有公開的店家名單）。</li>
+   <li>小孩：以人工檢查的清單為準（參考 Google 的「適合兒童」欄位）。不適合的 {len(kids_no)} 家已拿掉；沒標的寫 ⚠️。</li>
+   <li>沒有收「Tabelog 評分 3.5 以上」（Tabelog 主站擋自動查詢）。「神泡達人」是人工補標的。</li>
   </ul>
-  <details class="ref"><summary>📋 參考清單：Google 標「不適合小孩」（{len(kids_no)} 家）</summary><div>
-   <p class="legend">大人想去或外帶時參考。很多是完全預約制的吧台店。</p>
-   <div class="tw"><table><thead><tr><th>店</th><th>區域</th><th>種類</th><th>來源</th><th>Google</th><th></th></tr></thead><tbody>{ref_rows(kids_no)}</tbody></table></div>
-  </div></details>
   <details class="ref"><summary>沒列入的百名店（{len(closed_perm) + len(excluded_hm) + len(outside) + len(outside_kids_no)} 家）</summary><div>
    <p><b>Google 顯示永久歇業：</b>{"、".join(closed_perm) or "無"}</p>
    <p><b>不在行程區域（Google 位置）：</b>{"、".join(sorted(set(outside + outside_kids_no))) or "無"}</p>
@@ -333,4 +366,4 @@ html = ('<!doctype html>\n<html lang="zh-Hant"><head><meta charset="utf-8">'
 open(OUT, "w", encoding="utf-8").write(html)
 json.dump({aid: sum(1 for e in entries if e["area"] == aid) for aid, *_ in AREAS},
           open(os.path.join(ROOT, "data", "food-counts.json"), "w"))
-print("wrote", OUT, f"{len(html)//1024} KB；主清單 {len(entries)} 家（百名店 {n_hm}），參考清單 {len(kids_no)} 家，歇業 {closed_perm}")
+print("wrote", OUT, f"{len(html)//1024} KB；主清單 {len(entries)} 家（百名店 {n_hm}），拿掉不適合小孩 {len(kids_no)} 家，歇業 {closed_perm}")
