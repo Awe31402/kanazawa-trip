@@ -96,3 +96,11 @@
 - 照片在 `data/img/`，作者與授權資訊在 `data/img/meta.json`，全部來自 Wikimedia Commons。
 - 用 `tools/fetch_imgs.py` 可以重新下載。
 - ⚠️ `chaya.jpg` 右下角有作者的浮水印網址，之後可能要換一張。
+
+## 住宿（2026-11-07 確定，資料來自訂房網站）
+
+- **Hotel Forza 金澤**（ホテルフォルツァ金沢，1/14–16）：金沢市安江町2-10，076-222-7411。check-in 14:00／check-out 11:00。門口是北鐵巴士站「武蔵ヶ辻・近江町市場」，近江町市場走路 3 分，金澤站東口走路約 10 分。一休口コミ（2026/6）：退房後可寄放行李。來源：https://www.jalan.net/yad378719/ 、https://www.ikyu.com/00081868/ 、https://travel.rakuten.co.jp/HOTEL/177000/177000_std.html
+- **日本の宿 のと楽**（和倉溫泉，1/17）：2024/11/1 恢復營業（本館部分仍在修繕，客房、大浴場、餐廳正常）；2026/7 仍營業中。和倉溫泉站到溫泉街計程車約 5 分、走路約 20 分。接送 ⚠️ 沒查到。來源：https://www.ryoko-net.co.jp/?p=139706 、https://hotelbank.jp/area-analysis/wakura-onsen-recovery-2026-supply-stock-kagaya-33rooms/ 、https://sato-umi.com/wakura-onsen/
+- **金澤白鳥路 ホテル山樂**（1/18–20）：金沢市丸の内6-3，076-222-1212。check-in 15:00／check-out 12:00（依方案可能不同）。金澤站計程車約 10 分；巴士到「兼六園下・金沢城」走路 5 分。白鳥路溫泉大浴場（碳酸氫鹽泉，有三溫暖，沒有露天），5:00–10:30、15:00–24:00。⚠️ jalan 另有「THE HOTEL SANRAKU KANAZAWA」是不同的飯店，別搞混。來源：https://www.jalan.net/yad388405/ 、https://www.gltjp.com/ja/directory/item/17484/ 、https://yado.knt.co.jp/st/S170023/
+- **小松機場巴士**：部分班次停香林坊（東橫 INN 前）和武蔵ヶ辻・近江町市場（Holiday Inn 前）；票價有 ¥1,300／¥1,400 兩種說法 ⚠️。來源：https://www.nap-camp.com/mag/122867
+- **AEON 白山巴士（50 號）經過飯店附近**：去程 金沢駅 09:02 → 武蔵ヶ辻 09:08 → 南町 09:10 → 香林坊 09:12；回程 AEON 19:20 → 香林坊 19:53 → 南町 19:54 → 武蔵ヶ辻 19:56（北鐵 PDF 2026-03-15）。
