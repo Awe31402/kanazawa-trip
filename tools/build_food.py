@@ -7,7 +7,7 @@
   data/food-research.json  百名店（award.tabelog.com）＋地址查證
   data/google-places.json  Google Places API 結果（先跑 tools/google_places.py）
   data/kanazawa-food-kids-check.xlsx  人工檢查過的清單（以這份為準）
-規則：只放 Excel 裡有的店；「Google兒童標示」＝不適合的店直接拿掉；永久歇業的店拿掉。
+規則：只放 Excel 裡有的店（行程區域外的百名店另外放「行程區域外」）；「Google兒童標示」＝不適合的店直接拿掉；永久歇業的店拿掉。
       Excel 的「類型」「來源」會蓋過自動判斷。
 """
 import json, os, re, sys, urllib.parse
@@ -34,6 +34,8 @@ AREAS = [  # id, 標題, 對應行程, 用來算公休的日期
  ("nagamachi", "長町周邊", "Day 2 下午", [("1/15", "五")]),
  ("komatsu", "小松站／AEON 新小松", "Day 7 整天（午餐、晚餐）", [("1/20", "三")]),
  ("wakura", "和倉溫泉", "Day 4 下午～Day 5 早上", [("1/17", "日"), ("1/18", "一")]),
+ ("far", "行程區域外（要另外搭車）", "不在行程路線上，想專程去再排",
+  KANAZAWA_DATES[:3] + [("1/17", "日")] + KANAZAWA_DATES[3:]),
 ]
 AREA_TITLE = {a[0]: a[1] for a in AREAS}
 
@@ -156,7 +158,28 @@ for e in entries:
         e["genre"] = r[_col["類型"]]
     e["src_label"] = r[_col["來源"]]
     kept.append(e)
+_dropped = {e["name"]: e for e in entries if e not in kept}
 entries = kept
+_kept = {e["name"] for e in entries}
+
+# 行程區域外的百名店（Excel 沒有）
+for s in HM:
+    if s["area"] != "範圍外" or s["name"] in _kept:
+        continue  # 已在主清單的跳過（例：麺屋大河）
+    d = _dropped.get(s["name"])
+    if d:  # Google 找得到、位置其實在行程區域內（例：六角堂）→ 用 Google 資料＋百名店標記
+        if d["kids"] is not False:
+            d.update(hm=s, tabelog=s["tabelog"], cat=hm_cat(s["genres"]),
+                     genre="・".join(HM_GENRE.get(x, x) for x in s["genres"]))
+            entries.append(d)
+        continue
+    entries.append(dict(
+        name=s["name"], area="far", cat=hm_cat(s["genres"]),
+        genre="・".join(HM_GENRE.get(x, x) for x in s["genres"]), hm=s, g=None,
+        address=s["address"], addr_ok=False, kids=None, tabelog=s["tabelog"],
+        map="https://www.google.com/maps/search/?api=1&query=" + urllib.parse.quote(s["name"]),
+        closed={WD_JP[p[0]] for p in s["holiday"].split("、") if p and p[0] in WD_JP and "曜" in p},
+        closed_src="百名店頁面" if s["holiday"] else None))
 
 
 def sort_key(e):
@@ -238,9 +261,6 @@ def ref_rows(rows):
     return "".join(out)
 
 
-excluded_hm = [s for s in HM if s["area"] == "範圍外"]
-xrows = "".join(f'<tr><td>{escape(s["name"])}</td><td>{"・".join(HM_GENRE.get(g, g) for g in s["genres"])}</td>'
-                f'<td>{escape(s["address"])}</td></tr>' for s in excluded_hm)
 outside = [s["name"] for s in HM if s["area"] != "範圍外" and G["hyakumeiten"].get(s["tabelog"])
            and not G["hyakumeiten"][s["tabelog"]].get("area") and s["name"] not in closed_perm
            and G["hyakumeiten"][s["tabelog"]].get("kids") is not False]
@@ -348,10 +368,10 @@ body = f'''<title>金澤百名店地圖</title>
    <li>小孩：以人工檢查的清單為準（參考 Google 的「適合兒童」欄位）。不適合的 {len(kids_no)} 家已拿掉；沒標的寫 ⚠️。</li>
    <li>沒有收「Tabelog 評分 3.5 以上」（Tabelog 主站擋自動查詢）。「神泡達人」是人工補標的。</li>
   </ul>
-  <details class="ref"><summary>沒列入的百名店（{len(closed_perm) + len(excluded_hm) + len(outside) + len(outside_kids_no)} 家）</summary><div>
+  <details class="ref"><summary>沒列入的百名店（{len(closed_perm) + len(set(outside + outside_kids_no))} 家）</summary><div>
    <p><b>Google 顯示永久歇業：</b>{"、".join(closed_perm) or "無"}</p>
-   <p><b>不在行程區域（Google 位置）：</b>{"、".join(sorted(set(outside + outside_kids_no))) or "無"}</p>
-   <div class="tw"><table><thead><tr><th>不在行程區域（網路搜尋地址）</th><th>種類</th><th>地點</th></tr></thead><tbody>{xrows}</tbody></table></div>
+   <p><b>Google 位置不在行程區域、且標「不適合小孩」：</b>{"、".join(sorted(set(outside + outside_kids_no))) or "無"}</p>
+   <p>其他不在行程區域的百名店，已放在上面「行程區域外」。</p>
   </div></details>
  </section>
 </main>
