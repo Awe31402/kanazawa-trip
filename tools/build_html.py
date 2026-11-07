@@ -411,7 +411,7 @@ html = f'''<title>金澤能登冬季親子遊</title>
  <h2>預算表 <small>查詢日期 {ASOF}</small></h2>
  <p class="legend">只列查得到的數字。查不到的寫 ⚠️，不估假數字。</p>
  <div class="tw"><table><thead><tr><th>項目</th><th>大人／人</th><th>兒童</th><th>全家 3 人</th></tr></thead><tbody>
-  <tr><td>機票 桃園 ⇄ 小松</td><td>⚠️</td><td>⚠️</td><td>⚠️</td></tr>
+  <tr><td>虎航 桃園 ⇄ 小松 來回（含 20kg 行李，估算）</td><td class="num">約 NT$9,000–13,000 ⚠️</td><td>同大人</td><td class="num">約 NT$27,000–39,000</td></tr>
   <tr><td>機場巴士（來回）</td><td class="num">¥2,600</td><td>⚠️</td><td>⚠️</td></tr>
   <tr><td>一里野套票（纜車＋來回巴士，2025–26 參考）</td><td class="num">¥6,500</td><td class="num">¥4,500</td><td class="num">¥17,500</td></tr>
   <tr><td>雪具租借</td><td>⚠️</td><td>⚠️</td><td>⚠️</td></tr>
@@ -420,9 +420,22 @@ html = f'''<title>金澤能登冬季親子遊</title>
   <tr><td>能登島水族館</td><td class="num">¥1,850–1,890</td><td class="num">¥510</td><td class="num">¥4,210–4,290</td></tr>
   <tr><td>能登島交通巴士（來回）</td><td>⚠️</td><td>⚠️</td><td>⚠️</td></tr>
   <tr><td>金箔體驗</td><td class="num">約 ¥1,000–2,000 起（他店參考）</td><td>同左</td><td>⚠️</td></tr>
-  <tr><td>金澤住宿 6 晚（3＋3）</td><td>—</td><td>—</td><td>⚠️</td></tr>
+  <tr><td>日航金澤 雙床房 6 晚（估算）</td><td>—</td><td>—</td><td class="num">約 ¥101,000–149,000 ⚠️</td></tr>
   <tr><td>和倉溫泉旅館 1 晚</td><td>—</td><td>—</td><td>⚠️</td></tr>
  </tbody></table></div>
+ <h3>機＋酒對比：金澤 vs 福岡 <small>查詢 2026-11-06</small></h3>
+ <p class="legend">3 人、虎航來回、車站旁的日航飯店雙床房 6 晚。<b>不含</b>溫泉旅館 1 晚、當地交通、門票、餐費。匯率先用 ¥1 ≈ NT$0.21 試算。</p>
+ <div class="tw"><table><thead><tr><th>項目</th><th>金澤</th><th>福岡</th></tr></thead><tbody>
+  <tr><td>虎航來回（每人約 NT$9,000–13,000，小孩同價）</td><td class="num">NT$27,000–39,000</td><td class="num">NT$27,000–39,000</td></tr>
+  <tr><td>飯店 1 晚</td><td>日航金澤 <span class="num">¥16,900–24,850</span></td><td>日航福岡 <span class="num">¥30,000–37,000</span></td></tr>
+  <tr><td>飯店 6 晚</td><td class="num">¥101,000–149,000<br>≈ NT$21,000–31,000</td><td class="num">¥180,000–222,000<br>≈ NT$38,000–47,000</td></tr>
+  <tr><td><b>合計</b></td><td class="num"><b>約 NT$48,000–70,000</b></td><td class="num"><b>約 NT$65,000–86,000</b></td></tr>
+ </tbody></table></div>
+ <p class="legend">機票差不多，福岡飯店貴，整趟約多 NT$15,000–17,000。</p>
+ <ul class="warns">
+  <li class="warn"><span class="wtag">⚠️ 待查證</span> 虎航 2027/1 實際票價、行李費；小松線 2025 冬季只飛週四、週日，2026 冬季班表未查到 → <a href="https://www.tigerairtw.com/" target="_blank" rel="noopener">tigerairtw.com</a></li>
+  <li class="warn"><span class="wtag">⚠️ 待查證</span> 飯店價格多數沒標日期；小孩同床是否免費、要不要加床 → 訂房網站輸入 1/14–1/21 再看</li>
+ </ul>
 </section>
 
 <section id="prep">
