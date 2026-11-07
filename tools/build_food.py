@@ -163,6 +163,22 @@ _dropped = {e["name"]: e for e in entries if e not in kept}
 entries = kept
 _kept = {e["name"] for e in entries}
 
+# 使用者指定加入的店（不符合評價數門檻或 Google 標不適合小孩，但想去）
+MANUAL = [  # (Google place id, 區域, 分類, 類型, 小孩備註)
+    ("ChIJB5KhBoAz-F8RtHnvdTU3gGQ", "korinbo", "wa", "關東煮（おでん）",
+     "Google 標「不適合小孩」（多半是店小、吧台座位），先打電話問能不能帶小孩、要不要訂位"),
+]
+_RAW = json.load(open(os.path.join(ROOT, "data", "google-places-raw.json"), encoding="utf-8"))["raw"]
+for pid, area, cat, genre, knote in MANUAL:
+    p = _RAW[pid]
+    hours = p.get("regularOpeningHours")
+    entries.append(dict(
+        name=p["displayName"]["text"], area=area, cat=cat, genre=genre, hm=None,
+        g=dict(rating=p.get("rating"), count=p.get("userRatingCount")), address=clean_addr(p["formattedAddress"]),
+        addr_ok=True, kids=None, kids_note=knote, tabelog=None, map=p["googleMapsUri"], src_label="使用者指定",
+        closed={WD_IDX[d] for d in range(7)} - {WD_IDX[x["open"]["day"]] for x in hours["periods"]} if hours else set(),
+        closed_src="Google" if hours else None))
+
 # 行程區域外的百名店（Excel 沒有）
 for s in HM:
     if s["area"] != "範圍外" or s["name"] in _kept:
@@ -214,6 +230,7 @@ def card(e, days):
         hol += (f' <span class="closed">❌ 行程中公休：{"、".join(hits)}</span>' if hits
                 else ' <span class="open">✅ 行程那幾天有開</span>')
     kids = ('<span class="ok">✅ 適合小孩</span>' if e["kids"] else
+            f'<span class="wtag">⚠️ 待查證</span>（{escape(e["kids_note"])}）' if e.get("kids_note") else
             '<span class="wtag">⚠️ 待查證</span>（Google 沒寫）')
     addr = escape(e["address"]) + ("" if e["addr_ok"] else ' <span class="wtag">⚠️ 番地待確認</span>')
     links = f'<a class="mapbtn" href="{e["map"]}" target="_blank" rel="noopener">📍 Google 地圖</a>'
@@ -221,7 +238,7 @@ def card(e, days):
         links += f'<a class="mapbtn" href="{e["tabelog"]}" target="_blank" rel="noopener">Tabelog（預約、評分）</a>'
     note = f'<p class="snote">{escape(e["hm"]["note"])}</p>' if e["hm"] and e["hm"]["note"] else ""
     asof = " · ".join(x for x in [f"百名店 {HM_ASOF}" if e["hm"] else "", f"Google {G_ASOF}" if g else ""] if x)
-    return f'''<article class="shop" data-cat="{e["cat"]}" data-src="{src or "h"}">
+    return f'''<article class="shop" data-cat="{e["cat"]}" data-src="{src or ("m" if lab == "使用者指定" else "h")}">
  <header><h4>{escape(e["name"])}</h4><span class="tag">{escape(e["genre"])}</span></header>
  <div class="badges">{"".join(badges)}</div>
  {note}
